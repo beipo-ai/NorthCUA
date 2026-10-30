@@ -43,6 +43,13 @@ redacted configuration and a minimal task. Link a small relevant trace if possib
 Remove credentials, screenshots of personal data and private file contents first.
 Use [the security policy](SECURITY.md) for sensitive vulnerabilities.
 
+## Contact
+
+For contribution questions, contact the project maintainers:
+
+- [zhangchaoyun@qijizhifeng.com](mailto:zhangchaoyun@qijizhifeng.com)
+- [libingxuan@qijizhifeng.com](mailto:libingxuan@qijizhifeng.com)
+
 ## Release review
 
 Independent runtime and release reviews check lifecycle/cleanup, installability, public

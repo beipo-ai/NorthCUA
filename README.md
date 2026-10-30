@@ -159,3 +159,10 @@ task source, observation/action profile and evaluation protocol.
 ```
 
 [Citation metadata](CITATION.cff) · [Apache-2.0](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md) · [Security](SECURITY.md) · [Changelog](CHANGELOG.md)
+
+## Contact
+
+For questions about NorthCUA, research discussions or collaboration:
+
+- [zhangchaoyun@qijizhifeng.com](mailto:zhangchaoyun@qijizhifeng.com)
+- [libingxuan@qijizhifeng.com](mailto:libingxuan@qijizhifeng.com)

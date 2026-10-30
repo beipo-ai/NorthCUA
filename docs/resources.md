@@ -24,3 +24,10 @@ Record the Harness and NexAU commits, model/checkpoint revision, provider/API
 settings, task and environment version, coordinate profile, budgets, evaluator
 contract and artifact manifest. The report's model results and the repository's
 scripted-model runtime checks answer different questions; cite both accurately.
+
+## Contact
+
+For project questions, research discussions or collaboration:
+
+- [zhangchaoyun@qijizhifeng.com](mailto:zhangchaoyun@qijizhifeng.com)
+- [libingxuan@qijizhifeng.com](mailto:libingxuan@qijizhifeng.com)

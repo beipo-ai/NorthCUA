@@ -18,4 +18,7 @@ controls do not make arbitrary shell tools or model instructions a security sand
 
 The current release candidate has no promise of supporting older private CLI/config APIs.
 Report vulnerabilities privately to repository maintainers using GitHub private reporting
-when enabled. Dependency fixes must rerun the affected provider/runtime and wheel checks.
+when enabled, or email
+[zhangchaoyun@qijizhifeng.com](mailto:zhangchaoyun@qijizhifeng.com) or
+[libingxuan@qijizhifeng.com](mailto:libingxuan@qijizhifeng.com).
+Dependency fixes must rerun the affected provider/runtime and wheel checks.

@@ -117,3 +117,10 @@ Desktop 只有工具直接返回截图这一条观察路径。若模型输出 **
 
 引用请使用 [CITATION.cff](CITATION.cff)，并记录代码/NexAU revision、模型设置、任务来源与评估协议。
 [Apache-2.0](LICENSE) · [第三方声明](THIRD_PARTY_NOTICES.md) · [安全](SECURITY.md) · [更新](CHANGELOG.md)
+
+## 联系我们
+
+项目使用、研究交流与合作，请联系：
+
+- [zhangchaoyun@qijizhifeng.com](mailto:zhangchaoyun@qijizhifeng.com)
+- [libingxuan@qijizhifeng.com](mailto:libingxuan@qijizhifeng.com)
