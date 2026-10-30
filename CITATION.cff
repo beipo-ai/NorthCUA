@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "Please cite the NorthCUA Technical Report and record the Harness and NexAU revisions used."
+title: "NorthCUA Harness"
+type: software
+version: 0.2.0
+date-released: 2026-10-31
+authors:
+  - name: NorthCUA Team
+repository-code: https://github.com/china-qijizhifeng/NorthCUA-Harness
+url: https://github.com/china-qijizhifeng/NorthCUA-Harness
+license: Apache-2.0
+preferred-citation:
+  type: report
+  title: "NorthCUA Technical Report: Turbocharging Computer-Use Agents through Experience at Scale"
+  authors:
+    - name: NorthCUA Team
+  year: 2026
+  url: https://github.com/china-qijizhifeng/NorthCUA-Harness/blob/main/docs/paper/main.pdf

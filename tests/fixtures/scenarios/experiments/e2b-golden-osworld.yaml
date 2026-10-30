@@ -1,0 +1,76 @@
+version: v1
+experiment_id: e2b-golden-osworld-demo
+description: Three-sandbox golden E2E run for Chrome, LibreOffice Calc, and GIMP.
+controller:
+  managed_local: true
+  local_host: 127.0.0.1
+  local_port: 8885
+  public_url: ""
+  token: ""
+  app_config_path: config/app.local.yaml
+  insecure_dev_no_auth: false
+sandbox:
+  provider: e2b
+  template: northcua_golden_osworld_demo
+  desktop: true
+  platform: linux
+  resolution: [1280, 900]
+  device_python: python3.12
+  resources:
+    cpu_count: 2
+    memory_mb: 4096
+    timeout_seconds: 900
+  metadata:
+    suite: e2b-golden-osworld-demo
+concurrency: 3
+trace_expectations:
+  evaluator_kind: desktop_round_completion
+tasks:
+  - task_id: chrome-fixture-heading
+    app_profile: chrome
+    agent_kind: desktop
+    query: Google Chrome should already be open to file:///tmp/northcua-golden/chrome_fixture.html. Read the page and finish by reporting the main heading shown on the page.
+    max_steps: 100
+    timeout_seconds: 900
+    fixtures:
+      - generated_name: chrome_fixture.html
+        remote_path: /tmp/northcua-golden/chrome_fixture.html
+        mode: "0644"
+    startup_commands:
+      - label: open-chrome-fixture
+        command: bash -lc 'mkdir -p /tmp/northcua-golden; export DISPLAY=${DISPLAY:-:0}; setsid env CHROME_NO_DEFAULT_BROWSER_CHECK=1 google-chrome --no-sandbox --disable-dev-shm-usage --user-data-dir=/tmp/northcua-golden/chrome-profile --no-first-run --no-default-browser-check --disable-fre --disable-sync --disable-search-engine-choice-screen --disable-features=SigninIntercept,ChromeWhatsNewUI,Translate --new-window file:///tmp/northcua-golden/chrome_fixture.html </dev/null >/tmp/northcua-golden/chrome.out 2>/tmp/northcua-golden/chrome.err & echo $! > /tmp/northcua-golden/chrome.pid; sleep 8; echo open-chrome-fixture-launched pid=$(cat /tmp/northcua-golden/chrome.pid)'
+        timeout_seconds: 45
+    metadata:
+      golden_app: chrome
+  - task_id: calc-total-csv
+    app_profile: calc
+    agent_kind: desktop
+    query: LibreOffice Calc should already be open with /tmp/northcua-golden/calc_fixture.csv. Confirm the three values in column B are visible, compute their total, and finish by reporting the total.
+    max_steps: 100
+    timeout_seconds: 900
+    fixtures:
+      - generated_name: calc_fixture.csv
+        remote_path: /tmp/northcua-golden/calc_fixture.csv
+        mode: "0644"
+    startup_commands:
+      - label: open-calc-fixture
+        command: bash -lc 'mkdir -p /tmp/northcua-golden; export DISPLAY=${DISPLAY:-:0}; setsid libreoffice --calc --norestore /tmp/northcua-golden/calc_fixture.csv </dev/null >/tmp/northcua-golden/calc.out 2>/tmp/northcua-golden/calc.err & echo $! > /tmp/northcua-golden/calc.pid; sleep 12; echo open-calc-fixture-launched pid=$(cat /tmp/northcua-golden/calc.pid)'
+        timeout_seconds: 60
+    metadata:
+      golden_app: libreoffice-calc
+  - task_id: gimp-open-image
+    app_profile: gimp
+    agent_kind: desktop
+    query: GIMP should already be open with /tmp/northcua-golden/gimp_fixture.ppm. Confirm the image is visible, make one simple visible edit if a drawing tool is ready, and finish by reporting the visible final state.
+    max_steps: 100
+    timeout_seconds: 900
+    fixtures:
+      - generated_name: gimp_fixture.ppm
+        remote_path: /tmp/northcua-golden/gimp_fixture.ppm
+        mode: "0644"
+    startup_commands:
+      - label: open-gimp-fixture
+        command: bash -lc 'mkdir -p /tmp/northcua-golden; export DISPLAY=${DISPLAY:-:0}; setsid gimp /tmp/northcua-golden/gimp_fixture.ppm </dev/null >/tmp/northcua-golden/gimp.out 2>/tmp/northcua-golden/gimp.err & echo $! > /tmp/northcua-golden/gimp.pid; sleep 18; echo open-gimp-fixture-launched pid=$(cat /tmp/northcua-golden/gimp.pid)'
+        timeout_seconds: 90
+    metadata:
+      golden_app: gimp

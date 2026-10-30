@@ -1,0 +1,46 @@
+{
+  "agent.desktop.default": {
+    "fingerprints": {
+      "contract_summary_hash": "7b524a6044e25d790fe0fae4a59b5561677e0232af09534a4d9fc722b6350cda",
+      "final_prompt_surface_hash": "4a7768f21498934a54988478f4a2214cdd479e73ec766a449b420f562a9f6e9a",
+      "protocol_schema_hash": "591f4eddd5c0997c02ee6be34276afb9eb06b38f66ff83de32fcab83cb21a277",
+      "provider_schema_hash": "f27e52a8fe37152be30a9e4ecc50273fc616a329fc6f8bdc6dfd73631138ceeb",
+      "route_hash": "099441daeb74c4ccf46ac0685476a5d26d98f0a058f08b6b8540c18defe047bc"
+    },
+    "provider_count": 10,
+    "tool_count": 17
+  },
+  "agent.web": {
+    "fingerprints": {
+      "contract_summary_hash": "dcecfc18ec428a42c646cc7a5e99506defe54589d692e04db2d46c6b2dd913cd",
+      "final_prompt_surface_hash": "3c05c1407301faad6b9a12cec59eeba017fd7fef1a168015ec6274303b3795b2",
+      "protocol_schema_hash": "a428056c8f9479607fa059a83e1519ffc8ceb8cac037613a3e19a46545d04c15",
+      "provider_schema_hash": "e23eb48c425afd5cb3fa9242c4bd86ed9ea719f7f3295053217e2b65da2b3811",
+      "route_hash": "a0022e5b6374954317742ebcd23d72d52e9742a8e67a04b07fabe8be10b033b6"
+    },
+    "provider_count": 24,
+    "tool_count": 30
+  },
+  "env.sandbox.control_plane": {
+    "fingerprints": {
+      "contract_summary_hash": "519f380e5ca212d7a379a39b930d2b6b68304f1368c74a8d67621450ee25a411",
+      "final_prompt_surface_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "protocol_schema_hash": "ec5f6f8a64ffb7cdf1be8d364988e53044e96cf32b4ceb0b33c19df8c21d50e2",
+      "provider_schema_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "route_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "provider_count": 0,
+    "tool_count": 13
+  },
+  "evaluator.desktop.round": {
+    "fingerprints": {
+      "contract_summary_hash": "572b47d2ca8b72afbeec2f68a9a261d6fac10375ec0ff1189ed835e02620441e",
+      "final_prompt_surface_hash": "dc0fbc326c2fa92ddfb7729118a08dc1eda822e5ee8b01e5c939ca160a0a6323",
+      "protocol_schema_hash": "02601a3020712d8f5cdeaaf64dc445139027ef6bd72b25257f20be8f4c0c4a31",
+      "provider_schema_hash": "6a090e920bdbf299f7d4f6ec389fd398b449e41d1674b63e4bd7683ab5048748",
+      "route_hash": "3d3d43f325f56b75d7351de60ac0a5260284e66126e65e9e59fd39ae56b8d7ac"
+    },
+    "provider_count": 22,
+    "tool_count": 22
+  }
+}

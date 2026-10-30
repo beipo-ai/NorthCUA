@@ -1,0 +1,21 @@
+{
+  "title": "NorthCUA Technical Report: Turbocharging Computer-Use Agents through Experience at Scale",
+  "authors": "NorthCUA Team",
+  "snapshot_date": "2026-10-31",
+  "sha256": "bf2ce9e665cd7eb2212c0d5635d276aaba46232ad89f9f34f7ce6b2367244611",
+  "page_count": 123,
+  "status": "Technical report snapshot; reported model results are distinct from this repository’s runtime validation",
+  "source": "Maintainer-provided NorthCUA_Tiffany_Report_Compact.pdf",
+  "export": {
+    "method": "Unmodified compact PDF supplied with the local report; no resampling or content edits in this release",
+    "page_text_equality_verified_against_full_pdf": true,
+    "full_pdf_sha256": "9d4e17708b48f6a8bf02e4c7d62b4aa4402f6df20e31c5b66e52527e743f2c64"
+  },
+  "links": {
+    "project_homepage": "https://beipo.top/research/northcua/",
+    "model": "https://huggingface.co/beipo-ai/NorthCUA-Pro",
+    "harness": "https://github.com/china-qijizhifeng/NorthCUA-Harness"
+  },
+  "compiled_at": "2026-10-31T01:49:33+08:00",
+  "bytes": 45987583
+}

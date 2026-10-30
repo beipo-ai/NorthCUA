@@ -1,0 +1,18 @@
+batch_id: desktop-example
+defaults:
+  controller_url: wss://controller.example/ws
+  concurrency: 1
+  sandbox:
+    provider: e2b
+    template: northcua-desktop
+    allocation_strategy: ephemeral_per_task
+    desktop: true
+    platform: linux
+    device_python: /opt/northcua/venv/bin/python
+    resources:
+      timeout_seconds: 900
+tasks:
+- task_id: desktop-task
+  agent_kind: desktop
+  query: Open the file manager and report the names of the visible folders.
+  max_steps: 15

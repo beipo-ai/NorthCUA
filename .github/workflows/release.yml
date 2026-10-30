@@ -1,0 +1,49 @@
+name: Release candidate
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+jobs:
+  validate:
+    uses: ./.github/workflows/ci.yml
+  candidate:
+    needs: validate
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: wheelhouse-${{ github.sha }}
+          path: candidate/wheelhouse
+      - name: Record candidate version and checksums
+        env:
+          REVISION: ${{ github.sha }}
+          REF_NAME: ${{ github.ref_name }}
+          REF_TYPE: ${{ github.ref_type }}
+        run: |
+          git archive --format=tar.gz --output=candidate/northcua-source.tar.gz HEAD
+          python - <<'PY'
+          import hashlib, json, os, pathlib, shutil, tomllib
+          version = tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version']
+          if os.environ['REF_TYPE'] == 'tag' and os.environ['REF_NAME'] != 'v' + version:
+              raise SystemExit('Release tag must match the package version')
+          output = pathlib.Path('candidate')
+          for name in ('LICENSE', 'NOTICE', 'CITATION.cff', 'README.md', 'README.zh-CN.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'SECURITY.md', 'THIRD_PARTY_NOTICES.md', 'AGENTS.md', 'llms.txt', '.env.example'):
+              shutil.copy(name, output / name)
+          shutil.copytree('docs', output / 'docs')
+          shutil.copytree('examples', output / 'examples')
+          shutil.copytree('skills', output / 'skills')
+          shutil.copytree('config', output / 'config', ignore=shutil.ignore_patterns('*.local.*'))
+          files = {str(p.relative_to(output)): hashlib.sha256(p.read_bytes()).hexdigest()
+                   for p in output.rglob('*') if p.is_file()}
+          (output / 'manifest.json').write_text(json.dumps({'version': version,
+              'commit': os.environ['REVISION'], 'sha256': files}, indent=2))
+          PY
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: northcua-candidate-${{ github.sha }}
+          path: candidate/
+          include-hidden-files: true
+          if-no-files-found: error

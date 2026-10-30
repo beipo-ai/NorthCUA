@@ -1,0 +1,38 @@
+name: NorthCUAPolicyRoutedDesktopAgent
+description: Desktop agent whose provider is selected by task policy_route_ref.
+llm_config:
+  model: policy-route-required
+  base_url: http://127.0.0.1:9/v1
+  api_key: policy-route-required
+  api_type: openai_chat_completion
+  max_tokens: 4096
+  max_context_tokens: 262144
+  reasoning_replay_policy: chat_reasoning_content
+  max_retries: 0
+  timeout: 300
+max_iterations: 1
+mcp_servers:
+- name: DesktopNativeDataExecutor
+  model_visible: false
+  type: stdio
+  command: python3
+  args:
+  - -m
+  - northcua.runtime.mcp.launcher
+  - DesktopNativeDataExecutor
+- name: DesktopNativeA11yExecutor
+  model_visible: false
+  type: stdio
+  command: python3
+  args:
+  - -m
+  - northcua.runtime.mcp.launcher
+  - DesktopNativeA11yExecutor
+- name: DesktopNativeActionExecutor
+  model_visible: true
+  type: stdio
+  command: python3
+  args:
+  - -m
+  - northcua.runtime.mcp.launcher
+  - DesktopNativeActionExecutor

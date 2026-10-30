@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>NorthCUA Actionability Fixture</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 32px;
+      }
+
+      .toast-shell {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 100;
+        width: 180px;
+        height: 44px;
+        border: 1px dashed #777;
+        color: #555;
+        pointer-events: none;
+      }
+
+      .controls {
+        margin-top: 96px;
+        display: grid;
+        gap: 12px;
+        max-width: 320px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toast-shell" role="button" aria-label="Notifications">Notifications</div>
+    <main class="controls">
+      <button id="ok" type="button" onclick="this.textContent = 'Clicked OK'; window.okClicked = true">
+        OK
+      </button>
+      <button id="disabled" type="button" disabled>Disabled</button>
+      <label>
+        Name
+        <input id="name" name="name" placeholder="Name" />
+      </label>
+    </main>
+    <script>
+      window.okClicked = false;
+    </script>
+  </body>
+</html>

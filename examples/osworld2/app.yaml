@@ -1,0 +1,49 @@
+# Only a harness configuration. The caller supplies an already prepared task.
+agent_config_path: agent.yaml
+artifacts:
+  root_dir: logs/osworld2
+execution:
+  max_agent_iterations_per_round: 1
+  no_tool_call_attempts: 3
+  enable_in_memory_tracer: true
+  enable_langfuse_tracer: false
+evaluation:
+  enabled: false  # run_task calls the external original whole-task scorer
+context_management:
+  mode: enforce
+  budget:
+    soft_trigger_ratio: 0.7
+    target_ratio: 0.55
+    safety_margin_ratio: 0.08
+    safety_margin_min_tokens: 4096
+    recent_iterations: 4
+  summary:
+    model:
+      source: agent_config
+      agent_config_path: summary-agent.yaml
+    max_output_tokens: 2048
+    timeout_seconds: 300
+    total_deadline_seconds: 900
+    max_chunks: 4
+    max_calls: 12
+desktop:
+  backend: osworld
+  coordinate_policy:
+    input_space: normalized_1000
+    clamp_to_bounds: false
+  osworld:
+    vm_ip: 127.0.0.1  # replace locally with your already prepared endpoint
+    server_port: 5000
+    command_timeout_seconds: 120
+    screenshot_timeout_seconds: 30
+    retry_times: 3
+    retry_interval_seconds: 5
+prompt:
+  system_prompt_profile: osworld2_formal
+  history_window_rounds: 500
+  screenshot_window_images: 3
+  history_action_trace_enabled: true
+  history_action_trace_include_initial: true
+  history_action_trace_badges: true
+  include_initial_observation_image: true
+  include_subsequent_observation_images: true

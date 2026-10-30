@@ -1,0 +1,121 @@
+version: v1
+experiment_id: desktop-synthetic-three-public-nexau
+description: Three NorthCUA-authored deterministic desktop cases for the public NexAU migration.
+controller:
+  managed_local: true
+  local_host: 127.0.0.1
+  local_port: 8885
+  public_url: ""
+  token: ""
+  app_config_path: config/app.desktop.e2b.yaml
+  insecure_dev_no_auth: false
+  # GPT-5.5 Desktop and evaluator requests are intentionally serial for
+  # release evidence. Concurrency is covered by offline/process suites; three
+  # simultaneous image-heavy calls can starve one another at the provider.
+  parallelism: 1
+  runner_workers: 1
+  worker_queue_max: 6
+sandbox:
+  provider: e2b
+  template: fixture-desktop-candidate
+  allocation_strategy: ephemeral_per_task
+  desktop: true
+  platform: linux
+  resolution: [1280, 900]
+  device_python: python3.12
+  resources:
+    cpu_count: 4
+    memory_mb: 8192
+    timeout_seconds: 12000
+  metadata:
+    suite: desktop-synthetic-three-public-nexau
+    template_alias: fixture-desktop-candidate
+    dataset: none
+runtime:
+  # The template supplies GNOME applications only. Upload the checked-out
+  # candidate so this run does not exercise the template's baked NorthCUA.
+  mode: upload_wheels
+concurrency: 1
+trace_expectations:
+  evaluator_kind: desktop_round_completion
+tasks:
+  - task_id: desktop-chrome-heading
+    app_profile: chrome
+    agent_kind: desktop
+    query: Chrome is open to a local deterministic page. Read the complete main heading and finish with only that exact heading.
+    max_steps: 12
+    max_session_steps: 12
+    timeout_seconds: 12000
+    max_retries: 1
+    fixtures:
+      - generated_name: chrome_fixture.html
+        remote_path: /tmp/northcua-public-nexau/chrome_fixture.html
+        mode: "0644"
+    startup_commands:
+      - label: open-desktop-chrome-fixture
+        command: bash -lc 'export DISPLAY=${DISPLAY:-:0}; export CHROME_NO_DEFAULT_BROWSER_CHECK=1; setsid google-chrome --no-sandbox --disable-dev-shm-usage --user-data-dir=/tmp/northcua-public-nexau-chrome --no-first-run --no-default-browser-check --disable-fre --disable-sync --disable-component-update --disable-background-networking --disable-search-engine-choice-screen --disable-features=SigninIntercept,ChromeWhatsNewUI,Translate --new-window file:///tmp/northcua-public-nexau/chrome_fixture.html </dev/null >/tmp/northcua-public-nexau-chrome.out 2>/tmp/northcua-public-nexau-chrome.err & sleep 8'
+        timeout_seconds: 45
+    metadata:
+      expected_answer: NorthCUA Golden Chrome Ready
+      synthetic_case: true
+  - task_id: desktop-calc-total
+    app_profile: calc
+    agent_kind: desktop
+    query: Calc is open with a local spreadsheet. Do not edit or save it. Read the three numeric values in column B, compute their sum, and finish with only the total.
+    max_steps: 16
+    max_session_steps: 16
+    timeout_seconds: 12000
+    max_retries: 1
+    fixtures:
+      - generated_name: calc_fixture.csv
+        remote_path: /tmp/northcua-public-nexau/calc_fixture.csv
+        mode: "0644"
+    startup_commands:
+      - label: open-desktop-calc-native-fixture
+        # Opening CSV directly is racy on the fixture environment: LibreOffice can leave
+        # the desktop blank or surface an import/file dialog. Convert with an
+        # isolated headless profile, then open the deterministic native ODS in
+        # a second isolated profile and fail startup if that process is absent.
+        command: >-
+          bash -lc 'set -euo pipefail; export DISPLAY=${DISPLAY:-:0};
+          rm -rf /tmp/northcua-public-nexau-calc-convert-profile /tmp/northcua-public-nexau-calc-profile;
+          libreoffice -env:UserInstallation=file:///tmp/northcua-public-nexau-calc-convert-profile
+          --headless --convert-to ods --outdir /tmp/northcua-public-nexau
+          /tmp/northcua-public-nexau/calc_fixture.csv
+          >/tmp/northcua-public-nexau-calc-convert.out
+          2>/tmp/northcua-public-nexau-calc-convert.err;
+          test -s /tmp/northcua-public-nexau/calc_fixture.ods;
+          setsid libreoffice -env:UserInstallation=file:///tmp/northcua-public-nexau-calc-profile
+          --calc --norestore --nolockcheck --nodefault --nofirststartwizard
+          /tmp/northcua-public-nexau/calc_fixture.ods
+          </dev/null >/tmp/northcua-public-nexau-calc.out
+          2>/tmp/northcua-public-nexau-calc.err & sleep 15;
+          pgrep -af "soffice.*calc_fixture.ods"'
+        timeout_seconds: 90
+    metadata:
+      expected_answer: "60"
+      synthetic_case: true
+  - task_id: desktop-gimp-image
+    app_profile: gimp
+    agent_kind: desktop
+    query: GIMP is open with a local colored checkerboard image. Do not edit the image. Confirm the checkerboard canvas is visible. Your entire final answer must be exactly the lowercase text checkerboard visible.
+    max_steps: 12
+    max_session_steps: 12
+    timeout_seconds: 12000
+    max_retries: 1
+    fixtures:
+      - generated_name: gimp_fixture.ppm
+        remote_path: /tmp/northcua-public-nexau/gimp_fixture.ppm
+        mode: "0644"
+    startup_commands:
+      - label: open-desktop-gimp-fixture
+        command: bash -lc 'export DISPLAY=${DISPLAY:-:0}; setsid gimp /tmp/northcua-public-nexau/gimp_fixture.ppm </dev/null >/tmp/northcua-public-nexau-gimp.out 2>/tmp/northcua-public-nexau-gimp.err & sleep 18'
+        timeout_seconds: 90
+    metadata:
+      expected_answer: checkerboard visible
+      synthetic_case: true
+metadata:
+  suite_family: public-nexau-migration
+  deterministic_local_fixtures: true
+  excludes_osworld_dataset: true
+  excludes_webarena_verified: true

@@ -1,0 +1,323 @@
+templates:
+  - profile_id: base-runtime
+    alias: northcua-e2b-base-runtime
+    provider: e2b
+    base_template: e2b_desktop:base
+    desktop: true
+    resources:
+      cpu_count: 4
+      memory_mb: 8192
+      timeout_seconds: 900
+    resolution: [1280, 900]
+    device_python: python3.12
+    installed_apps:
+      - desktop.file_manager
+      - dev.terminal
+    required_binaries:
+      - python3.12
+      - northcua-device
+      - xdotool
+      - wmctrl
+      - scrot
+      - thunar
+      - xfce4-terminal
+    required_capabilities:
+      - desktop.screenshot
+      - desktop.input
+      - desktop.window
+      - shell.exec
+      - a11y.tree
+  - profile_id: office-web
+    alias: northcua-e2b-office-web
+    provider: e2b
+    base_template: northcua-e2b-base-runtime
+    desktop: true
+    resources:
+      cpu_count: 4
+      memory_mb: 8192
+      timeout_seconds: 900
+    resolution: [1280, 900]
+    device_python: python3.12
+    installed_apps:
+      - browser.chrome
+      - browser.firefox
+      - libreoffice.calc
+      - libreoffice.writer
+      - libreoffice.impress
+      - desktop.file_manager
+    required_binaries:
+      - google-chrome
+      - firefox
+      - libreoffice
+      - evince
+      - file-roller
+      - thunar
+    required_capabilities:
+      - desktop.screenshot
+      - desktop.input
+      - desktop.window
+      - shell.exec
+      - a11y.tree
+  - profile_id: creative
+    alias: northcua-e2b-creative
+    provider: e2b
+    base_template: northcua-e2b-base-runtime
+    desktop: true
+    resources:
+      cpu_count: 4
+      memory_mb: 8192
+      timeout_seconds: 900
+    resolution: [1280, 900]
+    device_python: python3.12
+    installed_apps:
+      - creative.gimp
+      - creative.inkscape
+    required_binaries:
+      - gimp
+      - inkscape
+      - convert
+      - ffmpeg
+    required_capabilities:
+      - desktop.screenshot
+      - desktop.input
+      - desktop.window
+      - shell.exec
+      - a11y.tree
+  - profile_id: dev
+    alias: northcua-e2b-dev
+    provider: e2b
+    base_template: northcua-e2b-base-runtime
+    desktop: true
+    resources:
+      cpu_count: 4
+      memory_mb: 8192
+      timeout_seconds: 900
+    resolution: [1280, 900]
+    device_python: python3.12
+    installed_apps:
+      - dev.vscode
+      - dev.terminal
+      - desktop.file_manager
+    required_binaries:
+      - code
+      - node
+      - npm
+      - git
+      - xfce4-terminal
+    required_capabilities:
+      - desktop.screenshot
+      - desktop.input
+      - desktop.window
+      - shell.exec
+      - a11y.tree
+  - profile_id: desktop-full
+    alias: northcua-e2b-desktop-full
+    provider: e2b
+    base_template: northcua-e2b-base-runtime
+    desktop: true
+    resources:
+      cpu_count: 6
+      memory_mb: 12288
+      timeout_seconds: 7200
+    resolution: [1280, 900]
+    device_python: python3.12
+    installed_apps:
+      - browser.chrome
+      - browser.firefox
+      - libreoffice.calc
+      - libreoffice.writer
+      - libreoffice.impress
+      - creative.gimp
+      - creative.inkscape
+      - desktop.file_manager
+      - desktop.text_editor
+      - desktop.image_viewer
+      - desktop.pdf_viewer
+      - media.vlc
+      - mail.thunderbird
+      - dev.vscode
+      - dev.terminal
+      - desktop.generic
+    required_binaries:
+      - google-chrome
+      - firefox
+      - libreoffice
+      - gimp
+      - inkscape
+      - code
+      - thunar
+      - nautilus
+      - xdg-open
+      - gedit
+      - mousepad
+      - eog
+      - ristretto
+      - evince
+      - vlc
+      - thunderbird
+      - xfce4-terminal
+      - sar
+    required_capabilities:
+      - desktop.screenshot
+      - desktop.input
+      - desktop.window
+      - shell.exec
+      - a11y.tree
+apps:
+  - app_profile: browser.chrome
+    template_profile: office-web
+    display_name: Google Chrome
+    launch_binary: google-chrome
+    launch_argv:
+      - google-chrome
+      - --no-sandbox
+      - --disable-dev-shm-usage
+      - --no-first-run
+      - --no-default-browser-check
+      - --disable-fre
+      - --disable-sync
+      - --disable-search-engine-choice-screen
+      - --user-data-dir=/tmp/northcua-chrome-profile
+    process_hint: chrome
+    window_hint: Google Chrome
+    required_binaries: [google-chrome]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window]
+    default_recipe: open_url
+  - app_profile: browser.firefox
+    template_profile: office-web
+    display_name: Firefox
+    launch_binary: firefox
+    launch_argv: [firefox]
+    process_hint: firefox
+    required_binaries: [firefox]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window]
+    default_recipe: open_url
+  - app_profile: libreoffice.calc
+    template_profile: office-web
+    display_name: LibreOffice Calc
+    launch_binary: libreoffice
+    launch_argv: [libreoffice, --calc, --norestore, --nofirststartwizard]
+    process_hint: soffice
+    window_hint: LibreOffice Calc
+    required_binaries: [libreoffice]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: libreoffice.writer
+    template_profile: office-web
+    display_name: LibreOffice Writer
+    launch_binary: libreoffice
+    launch_argv: [libreoffice, --writer, --norestore]
+    process_hint: soffice
+    required_binaries: [libreoffice]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: libreoffice.impress
+    template_profile: office-web
+    display_name: LibreOffice Impress
+    launch_binary: libreoffice
+    launch_argv: [libreoffice, --impress, --norestore]
+    process_hint: soffice
+    required_binaries: [libreoffice]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: creative.gimp
+    template_profile: creative
+    display_name: GIMP
+    launch_binary: gimp
+    launch_argv: [gimp]
+    process_hint: gimp
+    window_hint: GNU Image Manipulation Program
+    required_binaries: [gimp]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: creative.inkscape
+    template_profile: creative
+    display_name: Inkscape
+    launch_binary: inkscape
+    launch_argv: [inkscape]
+    process_hint: inkscape
+    required_binaries: [inkscape]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: desktop.file_manager
+    template_profile: base-runtime
+    display_name: File Manager
+    launch_binary: thunar
+    launch_argv: [thunar]
+    process_hint: thunar
+    required_binaries: [thunar]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_directory
+  - app_profile: desktop.text_editor
+    template_profile: desktop-full
+    display_name: Text Editor
+    launch_binary: mousepad
+    launch_argv: [mousepad]
+    process_hint: mousepad
+    required_binaries: [mousepad]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: desktop.image_viewer
+    template_profile: desktop-full
+    display_name: Image Viewer
+    launch_binary: eog
+    launch_argv: [eog]
+    process_hint: eog
+    required_binaries: [eog]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: desktop.pdf_viewer
+    template_profile: desktop-full
+    display_name: PDF Viewer
+    launch_binary: evince
+    launch_argv: [evince]
+    process_hint: evince
+    required_binaries: [evince]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: media.vlc
+    template_profile: desktop-full
+    display_name: VLC
+    launch_binary: vlc
+    launch_argv: [vlc, --no-qt-privacy-ask, --no-audio]
+    launch_user: user
+    process_hint: vlc
+    required_binaries: [vlc]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: mail.thunderbird
+    template_profile: desktop-full
+    display_name: Thunderbird
+    launch_binary: thunderbird
+    launch_argv: [thunderbird]
+    process_hint: thunderbird
+    required_binaries: [thunderbird]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_blank_app
+  - app_profile: dev.terminal
+    template_profile: dev
+    display_name: Terminal
+    launch_binary: xfce4-terminal
+    launch_argv: [xfce4-terminal]
+    process_hint: xfce4-terminal
+    required_binaries: [xfce4-terminal]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_blank_app
+  - app_profile: dev.vscode
+    template_profile: dev
+    display_name: Visual Studio Code
+    launch_binary: code
+    launch_argv: [code, --no-sandbox, --user-data-dir, /tmp/northcua-vscode-user-data]
+    process_hint: code
+    window_hint: Visual Studio Code
+    required_binaries: [code]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_directory
+  - app_profile: desktop.generic
+    template_profile: desktop-full
+    display_name: Generic Desktop
+    launch_binary: xfce4-terminal
+    launch_argv: [xfce4-terminal]
+    required_binaries: [xfce4-terminal]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec, a11y.tree]
+    default_recipe: run_setup_script

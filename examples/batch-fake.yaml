@@ -1,0 +1,18 @@
+batch_id: demo-fake
+defaults:
+  controller_url: ws://127.0.0.1:8765
+  concurrency: 2
+  sandbox:
+    provider: fake
+    template: ubuntu
+    desktop: false
+tasks:
+  - task_id: web-smoke
+    agent_kind: web
+    query: Open example.com and summarize the visible content
+    url: https://example.com
+    max_steps: 5
+  - task_id: desktop-smoke
+    agent_kind: desktop
+    query: Open a calculator and compute 12 * 7
+    max_steps: 8

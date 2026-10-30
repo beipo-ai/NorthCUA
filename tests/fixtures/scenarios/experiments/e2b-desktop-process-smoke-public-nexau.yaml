@@ -1,0 +1,65 @@
+version: v1
+experiment_id: desktop-process-smoke-public-nexau
+description: One deterministic Desktop case through the real controller process executor.
+controller:
+  managed_local: true
+  local_host: 127.0.0.1
+  local_port: 8885
+  public_url: ""
+  token: ""
+  app_config_path: config/app.desktop.e2b.yaml
+  insecure_dev_no_auth: false
+  executor_mode: process
+  parallelism: 1
+  runner_workers: 1
+  worker_queue_max: 2
+  worker_start_timeout_seconds: 120
+  worker_heartbeat_timeout_seconds: 120
+sandbox:
+  provider: e2b
+  template: fixture-desktop-candidate
+  allocation_strategy: ephemeral_per_task
+  desktop: true
+  platform: linux
+  resolution: [1280, 900]
+  device_python: python3.12
+  resources:
+    cpu_count: 4
+    memory_mb: 8192
+    timeout_seconds: 12000
+  metadata:
+    suite: desktop-process-smoke-public-nexau
+    template_alias: fixture-desktop-candidate
+    dataset: none
+runtime:
+  mode: upload_wheels
+concurrency: 1
+trace_expectations:
+  evaluator_kind: desktop_round_completion
+tasks:
+  - task_id: desktop-process-chrome-resume
+    app_profile: chrome
+    agent_kind: desktop
+    query: Chrome is open to a local deterministic page. Click the blue "Reveal confirmation code" button, then read the newly revealed code and finish with only that exact code. The code is not visible before the click.
+    max_steps: 12
+    max_session_steps: 12
+    timeout_seconds: 12000
+    max_retries: 1
+    fixtures:
+      - source_path: ../fixtures/nexau-compat/desktop-process-resume.html
+        remote_path: /tmp/northcua-public-nexau-process/desktop-process-resume.html
+        mode: "0644"
+    startup_commands:
+      - label: open-desktop-process-chrome-fixture
+        command: bash -lc 'export DISPLAY=${DISPLAY:-:0}; export CHROME_NO_DEFAULT_BROWSER_CHECK=1; setsid google-chrome --no-sandbox --disable-dev-shm-usage --user-data-dir=/tmp/northcua-public-nexau-process-chrome --no-first-run --no-default-browser-check --disable-fre --disable-sync --disable-component-update --disable-background-networking --disable-search-engine-choice-screen --disable-features=SigninIntercept,ChromeWhatsNewUI,Translate --new-window file:///tmp/northcua-public-nexau-process/desktop-process-resume.html </dev/null >/tmp/northcua-public-nexau-process-chrome.out 2>/tmp/northcua-public-nexau-process-chrome.err & sleep 8'
+        timeout_seconds: 45
+    metadata:
+      expected_answer: NORTHCUA-RESUME-425
+      synthetic_case: true
+      requires_pending_call_resume: true
+metadata:
+  suite_family: public-nexau-migration
+  deterministic_local_fixtures: true
+  process_executor_smoke: true
+  excludes_osworld_dataset: true
+  excludes_webarena_verified: true

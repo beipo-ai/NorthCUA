@@ -1,0 +1,13 @@
+task_id: live-five-gimp-undo
+query: Set the minimum number of undo steps to 100.
+app_profile: creative.gimp
+template_profile: creative
+max_retries: 2
+init:
+  - recipe: open_blank_app
+    label: open-gimp
+    args:
+      app: creative.gimp
+      wait_window: GNU Image Manipulation Program
+      timeout_seconds: 90
+tags: [gimp, live-five]

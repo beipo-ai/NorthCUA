@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NorthCUA Process Resume Fixture</title>
+    <style>
+      body {
+        align-items: center;
+        background: #f5f7fb;
+        color: #172033;
+        display: flex;
+        font-family: sans-serif;
+        justify-content: center;
+        margin: 0;
+        min-height: 100vh;
+      }
+      main {
+        background: white;
+        border: 2px solid #cad3e0;
+        border-radius: 16px;
+        padding: 48px;
+        text-align: center;
+        width: 620px;
+      }
+      button {
+        background: #155eef;
+        border: 0;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        font-size: 28px;
+        padding: 20px 36px;
+      }
+      #result {
+        font-size: 32px;
+        font-weight: 700;
+        margin-top: 32px;
+        min-height: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Process Resume Verification</h1>
+      <p>The confirmation code is hidden until the button is activated.</p>
+      <button id="reveal" type="button">Reveal confirmation code</button>
+      <div id="result" role="status" aria-live="polite"></div>
+    </main>
+    <script>
+      document.getElementById("reveal").addEventListener("click", () => {
+        document.getElementById("result").textContent = "NORTHCUA-RESUME-425";
+      });
+    </script>
+  </body>
+</html>

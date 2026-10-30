@@ -1,0 +1,48 @@
+{
+  "snapshot_date": "2026-10-31",
+  "author": "NorthCUA Team",
+  "figures": [
+    {
+      "file": "harness-lifecycle.png",
+      "paper_source": "figures/generated/04_harness_lifecycle.pdf",
+      "report_page": 8,
+      "figure": "Figure 4. NorthCUA Harness lifecycle",
+      "report_sha256": "bf2ce9e665cd7eb2212c0d5635d276aaba46232ad89f9f34f7ce6b2367244611",
+      "sha256": "2f90376b27acba9de601ddcd5255be223c0bdd6bfea051845dbde4bf952353ad",
+      "kind": "research mechanism illustration; not a recorded agent run",
+      "method": "unchanged body rendered from report page 8"
+    },
+    {
+      "file": "long-horizon.png",
+      "paper_source": "figures/generated/05_long_horizon.pdf",
+      "report_page": 11,
+      "figure": "Figure 5. Context for long-horizon execution",
+      "report_sha256": "bf2ce9e665cd7eb2212c0d5635d276aaba46232ad89f9f34f7ce6b2367244611",
+      "sha256": "3909b7f7a770be6d3b54bca1de854d8ee28ef5b64db55e6800b15bfe58bc532c",
+      "kind": "research mechanism illustration; not a recorded agent run",
+      "render_scale": 4,
+      "bbox": [
+        87.73227,
+        67.78189,
+        524.29083,
+        401.50662
+      ]
+    },
+    {
+      "file": "outcome-evaluation.png",
+      "paper_source": "figures/generated/07_evaluator.pdf",
+      "report_page": 15,
+      "figure": "Figure 7. Agentic outcome evaluation",
+      "report_sha256": "bf2ce9e665cd7eb2212c0d5635d276aaba46232ad89f9f34f7ce6b2367244611",
+      "sha256": "b1d417f9250b0fa4ab8fc9a4927c10eca83fb27683be3c4234965fcc943835d7",
+      "kind": "research mechanism illustration; not a recorded agent run",
+      "render_scale": 4,
+      "bbox": [
+        87.73227,
+        67.83575,
+        524.25928,
+        313.24003
+      ]
+    }
+  ]
+}

@@ -1,0 +1,259 @@
+templates:
+  - profile_id: osworld-gnome-full
+    alias: fixture-osworld-candidate
+    provider: e2b
+    base_template: fixture-osworld-base
+    desktop: true
+    resources:
+      cpu_count: 8
+      memory_mb: 16384
+      timeout_seconds: 7200
+    resolution: [1920, 1080]
+    device_python: python3.12
+    installed_apps:
+      - browser.chrome
+      - browser.firefox
+      - libreoffice.calc
+      - libreoffice.writer
+      - libreoffice.impress
+      - creative.gimp
+      - creative.inkscape
+      - desktop.file_manager
+      - desktop.text_editor
+      - desktop.image_viewer
+      - desktop.pdf_viewer
+      - media.vlc
+      - mail.thunderbird
+      - dev.vscode
+      - dev.terminal
+      - desktop.generic
+    required_binaries:
+      - google-chrome
+      - firefox
+      - libreoffice
+      - gimp
+      - inkscape
+      - code
+      - node
+      - npm
+      - nautilus
+      - thunar
+      - xdg-open
+      - gedit
+      - mousepad
+      - eog
+      - ristretto
+      - evince
+      - vlc
+      - thunderbird
+      - gnome-terminal
+      - gnome-control-center
+      - xfce4-terminal
+      - vim
+      - nano
+      - rg
+      - gnome-shell
+      - gsettings
+      - dbus-run-session
+      - xdotool
+      - wmctrl
+      - scrot
+      - socat
+      - sar
+      - northcua-device
+    required_capabilities:
+      - desktop.screenshot
+      - desktop.input
+      - desktop.window
+      - shell.exec
+      - a11y.tree
+
+apps:
+  - app_profile: browser.chrome
+    template_profile: osworld-gnome-full
+    display_name: Google Chrome
+    launch_binary: google-chrome
+    launch_argv:
+      - google-chrome
+      - --remote-debugging-port=9222
+      - --remote-debugging-address=0.0.0.0
+      - --password-store=basic
+      - --no-sandbox
+      - --disable-dev-shm-usage
+      - --no-first-run
+      - --no-default-browser-check
+      - --disable-fre
+      - --disable-sync
+      - --disable-search-engine-choice-screen
+      - --user-data-dir=/home/user/.config/google-chrome
+    launch_user: user
+    process_hint: chrome
+    window_hint: Google Chrome
+    required_binaries: [google-chrome]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window]
+    default_recipe: open_url
+  - app_profile: browser.firefox
+    template_profile: osworld-gnome-full
+    display_name: Firefox
+    launch_binary: firefox
+    launch_argv: [firefox]
+    launch_user: user
+    process_hint: firefox
+    window_hint: Firefox
+    required_binaries: [firefox]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window]
+    default_recipe: open_url
+  - app_profile: libreoffice.calc
+    template_profile: osworld-gnome-full
+    display_name: LibreOffice Calc
+    launch_binary: libreoffice
+    launch_argv: [libreoffice, --calc, --norestore, --nofirststartwizard]
+    launch_user: user
+    process_hint: soffice
+    window_hint: LibreOffice Calc
+    required_binaries: [libreoffice]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: libreoffice.writer
+    template_profile: osworld-gnome-full
+    display_name: LibreOffice Writer
+    launch_binary: libreoffice
+    launch_argv: [libreoffice, --writer, --norestore, --nofirststartwizard]
+    launch_user: user
+    process_hint: soffice
+    window_hint: LibreOffice Writer
+    required_binaries: [libreoffice]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: libreoffice.impress
+    template_profile: osworld-gnome-full
+    display_name: LibreOffice Impress
+    launch_binary: libreoffice
+    launch_argv: [libreoffice, --impress, --norestore, --nofirststartwizard]
+    launch_user: user
+    process_hint: soffice
+    window_hint: LibreOffice Impress
+    required_binaries: [libreoffice]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: creative.gimp
+    template_profile: osworld-gnome-full
+    display_name: GIMP
+    launch_binary: gimp
+    launch_argv: [gimp]
+    launch_user: user
+    process_hint: gimp
+    window_hint: GNU Image Manipulation Program
+    required_binaries: [gimp]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: creative.inkscape
+    template_profile: osworld-gnome-full
+    display_name: Inkscape
+    launch_binary: inkscape
+    launch_argv: [inkscape]
+    launch_user: user
+    process_hint: inkscape
+    window_hint: Inkscape
+    required_binaries: [inkscape]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: desktop.file_manager
+    template_profile: osworld-gnome-full
+    display_name: Files
+    launch_binary: nautilus
+    launch_argv: [nautilus]
+    launch_user: user
+    process_hint: nautilus
+    window_hint: org.gnome.Nautilus
+    required_binaries: [nautilus]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_directory
+  - app_profile: desktop.text_editor
+    template_profile: osworld-gnome-full
+    display_name: Text Editor
+    launch_binary: gedit
+    launch_argv: [gedit]
+    launch_user: user
+    process_hint: gedit
+    window_hint: gedit
+    required_binaries: [gedit]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: desktop.image_viewer
+    template_profile: osworld-gnome-full
+    display_name: Image Viewer
+    launch_binary: eog
+    launch_argv: [eog]
+    launch_user: user
+    process_hint: eog
+    window_hint: Image Viewer
+    required_binaries: [eog]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: desktop.pdf_viewer
+    template_profile: osworld-gnome-full
+    display_name: Document Viewer
+    launch_binary: evince
+    launch_argv: [evince]
+    launch_user: user
+    process_hint: evince
+    window_hint: Document Viewer
+    required_binaries: [evince]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: media.vlc
+    template_profile: osworld-gnome-full
+    display_name: VLC
+    launch_binary: vlc
+    launch_argv: [vlc, --no-qt-privacy-ask, --no-audio, --extraintf, http, --http-port, "8080", --http-password, password]
+    launch_user: user
+    process_hint: vlc
+    window_hint: VLC
+    required_binaries: [vlc]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_file
+  - app_profile: mail.thunderbird
+    template_profile: osworld-gnome-full
+    display_name: Thunderbird
+    launch_binary: thunderbird
+    launch_argv: [thunderbird]
+    launch_user: user
+    process_hint: thunderbird
+    window_hint: Thunderbird
+    required_binaries: [thunderbird]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_blank_app
+  - app_profile: dev.terminal
+    template_profile: osworld-gnome-full
+    display_name: Terminal
+    launch_binary: gnome-terminal
+    launch_argv: [gnome-terminal]
+    launch_user: user
+    process_hint: gnome-terminal
+    window_hint: Terminal
+    required_binaries: [gnome-terminal]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_blank_app
+  - app_profile: dev.vscode
+    template_profile: osworld-gnome-full
+    display_name: Visual Studio Code
+    launch_binary: code
+    launch_argv: [code, --no-sandbox, --user-data-dir, /home/user/.config/Code]
+    launch_user: user
+    process_hint: code
+    window_hint: Visual Studio Code
+    required_binaries: [code]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec]
+    default_recipe: open_directory
+  - app_profile: desktop.generic
+    template_profile: osworld-gnome-full
+    display_name: Generic GNOME Desktop
+    launch_binary: gnome-terminal
+    launch_argv: [gnome-terminal]
+    launch_user: user
+    process_hint: gnome-terminal
+    window_hint: Terminal
+    required_binaries: [gnome-terminal]
+    required_capabilities: [desktop.screenshot, desktop.input, desktop.window, shell.exec, a11y.tree]
+    default_recipe: run_setup_script

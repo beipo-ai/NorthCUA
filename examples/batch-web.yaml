@@ -1,0 +1,19 @@
+batch_id: web-example
+defaults:
+  controller_url: wss://controller.example/ws
+  concurrency: 1
+  sandbox:
+    provider: e2b
+    template: northcua-web
+    allocation_strategy: ephemeral_per_task
+    desktop: false
+    platform: browser
+    device_python: /opt/northcua/venv/bin/python
+    resources:
+      timeout_seconds: 900
+tasks:
+- task_id: web-task
+  agent_kind: web
+  query: Open https://example.com and report the main heading.
+  max_steps: 15
+  url: https://example.com

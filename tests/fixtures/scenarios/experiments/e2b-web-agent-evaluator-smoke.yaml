@@ -1,0 +1,73 @@
+version: v1
+experiment_id: web-agent-e2b-smoke
+description: Single deterministic E2B Web Agent + Web Evaluator smoke case using a local fixture page.
+controller:
+  managed_local: true
+  local_host: 127.0.0.1
+  local_port: 8884
+  public_url: ""
+  token: ""
+  app_config_path: config/app.web.e2b.yaml
+  insecure_dev_no_auth: false
+  parallelism: 1
+  runner_workers: 1
+  worker_queue_max: 2
+sandbox:
+  provider: e2b
+  template: fixture-web-base
+  allocation_strategy: ephemeral_per_task
+  desktop: true
+  platform: linux
+  resolution: [1280, 900]
+  device_python: python3.12
+  resources:
+    cpu_count: 2
+    memory_mb: 4096
+    timeout_seconds: 12000
+  metadata:
+    suite: web-agent-e2b-smoke
+    template_alias: fixture-web-base
+runtime:
+  mode: baked_in
+concurrency: 1
+trace_expectations:
+  evaluator_kind: web_round_evaluator
+tasks:
+  - task_id: web-info-lookup-smoke
+    app_profile: chrome
+    agent_kind: web
+    query: Open the local NorthCUA docs fixture. Find the renewal confirmation code and finish with only that code.
+    max_steps: 12
+    max_session_steps: 12
+    timeout_seconds: 12000
+    fixtures:
+      - source_path: ../fixtures/web-e2b-three/info/index.html
+        remote_path: /tmp/northcua-web-e2b-smoke/info/index.html
+        mode: "0644"
+      - source_path: ../fixtures/web-e2b-three/info/license.html
+        remote_path: /tmp/northcua-web-e2b-smoke/info/license.html
+        mode: "0644"
+    startup_commands:
+      - label: start-web-info-smoke-fixture
+        command: |
+          bash -lc 'set -euo pipefail
+          python3.12 -m http.server 8761 --bind 127.0.0.1 --directory /tmp/northcua-web-e2b-smoke/info >/tmp/northcua-web-e2b-smoke/info/http.log 2>&1 &
+          echo $! >/tmp/northcua-web-e2b-smoke/info/http.pid
+          sleep 1
+          python3.12 - <<PY
+          import urllib.request
+          urllib.request.urlopen("http://127.0.0.1:8761/index.html", timeout=5).read()
+          PY
+          echo web-info-smoke-fixture-ready'
+        timeout_seconds: 30
+    metadata:
+      url: http://127.0.0.1:8761/index.html
+      headed: false
+      web_case_kind: info_lookup
+      smoke: true
+      expected_answer: PRISM-2479
+metadata:
+  suite_family: web-agent-evaluator-e2b
+  deterministic_local_fixtures: true
+  qwen_trace_conversion_required: true
+  smoke: true

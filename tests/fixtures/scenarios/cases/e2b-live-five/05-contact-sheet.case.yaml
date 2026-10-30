@@ -1,0 +1,61 @@
+task_id: live-five-contact-sheet
+query: I am collecting the contact information of some professors and have their homepage links listed here. Assist me in completing the form by adding their respective email addresses.
+app_profile: desktop.generic
+template_profile: desktop-full
+max_retries: 2
+fixtures:
+  - generated:
+      generator: spreadsheet.xlsx
+      params:
+        rows:
+          - ["Professor", "Homepage", "Email"]
+          - ["Ada Lovelace", "file:///home/user/Desktop/contact-pages/ada-lovelace.html", ""]
+          - ["Grace Hopper", "file:///home/user/Desktop/contact-pages/grace-hopper.html", ""]
+          - ["Katherine Johnson", "file:///home/user/Desktop/contact-pages/katherine-johnson.html", ""]
+    remote_path: /home/user/Desktop/Professor_Contact.xlsx
+    role: input
+  - generated:
+      generator: html.simple_page
+      params:
+        title: Ada Lovelace
+        heading: Professor Ada Lovelace
+        body: "Department profile page. Office: Analytical Engine Lab. Email: ada.lovelace@northcua.test."
+    remote_path: /home/user/Desktop/contact-pages/ada-lovelace.html
+    role: support
+  - generated:
+      generator: html.simple_page
+      params:
+        title: Grace Hopper
+        heading: Professor Grace Hopper
+        body: "Department profile page. Office: Compiler Systems Lab. Email: grace.hopper@northcua.test."
+    remote_path: /home/user/Desktop/contact-pages/grace-hopper.html
+    role: support
+  - generated:
+      generator: html.simple_page
+      params:
+        title: Katherine Johnson
+        heading: Professor Katherine Johnson
+        body: "Department profile page. Office: Orbital Mechanics Lab. Email: katherine.johnson@northcua.test."
+    remote_path: /home/user/Desktop/contact-pages/katherine-johnson.html
+    role: support
+  - generated:
+      generator: setup.script
+      params:
+        commands:
+          - "setsid google-chrome --no-sandbox --disable-dev-shm-usage --no-first-run --no-default-browser-check about:blank </dev/null >/tmp/northcua-contact-chrome.out 2>/tmp/northcua-contact-chrome.err &"
+    remote_path: /tmp/northcua-cases/live-five-contact-sheet/open-browser.sh
+    mode: "0755"
+    role: setup_script
+init:
+  - recipe: run_setup_script
+    label: open-browser
+    args:
+      path: /tmp/northcua-cases/live-five-contact-sheet/open-browser.sh
+      timeout_seconds: 60
+  - recipe: open_file
+    label: open-contact-sheet
+    args:
+      app: libreoffice.calc
+      path: /home/user/Desktop/Professor_Contact.xlsx
+      timeout_seconds: 90
+tags: [multi-app, live-five]

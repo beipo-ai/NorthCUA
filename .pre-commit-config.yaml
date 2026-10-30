@@ -1,0 +1,24 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^docs/assets/brand/(GUST-FONT-LICENSE|LPPL-1\.3c)\.txt$
+      - id: end-of-file-fixer
+        exclude: ^docs/assets/brand/((GUST-FONT-LICENSE|LPPL-1\.3c)\.txt|northcua-mark\.svg)$
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ['--maxkb=1024']
+        exclude: ^docs/(paper/main\.pdf|assets/demos/(tidal-workflow|wm33-smartest-workflow)\.mp4)$
+  - repo: local
+    hooks:
+      - id: ruff
+        name: Ruff
+        entry: uv run --no-sync ruff check
+        language: system
+        types: [python]
+      - id: ruff-format
+        name: Ruff format
+        entry: uv run --no-sync ruff format --check
+        language: system
+        types: [python]

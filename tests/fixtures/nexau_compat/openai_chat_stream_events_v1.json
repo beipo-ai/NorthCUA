@@ -1,0 +1,91 @@
+[
+  {
+    "id": "chatcmpl-fixture",
+    "object": "chat.completion.chunk",
+    "created": 1,
+    "model": "fixture-model",
+    "choices": [
+      {
+        "index": 0,
+        "delta": {"role": "assistant", "reasoning_content": "plan "},
+        "finish_reason": null
+      }
+    ]
+  },
+  {
+    "id": "chatcmpl-fixture",
+    "object": "chat.completion.chunk",
+    "created": 1,
+    "model": "fixture-model",
+    "choices": [
+      {
+        "index": 0,
+        "delta": {"reasoning_content": "lookup"},
+        "finish_reason": null
+      }
+    ]
+  },
+  {
+    "id": "chatcmpl-fixture",
+    "object": "chat.completion.chunk",
+    "created": 1,
+    "model": "fixture-model",
+    "choices": [
+      {
+        "index": 0,
+        "delta": {"content": "chat answer"},
+        "finish_reason": null
+      }
+    ]
+  },
+  {
+    "id": "chatcmpl-fixture",
+    "object": "chat.completion.chunk",
+    "created": 1,
+    "model": "fixture-model",
+    "choices": [
+      {
+        "index": 0,
+        "delta": {
+          "tool_calls": [
+            {
+              "index": 0,
+              "id": "call-chat",
+              "type": "function",
+              "function": {"name": "lookup", "arguments": "{\"q\":"}
+            }
+          ]
+        },
+        "finish_reason": null
+      }
+    ]
+  },
+  {
+    "id": "chatcmpl-fixture",
+    "object": "chat.completion.chunk",
+    "created": 1,
+    "model": "fixture-model",
+    "choices": [
+      {
+        "index": 0,
+        "delta": {
+          "tool_calls": [
+            {
+              "index": 0,
+              "function": {"arguments": "\"chat\"}"}
+            }
+          ]
+        },
+        "finish_reason": "tool_calls"
+      }
+    ]
+  },
+  {
+    "id": "chatcmpl-fixture",
+    "object": "chat.completion.chunk",
+    "created": 1,
+    "model": "fixture-model",
+    "choices": [],
+    "usage": {"prompt_tokens": 3, "completion_tokens": 4, "total_tokens": 7}
+  }
+]

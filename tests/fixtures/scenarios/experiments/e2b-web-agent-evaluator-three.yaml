@@ -1,0 +1,141 @@
+version: v1
+experiment_id: web-agent-e2b-three
+description: Three deterministic E2B Web Agent + Web Evaluator cases using local fixture pages.
+controller:
+  managed_local: true
+  local_host: 127.0.0.1
+  local_port: 8885
+  public_url: ""
+  token: ""
+  app_config_path: config/app.web.e2b.yaml
+  insecure_dev_no_auth: false
+  # Keep the release canary serial so three GPT-5.5 xhigh evaluator loops do
+  # not contend for the same gateway quota. The five-case expansion exercises
+  # the parallel controller/worker path separately.
+  parallelism: 1
+  runner_workers: 1
+  worker_queue_max: 2
+sandbox:
+  provider: e2b
+  template: fixture-web-candidate
+  allocation_strategy: ephemeral_per_task
+  desktop: true
+  platform: linux
+  resolution: [1280, 900]
+  device_python: python3.12
+  resources:
+    cpu_count: 2
+    memory_mb: 4096
+    timeout_seconds: 12000
+  metadata:
+    suite: web-agent-e2b-three
+    template_alias: fixture-web-candidate
+runtime:
+  # This suite validates the checked-out NorthCUA/NexAU candidate. The fixture
+  # template supplies the browser/desktop substrate; current runtime wheels
+  # must be uploaded or the run silently exercises the older baked release.
+  mode: upload_wheels
+concurrency: 1
+trace_expectations:
+  evaluator_kind: web_round_evaluator
+tasks:
+  - task_id: web-info-lookup
+    app_profile: chrome
+    agent_kind: web
+    query: Open the local NorthCUA docs fixture. Find the renewal confirmation code and finish with only that code.
+    max_steps: 12
+    max_session_steps: 12
+    timeout_seconds: 12000
+    max_retries: 1
+    fixtures:
+      - source_path: ../fixtures/web-e2b-three/info/index.html
+        remote_path: /tmp/northcua-web-e2b-three/info/index.html
+        mode: "0644"
+      - source_path: ../fixtures/web-e2b-three/info/license.html
+        remote_path: /tmp/northcua-web-e2b-three/info/license.html
+        mode: "0644"
+    startup_commands:
+      - label: start-web-info-fixture
+        command: |
+          bash -lc 'set -euo pipefail
+          python3.12 -m http.server 8761 --bind 127.0.0.1 --directory /tmp/northcua-web-e2b-three/info >/tmp/northcua-web-e2b-three/info/http.log 2>&1 &
+          echo $! >/tmp/northcua-web-e2b-three/info/http.pid
+          sleep 1
+          python3.12 - <<PY
+          import urllib.request
+          urllib.request.urlopen("http://127.0.0.1:8761/index.html", timeout=5).read()
+          PY
+          echo web-info-fixture-ready'
+        timeout_seconds: 30
+    metadata:
+      url: http://127.0.0.1:8761/index.html
+      headed: false
+      web_case_kind: info_lookup
+      expected_answer: PRISM-2479
+  - task_id: web-form-state
+    app_profile: chrome
+    agent_kind: web
+    query: Open the local dynamic form. Fill Full name as Ada Lovelace, choose Enterprise, check the agreement box, submit, and finish with the confirmation id.
+    max_steps: 18
+    max_session_steps: 18
+    timeout_seconds: 12000
+    max_retries: 1
+    fixtures:
+      - source_path: ../fixtures/web-e2b-three/form/index.html
+        remote_path: /tmp/northcua-web-e2b-three/form/index.html
+        mode: "0644"
+    startup_commands:
+      - label: start-web-form-fixture
+        command: |
+          bash -lc 'set -euo pipefail
+          python3.12 -m http.server 8762 --bind 127.0.0.1 --directory /tmp/northcua-web-e2b-three/form >/tmp/northcua-web-e2b-three/form/http.log 2>&1 &
+          echo $! >/tmp/northcua-web-e2b-three/form/http.pid
+          sleep 1
+          python3.12 - <<PY
+          import urllib.request
+          urllib.request.urlopen("http://127.0.0.1:8762/index.html", timeout=5).read()
+          PY
+          echo web-form-fixture-ready'
+        timeout_seconds: 30
+    metadata:
+      url: http://127.0.0.1:8762/index.html
+      headed: false
+      web_case_kind: form_state
+      expected_answer: WEB-FORM-314
+  - task_id: web-tabs-navigation
+    app_profile: chrome
+    agent_kind: web
+    query: Open the local tab launcher. Open the details page in a new tab, focus it if needed, find the launch window, and finish with the launch window.
+    max_steps: 18
+    max_session_steps: 18
+    timeout_seconds: 12000
+    max_retries: 1
+    fixtures:
+      - source_path: ../fixtures/web-e2b-three/tabs/index.html
+        remote_path: /tmp/northcua-web-e2b-three/tabs/index.html
+        mode: "0644"
+      - source_path: ../fixtures/web-e2b-three/tabs/details.html
+        remote_path: /tmp/northcua-web-e2b-three/tabs/details.html
+        mode: "0644"
+    startup_commands:
+      - label: start-web-tabs-fixture
+        command: |
+          bash -lc 'set -euo pipefail
+          python3.12 -m http.server 8763 --bind 127.0.0.1 --directory /tmp/northcua-web-e2b-three/tabs >/tmp/northcua-web-e2b-three/tabs/http.log 2>&1 &
+          echo $! >/tmp/northcua-web-e2b-three/tabs/http.pid
+          sleep 1
+          python3.12 - <<PY
+          import urllib.request
+          urllib.request.urlopen("http://127.0.0.1:8763/index.html", timeout=5).read()
+          PY
+          echo web-tabs-fixture-ready'
+        timeout_seconds: 30
+    metadata:
+      url: http://127.0.0.1:8763/index.html
+      headed: false
+      web_case_kind: tabs_navigation
+      expected_answer: 09:30 UTC
+metadata:
+  suite_family: web-agent-evaluator-e2b
+  deterministic_local_fixtures: true
+  qwen_trace_conversion_required: true

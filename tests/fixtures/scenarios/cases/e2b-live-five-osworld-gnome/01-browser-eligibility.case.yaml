@@ -1,0 +1,14 @@
+task_id: live-five-browser-eligibility
+query: Find the Driver License Eligibility Requirements.
+app_profile: browser.chrome
+template_profile: osworld-gnome-full
+max_retries: 2
+init:
+  - recipe: open_url
+    label: open-dmv
+    args:
+      app: browser.chrome
+      url: https://www.dmv.virginia.gov/
+      wait_window: Google Chrome
+      timeout_seconds: 60
+tags: [browser, live-five, osworld-gnome]

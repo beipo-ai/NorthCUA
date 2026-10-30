@@ -1,0 +1,91 @@
+{
+  "created": "2026-10-31",
+  "project": "NorthCUA",
+  "component": "NorthCUA Harness",
+  "method": "Exact original Beipo SVG and exact first-page embedded TeX Gyre Adventor Regular glyph outlines; uniform lockup scaling and clear-space framing only.",
+  "source": {
+    "report": "../../paper/main.pdf",
+    "report_title": "NorthCUA Technical Report: Turbocharging Computer-Use Agents through Experience at Scale",
+    "report_sha256": "bf2ce9e665cd7eb2212c0d5635d276aaba46232ad89f9f34f7ce6b2367244611",
+    "pdf_page": 1,
+    "font": "TeXGyreAdventor-Regular",
+    "embedded_font_xref": 8,
+    "wordmark_text": "NorthCUA",
+    "mark_original_filename": "xiaobei-favicon-original.svg",
+    "mark_sha256": "5877baac80fa0cf1d3534c63199e4c5128c72d9037048b19af9c8476ada13818"
+  },
+  "geometry": {
+    "canvas": [
+      600,
+      160
+    ],
+    "paper_to_canvas_scale": 10.4,
+    "canvas_origin": [
+      16.0,
+      14.0
+    ],
+    "mark_pdf_origin": [
+      87.7322926475176,
+      69.54223875056329
+    ],
+    "mark_svg_units_to_pdf_scale": 0.00722437443060936,
+    "paper_wordmark_baseline_y": 78.99413,
+    "paper_wordmark_font_size": 8.368612,
+    "glyph_transforms": [
+      "matrix(8.368612,0,0,-8.368612,101.57335,78.99413)",
+      "matrix(8.368612,0,0,-8.368612,107.84981,78.99413)",
+      "matrix(8.368612,0,0,-8.368612,113.33125,78.99413)",
+      "matrix(8.368612,0,0,-8.368612,116.10126,78.99413)",
+      "matrix(8.368612,0,0,-8.368612,118.93822,78.99413)",
+      "matrix(8.368612,0,0,-8.368612,124.043079,78.99413)",
+      "matrix(8.368612,0,0,-8.368612,130.84676,78.99413)",
+      "matrix(8.368612,0,0,-8.368612,136.08551,78.99413)"
+    ]
+  },
+  "dark_variant": "Only the eight wordmark path fills change from #223336 to #ffffff; mark, paths, placement, canvas and transparency are unchanged.",
+  "font_license_sources": {
+    "GUST-FONT-LICENSE.txt": "https://www.gust.org.pl/projects/e-foundry/licenses/GUST-FONT-LICENSE.txt",
+    "LPPL-1.3c.txt": "https://www.latex-project.org/lppl.txt"
+  },
+  "assets": [
+    {
+      "file": "northcua-mark.svg",
+      "bytes": 2175,
+      "sha256": "5877baac80fa0cf1d3534c63199e4c5128c72d9037048b19af9c8476ada13818",
+      "width": 1388,
+      "height": 1764,
+      "transparent_background": true
+    },
+    {
+      "file": "northcua-logo.svg",
+      "bytes": 5180,
+      "sha256": "b1d733ad79ada74427c659c9230403e3a32fa33ca83dfa1cae6fd09c686c17a9",
+      "width": 600,
+      "height": 160,
+      "transparent_background": true
+    },
+    {
+      "file": "northcua-logo-dark.svg",
+      "bytes": 5180,
+      "sha256": "4ba4f666f3ec6a83509475b09f1c10c3d8d36a9329ddd93517260b242298a0fc",
+      "width": 600,
+      "height": 160,
+      "transparent_background": true
+    },
+    {
+      "file": "GUST-FONT-LICENSE.txt",
+      "bytes": 1417,
+      "sha256": "5eb61bb836bb1845ef668717cb15b382e997748ce2629e4388cc5e4c3fa4e433"
+    },
+    {
+      "file": "LPPL-1.3c.txt",
+      "bytes": 19102,
+      "sha256": "3d262cdf34dafa6955f703c634a8c238ec44109bc8dd6ef34fb7aa54809f7e66"
+    },
+    {
+      "file": "README.md",
+      "bytes": 2693,
+      "sha256": "22ea8a74922c49223d75dc33f7a71a011d932344686bf63d7798475fb28fa67c"
+    }
+  ]
+}

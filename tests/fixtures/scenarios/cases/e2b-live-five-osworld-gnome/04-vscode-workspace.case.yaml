@@ -1,0 +1,47 @@
+task_id: live-five-vscode-workspace
+query: Please help me save the current project as workspace "project" at "/home/user/".
+app_profile: dev.vscode
+template_profile: osworld-gnome-full
+max_retries: 2
+fixtures:
+  - generated:
+      generator: text.file
+      params:
+        text: "print('northcua live five')\n"
+    remote_path: /home/user/project/main.py
+    role: input
+  - generated:
+      generator: text.file
+      params:
+        text: "# Project\n\nNorthCUA live five project fixture.\n"
+    remote_path: /home/user/project/README.md
+    role: input
+  - generated:
+      generator: text.file
+      params:
+        text: "{\n  \"python.defaultInterpreterPath\": \"/usr/bin/python3\"\n}\n"
+    remote_path: /home/user/project/.vscode/settings.json
+    role: input
+  - generated:
+      generator: setup.script
+      params:
+        commands:
+          - "chown -R user:user /home/user/project"
+          - "export DISPLAY=${DISPLAY:-:0}"
+          - "sudo -Hu user env HOME=/home/user DISPLAY=${DISPLAY:-:0} XDG_RUNTIME_DIR=/run/user/1000 setsid code --no-sandbox --user-data-dir=/home/user/.config/Code /home/user/project </dev/null >/tmp/northcua-vscode.out 2>/tmp/northcua-vscode.err &"
+    remote_path: /tmp/northcua-cases/live-five-vscode-workspace/open-vscode.sh
+    mode: "0755"
+    role: setup_script
+init:
+  - recipe: run_setup_script
+    label: open-vscode
+    args:
+      path: /tmp/northcua-cases/live-five-vscode-workspace/open-vscode.sh
+      timeout_seconds: 60
+  - recipe: wait_window
+    label: wait-vscode
+    args:
+      title_contains: Visual Studio Code
+      process_contains: code
+      timeout_seconds: 45
+tags: [vscode, live-five, osworld-gnome]

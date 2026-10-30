@@ -1,0 +1,48 @@
+[
+  {
+    "responseId": "gemini-fixture",
+    "modelVersion": "fixture-model",
+    "candidates": [
+      {
+        "index": 0,
+        "content": {
+          "role": "model",
+          "parts": [{"thought": true, "text": "gemini plan", "thoughtSignature": "thought-fixture"}]
+        }
+      }
+    ]
+  },
+  {
+    "responseId": "gemini-fixture",
+    "modelVersion": "fixture-model",
+    "candidates": [
+      {
+        "index": 0,
+        "content": {
+          "role": "model",
+          "parts": [{"text": "gemini answer"}]
+        }
+      }
+    ]
+  },
+  {
+    "responseId": "gemini-fixture",
+    "modelVersion": "fixture-model",
+    "candidates": [
+      {
+        "index": 0,
+        "content": {
+          "role": "model",
+          "parts": [{"functionCall": {"name": "lookup", "args": {"q": "gemini"}}}]
+        },
+        "finishReason": "STOP"
+      }
+    ],
+    "usageMetadata": {
+      "promptTokenCount": 3,
+      "candidatesTokenCount": 5,
+      "totalTokenCount": 8,
+      "thoughtsTokenCount": 2
+    }
+  }
+]

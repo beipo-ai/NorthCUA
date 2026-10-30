@@ -1,0 +1,32 @@
+{
+  "snapshot_date": "2026-10-31",
+  "kind": "historical recorded agent demonstrations, not reruns or model benchmarks of this source release",
+  "files": [
+    {
+      "file": "tidal-workflow.mp4",
+      "source": "NorthCUA-site/public/media/tidal-workflow.mp4",
+      "bytes": 11019793,
+      "sha256": "124c984c124a0cb810bebf33eaace54848abc900c6ed7e64cf634fb00e5a30cb"
+    },
+    {
+      "file": "wm33-smartest-workflow.mp4",
+      "source": "NorthCUA-site/public/media/wm33-smartest-workflow.mp4",
+      "bytes": 13000902,
+      "sha256": "4aa8f147513345833ec911efec300f7d613a2d029301ada05f9918540340a0a2"
+    },
+    {
+      "file": "tidal.webp",
+      "source": "NorthCUA-site/public/images/tidal.webp",
+      "bytes": 16690,
+      "sha256": "21052e3d6ecb1f8f4f554f9dbb49a3367119dce51e6a23400a94e8ad1447a79a"
+    },
+    {
+      "file": "smartest.png",
+      "source": "wm33-smartest-workflow.mp4",
+      "frame_seconds": 12,
+      "bytes": 309899,
+      "sha256": "780d0098fd35736dcbde80cf1ddf94d86c2680a6b161a18e4e50e6162cc7326a",
+      "method": "unaltered frame extraction"
+    }
+  ]
+}

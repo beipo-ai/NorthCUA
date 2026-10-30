@@ -1,0 +1,45 @@
+# Build the four wheels first: python -m scripts.build_wheelhouse
+provider: e2b
+alias: northcua-desktop
+base_template: desktop
+desktop: true
+resources:
+  cpu_count: 2
+  memory_mb: 4096
+  timeout_seconds: 900
+layers:
+- kind: apt
+  packages:
+  - curl
+  - ca-certificates
+  - git
+  - python3-tk
+  - xdotool
+  - scrot
+  - wmctrl
+  - xclip
+- kind: copy
+  files:
+    wheelhouse: /opt/northcua/wheels
+- kind: run
+  command: 'set -eu
+
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+
+    /root/.local/bin/uv python install 3.12
+
+    /root/.local/bin/uv venv --seed --python 3.12 /opt/northcua/venv
+
+    /root/.local/bin/uv pip install --python /opt/northcua/venv/bin/python /opt/northcua/wheels/*.whl
+
+    /opt/northcua/venv/bin/python -m playwright install --with-deps chromium
+
+    /opt/northcua/venv/bin/northcua-device doctor --metadata-only
+
+    '
+- kind: env
+  env:
+    PATH: /opt/northcua/venv/bin:/usr/local/bin:/usr/bin:/bin
+    PLAYWRIGHT_BROWSERS_PATH: /root/.cache/ms-playwright
+metadata:
+  e2b_explicit_run_user: root

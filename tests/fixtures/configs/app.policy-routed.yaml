@@ -1,0 +1,12 @@
+agent_config_path: agent.policy-routed.yaml
+web_agent_config_path: agent.web.policy-routed.yaml
+context_management:
+  mode: false
+websocket:
+  command_result_timeout_seconds: 300
+evaluation:
+  enabled: false
+desktop:
+  coordinate_policy:
+    input_space: normalized_1000
+    clamp_to_bounds: true

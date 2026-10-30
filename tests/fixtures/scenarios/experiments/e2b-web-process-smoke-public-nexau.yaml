@@ -1,0 +1,72 @@
+version: v1
+experiment_id: web-process-smoke-public-nexau
+description: One deterministic Web case through the real controller process executor.
+controller:
+  managed_local: true
+  local_host: 127.0.0.1
+  local_port: 8885
+  public_url: ""
+  token: ""
+  app_config_path: config/app.web.e2b.yaml
+  insecure_dev_no_auth: false
+  executor_mode: process
+  parallelism: 1
+  runner_workers: 1
+  worker_queue_max: 2
+  worker_start_timeout_seconds: 120
+  worker_heartbeat_timeout_seconds: 120
+sandbox:
+  provider: e2b
+  template: fixture-web-candidate
+  allocation_strategy: ephemeral_per_task
+  desktop: true
+  platform: linux
+  resolution: [1280, 900]
+  device_python: python3.12
+  resources:
+    cpu_count: 2
+    memory_mb: 4096
+    timeout_seconds: 12000
+  metadata:
+    suite: web-process-smoke-public-nexau
+    template_alias: fixture-web-candidate
+    dataset: none
+runtime:
+  mode: upload_wheels
+concurrency: 1
+trace_expectations:
+  evaluator_kind: web_round_evaluator
+tasks:
+  - task_id: web-process-info-lookup
+    app_profile: chrome
+    agent_kind: web
+    query: Open the local NorthCUA docs fixture. Find the renewal confirmation code and finish with only that code.
+    max_steps: 12
+    max_session_steps: 12
+    timeout_seconds: 12000
+    max_retries: 1
+    fixtures:
+      - source_path: ../fixtures/web-e2b-three/info/index.html
+        remote_path: /tmp/northcua-web-process/info/index.html
+        mode: "0644"
+      - source_path: ../fixtures/web-e2b-three/info/license.html
+        remote_path: /tmp/northcua-web-process/info/license.html
+        mode: "0644"
+    startup_commands:
+      - label: start-web-process-info-fixture
+        command: |
+          bash -lc 'set -euo pipefail
+          python3.12 -m http.server 8761 --bind 127.0.0.1 --directory /tmp/northcua-web-process/info >/tmp/northcua-web-process/info/http.log 2>&1 &
+          sleep 1
+          python3.12 -c "import urllib.request; urllib.request.urlopen(\"http://127.0.0.1:8761/index.html\", timeout=5).read()"'
+        timeout_seconds: 30
+    metadata:
+      url: http://127.0.0.1:8761/index.html
+      headed: false
+      expected_answer: PRISM-2479
+      synthetic_case: true
+metadata:
+  suite_family: public-nexau-migration
+  deterministic_local_fixtures: true
+  process_executor_smoke: true
+  excludes_webarena_verified: true

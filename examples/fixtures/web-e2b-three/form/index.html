@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>NorthCUA Dynamic Form</title>
+    <script>
+      function submitFixture(event) {
+        event.preventDefault();
+        const name = document.querySelector("#full-name").value;
+        const tier = document.querySelector("#tier").value;
+        const agreed = document.querySelector("#terms").checked;
+        const status = document.querySelector("#status");
+        if (name === "Ada Lovelace" && tier === "enterprise" && agreed) {
+          status.textContent = "Submission accepted. Confirmation id: WEB-FORM-314.";
+        } else {
+          status.textContent = "Submission incomplete.";
+        }
+      }
+      window.addEventListener("DOMContentLoaded", () => {
+        document.querySelector("#request-form").addEventListener("submit", submitFixture);
+      });
+    </script>
+  </head>
+  <body>
+    <main>
+      <h1>NorthCUA Dynamic Form</h1>
+      <form id="request-form">
+        <label>Full name <input id="full-name" name="full-name" autocomplete="off" /></label>
+        <label>
+          Plan
+          <select id="tier" name="tier">
+            <option value="starter">Starter</option>
+            <option value="enterprise">Enterprise</option>
+          </select>
+        </label>
+        <label><input id="terms" type="checkbox" /> I agree to the fixture terms</label>
+        <button id="submit-request" type="submit">Submit request</button>
+      </form>
+      <p id="status" aria-live="polite">Waiting for submission.</p>
+    </main>
+  </body>
+</html>

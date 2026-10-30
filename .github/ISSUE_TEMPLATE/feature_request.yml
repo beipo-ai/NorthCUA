@@ -1,0 +1,17 @@
+name: Feature request
+description: Propose a change to NorthCUA's NorthCUA Harness.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Workflow and problem
+      description: What are you trying to accomplish, and what prevents it today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Include alternatives and how you would validate the outcome.
+    validations:
+      required: true

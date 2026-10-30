@@ -1,0 +1,30 @@
+version: v1
+suite_id: e2b-live-five
+description: Static five-query E2B development suite copied from benchmark-style desktop tasks.
+controller:
+  managed_local: true
+  local_host: 127.0.0.1
+  local_port: 8885
+  public_url: ""
+  token: ""
+  app_config_path: config/app.local.yaml
+sandbox:
+  provider: e2b
+  template: northcua-e2b-base-runtime
+  desktop: true
+  platform: linux
+  resolution: [1280, 900]
+  device_python: python3.12
+  resources:
+    cpu_count: 4
+    memory_mb: 8192
+    timeout_seconds: 900
+  metadata:
+    suite: e2b-live-five
+concurrency: 5
+case_sources:
+  - kind: directory
+    path: ../cases/e2b-live-five
+    glob: "*.case.yaml"
+metadata:
+  selector: static-live-five-v1

@@ -1,0 +1,18 @@
+# NorthCUA
+
+> NorthCUA Harness: Desktop/Web agents, evaluation and recoverable task batches.
+
+- [Operator skill](skills/northcua/SKILL.md): route an assistant from installation to evidence.
+- [First run](docs/first-run.md): model templates and credential-free native/browser tasks.
+- [Local batch](docs/local-batch.md): real local workers, three tasks, drain and resume.
+- [Models](docs/models.md): minimal endpoint settings and research-model availability.
+- [Resources](docs/resources.md): canonical report, repository and model links with checked access status.
+- [Configuration](docs/configuration.md): model protocols, defaults and schemas.
+- [Execution modes](docs/running.md): CLI, Python, WebSocket and controller/device.
+- [Batch](docs/batch.md): manifests, recovery and reports.
+- [Skills](docs/skills.md): operator installation and runtime skill loading.
+- [Troubleshooting](docs/troubleshooting.md): diagnosis and evidence.
+- [Evaluation](docs/evaluation.md): actor status versus outcome verdict.
+- [Paper map](docs/paper-map.md): released mechanisms and research boundaries.
+- [Release verification](docs/release-0.2.0.md): current execution and independent review scope.
+- [Showcase](docs/showcase.md): bundled recorded demos with provenance and limitations.

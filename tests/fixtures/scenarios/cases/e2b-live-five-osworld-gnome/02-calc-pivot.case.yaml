@@ -1,0 +1,42 @@
+task_id: live-five-calc-pivot
+query: Create a Pivot Table in a new sheet named Sheet2 to count how many times each "Invoice No." appears.
+app_profile: libreoffice.calc
+template_profile: osworld-gnome-full
+max_retries: 2
+fixtures:
+  - generated:
+      generator: spreadsheet.xlsx
+      params:
+        rows:
+          - ["Invoice No.", "Customer", "Amount"]
+          - ["INV-001", "Ava", 120]
+          - ["INV-002", "Ben", 180]
+          - ["INV-001", "Ava", 90]
+          - ["INV-003", "Chen", 75]
+    remote_path: /tmp/northcua-cases/live-five-calc-pivot/invoices.xlsx
+    role: input
+  - generated:
+      generator: setup.script
+      params:
+        commands:
+          - "mkdir -p /tmp/northcua-cases/live-five-calc-pivot"
+          - "chown -R user:user /tmp/northcua-cases/live-five-calc-pivot"
+          - "rm -f /tmp/northcua-cases/live-five-calc-pivot/invoices.ods"
+          - "sudo -Hu user env HOME=/home/user DISPLAY=${DISPLAY:-:0} timeout 60s libreoffice --headless --convert-to ods --outdir /tmp/northcua-cases/live-five-calc-pivot /tmp/northcua-cases/live-five-calc-pivot/invoices.xlsx >/tmp/northcua-calc-convert.out 2>/tmp/northcua-calc-convert.err"
+          - "test -s /tmp/northcua-cases/live-five-calc-pivot/invoices.ods"
+    remote_path: /tmp/northcua-cases/live-five-calc-pivot/prepare-native-calc.sh
+    mode: "0755"
+    role: setup_script
+init:
+  - recipe: run_setup_script
+    label: prepare-native-calc
+    args:
+      path: /tmp/northcua-cases/live-five-calc-pivot/prepare-native-calc.sh
+      timeout_seconds: 90
+  - recipe: open_file
+    label: open-invoices
+    args:
+      app: libreoffice.calc
+      path: /tmp/northcua-cases/live-five-calc-pivot/invoices.ods
+      timeout_seconds: 90
+tags: [calc, live-five, osworld-gnome]
