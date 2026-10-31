@@ -131,10 +131,10 @@ system and reports its model results. This repository publishes the **Desktop/We
 Harness**. Experience Flywheel, data generation, staged training and model weights
 are separate research components, not hidden install requirements.
 
-The report names the [project website and Hugging Face model page](docs/resources.md).
-At the release check, the website returned 404 and the model endpoint returned 401;
-we therefore provide local report/demo fallbacks and do not claim public weight
-availability or a model-weight license. [Model guidance and availability](docs/models.md).
+The report names the [NorthCUA-Pro Hugging Face model page](docs/resources.md).
+At the release check, the model endpoint returned 401; public weight availability
+and a model-weight license are not confirmed. The report and demo recordings are
+bundled in this repository. [Model guidance and availability](docs/models.md).
 
 **What has been checked:** the [release verification](docs/release-0.2.0.md) records
 fresh installation, regression tests, real-browser tasks, local batches, installed

@@ -107,8 +107,8 @@ Desktop 只有工具直接返回截图这一条观察路径。若模型输出 **
 本仓库发布 Desktop/Web Harness。Experience Flywheel、数据生成、分阶段训练与模型权重是独立研究组成，
 不是运行本仓库所需的隐藏依赖。
 
-报告写定的官网和 NorthCUA-Pro Hugging Face 页在发布检查时分别返回 404 / 401。
-[资源状态页](docs/resources.md)如实记录可用性，并提供仓库内报告与演示；
+报告中的 NorthCUA-Pro Hugging Face 页在发布检查时返回 401，权重公开状态与许可证尚未确认。
+[资源状态页](docs/resources.md)如实记录可用性；报告与演示均随仓库提供。
 [模型指南](docs/models.md)说明端点接入与坐标配置，不暗示权重已公开或沿用代码许可证。
 
 [发布验证记录](docs/release-0.2.0.md)区分从零安装、回归、真实浏览器、本地跑批、安装包和独立 review。

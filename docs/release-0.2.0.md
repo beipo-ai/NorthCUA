@@ -53,13 +53,6 @@ observations, rather than a blanket model/platform certification.
   Web/controller/batch cases outside the checkout. The source allowlist contains
   no virtual environments, private inventories, raw traces, website checkout,
   build trees or real credentials; the private-key test fixture is explicitly fake.
-- **Website — SIGNOFF.** Latest report, exact logos, headline model scores and
-  evaluation protocols, citations and availability labels align with the report.
-  The separate website passed its root/subpath build and link/asset audits,
-  9 unit checks, 38 browser cases (4 declared GPU-scope skips), a final 9-case
-  targeted three-engine regression and full decode of all seven recordings.
-  Actual in-app browser interactions were checked. Its online advisory request
-  timed out; no completed vulnerability-scan or public-hosting claim is made.
 
 ## Release checks that caught and closed issues
 
@@ -111,8 +104,8 @@ Canonical logos use the exact blue Beipo mark and embedded TeX Gyre Adventor
 letter outlines from that report. Current figures and historical recordings have
 separate provenance and are bundled in the repository.
 
-The official website returned **404** and the Hugging Face page/API **401** at
-the check. Model downloads, revision and weight license are not claimed.
+The Hugging Face page/API returned **401** at the check. Model downloads,
+revision and weight license are not claimed.
 [Resource status](resources.md) provides identities and local fallbacks.
 
 ## Acceptance boundaries and reproduction
