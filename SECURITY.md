@@ -37,6 +37,11 @@ for six Transformers advisories; read the [exact scope and practical risk](docs/
 Raw findings remain visible. New risks, failed lookups or expired exceptions
 block CI; a passing policy gate is not a claim of zero known vulnerabilities.
 
+A separate trusted-main workflow submits the exact lock's public dependency
+versions to GitHub's dependency graph. It uses no package installation and grants
+repository write permission only to that metadata-submission job, never to a PR
+audit job. Known accepted-risk versions remain in the submitted graph.
+
 Keep `.env`, local configuration, run traces, private inventories and build
 environments outside version control. Use the published templates and retain
 environment-variable references for keys. A sample credential in a security test

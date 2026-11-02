@@ -1,0 +1,38 @@
+name: Dependency graph
+on:
+  push:
+    branches: [main]
+    paths:
+      - uv.lock
+      - scripts/audit_dependencies.py
+      - scripts/submit_dependency_graph.py
+      - .github/workflows/dependency-graph.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: dependency-graph-main
+  cancel-in-progress: true
+jobs:
+  submit:
+    if: github.repository == 'beipo-ai/NorthCUA' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Submit the exact lock snapshot without installing dependencies
+        run: python -m scripts.submit_dependency_graph
+        env:
+          DEPENDENCY_GRAPH_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: dependency-graph-${{ github.sha }}
+          path: reports/dependency-graph-snapshot.json

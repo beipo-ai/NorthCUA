@@ -23,6 +23,9 @@ Check the exact candidate commit in [GitHub Actions](https://github.com/beipo-ai
 Require all five jobs: publication security, contracts, browser/native integration,
 Linux wheels and macOS wheels. A cancelled or older successful run does not count
 for a new candidate. The reusable CI also gates the release-candidate workflow.
+After a lock change, also check the separate trusted-main **Dependency graph**
+workflow: it submits all public versions with the commit and lock checksum so
+GitHub's security panel does not continue reporting an older dependency graph.
 See [testing](testing.md) for installed-wheel and optional platform checks.
 
 Have another reviewer follow the [operator skill](../skills/northcua/SKILL.md)
