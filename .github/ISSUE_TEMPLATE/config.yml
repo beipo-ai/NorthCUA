@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Installation and usage
+    url: https://github.com/beipo-ai/NorthCUA/blob/main/docs/first-run.md
+    about: Start with the model templates, local tutorial and troubleshooting guides.
+  - name: Report a security vulnerability privately
+    url: https://github.com/beipo-ai/NorthCUA/blob/main/SECURITY.md
+    about: Use the maintainer contact addresses; do not post credentials or vulnerabilities in public issues.

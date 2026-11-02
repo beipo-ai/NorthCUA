@@ -15,4 +15,5 @@ weights, third-party software or services merely referenced by the project.
 
 Models and datasets referenced in the report are not distributed by this
 repository. Obtain their licenses and permissions from their publishers;
-no unavailable Hugging Face license is inferred from this code license.
+the NorthCUA-Pro model's published license and revision are documented in
+[the model guide](docs/models.md), independently from this code license.

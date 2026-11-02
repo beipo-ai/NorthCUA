@@ -4,20 +4,57 @@ NorthCUA Harness connects a model to Desktop/Web tools; model weights are not an
 installation dependency. The same runtime can use a hosted endpoint or a model
 served locally with a supported API.
 
+## Published model family
+
+Public model cards, configurations and license files were checked on **2026-11-03**.
+Nominal parameter counts follow the cards and report; active parameters do not
+represent the memory required to load all model weights.
+
+| Model | Total / active parameters | Architecture | Checked revision |
+|---|---|---|---|
+| [NorthCUA-Nano](https://huggingface.co/china-beipo/NorthCUA-Nano) | 9B / 9B | Dense | [`e8c1a7ea38a2fb23f133ad005bd33b3f93518793`](https://huggingface.co/china-beipo/NorthCUA-Nano/tree/e8c1a7ea38a2fb23f133ad005bd33b3f93518793) |
+| [NorthCUA-Mini](https://huggingface.co/china-beipo/NorthCUA-Mini) | 35B / 3B | MoE | [`cafee9af6a950bffea2a4a17544f253abf80d44b`](https://huggingface.co/china-beipo/NorthCUA-Mini/tree/cafee9af6a950bffea2a4a17544f253abf80d44b) |
+| [NorthCUA-Pro](https://huggingface.co/china-beipo/NorthCUA-Pro) | 397B / 17B | MoE | [`2f1f0cbf4ed3f1243c37838889c446f50bc3d32c`](https://huggingface.co/china-beipo/NorthCUA-Pro/tree/2f1f0cbf4ed3f1243c37838889c446f50bc3d32c) |
+
+All three cards and checkpoint license files specify Apache-2.0. Availability
+and metadata are checked separately from inference and benchmark acceptance.
+The report's `beipo-ai` links currently resolve to the `china-beipo` resources.
+
 ## NorthCUA-Pro research model
 
 The [31 October 2026 Technical Report](paper/main.pdf) names
-[beipo-ai/NorthCUA-Pro](https://huggingface.co/beipo-ai/NorthCUA-Pro) as its Hugging
-Face resource. At the release check on **2026-10-31**, both the model page and its
-public API returned HTTP 401. Public access, checkpoint revision and weight
-license are therefore **not confirmed by this release**. Do not treat the
-Harness's Apache-2.0 license as a model-weight license. See [resource status](resources.md).
+[beipo-ai/NorthCUA-Pro](https://huggingface.co/beipo-ai/NorthCUA-Pro). That address
+now resolves to the public [china-beipo/NorthCUA-Pro model resource](https://huggingface.co/china-beipo/NorthCUA-Pro).
+On **2026-11-03**, its card, configuration, index, license and all 122 weight-shard
+URLs were publicly accessible without authentication. No weight contents were
+downloaded for this check; this supersedes the 31 October HTTP 401 observation.
+
+| Published metadata | Verified value |
+|---|---|
+| Pinned checkpoint | [`2f1f0cbf4ed3f1243c37838889c446f50bc3d32c`](https://huggingface.co/china-beipo/NorthCUA-Pro/tree/2f1f0cbf4ed3f1243c37838889c446f50bc3d32c) |
+| Model family | Qwen3.5 MoE; `Qwen3_5MoeForConditionalGeneration` |
+| Card's parameter count | 397B total / 17B active |
+| Weight index | 122 safetensors shards; 793,604,721,632 bytes of tensors |
+| Model license | [Apache-2.0, shipped with the checkpoint](https://huggingface.co/china-beipo/NorthCUA-Pro/blob/2f1f0cbf4ed3f1243c37838889c446f50bc3d32c/LICENSE) |
+
+The checkpoint is a separate distribution with its own license and notices.
+Its public availability does not mean this Harness has accepted its inference,
+tool-call compatibility or benchmark performance. The card itself distinguishes
+the exported checkpoint from the report's experiment results.
 
 Reported benchmark results belong to the report's specified checkpoints and
 protocols. Installing this Harness does not reproduce those experiments or
-substitute a different checkpoint. Once weights are accessible, follow the
-publisher's model card for the exact architecture, serving requirements,
-license and model-specific settings; record the checkpoint revision.
+substitute a different checkpoint. Follow the publisher's model card for serving
+requirements and model-specific settings; record the checkpoint revision.
+
+**Serve the model separately from the Harness.** The weight tensors alone occupy
+about 793.6 GB; the no-key tutorial does not download them. The export records
+Transformers 5.20.2, while this Harness's locked runtime is a separate environment.
+Use an inference engine that supports the checkpoint's architecture and expose
+an image-capable, structured-tool API compatible with the chosen provider recipe.
+This repository does not claim a tested server-launch recipe for this checkpoint.
+Start with one bounded task and inspect the actual tool calls and outcome before
+batching. See [resource status](resources.md).
 
 ## Minimal endpoint configuration
 

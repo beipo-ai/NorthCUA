@@ -122,3 +122,58 @@ Reproduce the supported paths with [first run](first-run.md),
 source environment. Preserve code/model/environment revisions, task and evaluator
 settings, task-specific receipts and cleanup outcomes with experiment artifacts.
 Raw local traces and credentials are excluded from the publication.
+
+## 3 November publication recheck
+
+The canonical source is now [beipo-ai/NorthCUA](https://github.com/beipo-ai/NorthCUA).
+This recheck keeps the 31 October execution record above as historical evidence.
+
+- **Local default regression after dependency updates:** 2,940 passed, 9 opt-in skips, 185.57s with Python
+  3.12 and uv 0.13.6. The 19 local-process ownership/cleanup tests also passed
+  independently after the fixture fix described below. Lint, format, scoped
+  typing, lock, actionlint, 29 release tests and isolated pre-commit checks passed.
+- **Updated-runtime task checks:** all seven real Web/controller/batch tests
+  passed in 45.44s. Both physical-input/native Desktop tests passed in 7.61s
+  after explicitly activating their own disposable macOS fixture before publishing
+  click coordinates. The click receipt still gates all keyboard input; no
+  production Desktop code changed. The preceding focus-only failure is retained
+  as diagnostic evidence, not a pass.
+- **Independent onboarding:** a fresh locked source installation, configuration
+  generation, real Web task and a three-task local-process batch succeeded.
+  All tasks finished in one attempt; completed resume left events unchanged;
+  all three cleanup receipts confirmed zero remaining worker PIDs. Only a
+  deterministic local model was used, and no physical desktop was operated.
+- **Source/history/distribution inspection:** Gitleaks found no secrets in the
+  reviewed reachable history, tracked export or four rebuilt wheels. Additional
+  review covered source blobs, package metadata, the report's 123 pages of text,
+  PDF attachment/action checks, unchanged asset hashes and media metadata.
+  Local OCR sampled 52 video frames at five-second intervals plus five images;
+  this is not an exhaustive video-pixel or audio audit. No real credential or
+  private infrastructure endpoint was identified in the reviewed material.
+- **Dependency policy:** compatible affected packages were upgraded and the
+  source/device distributions now require Pillow 13+. E2B and viewer minima
+  match compatible releases. Development hooks run in a separate tool environment.
+  Both PyPI and OSV audited all **337 locked public-package versions**, with
+  zero unreviewed findings or lookup errors. Six Transformers advisory groups
+  remain under the maintainer's [explicit, expiring exception](security/dependencies.md);
+  this is not a zero-vulnerability claim. NexAU's public pin is unchanged.
+- **Model publication:** all three model cards/configurations/license files are
+  now public. The Pro index and all 122 fixed-revision shard URLs were checked
+  without authentication or weight-body downloads. See [models](models.md) for
+  exact revisions and independent-serving requirements; inference and reported
+  benchmark results were not accepted by this check.
+
+The first organization-repository CI run at `966d18f` failed a test that sampled
+a detached child's PID after successful cleanup had already removed it. The
+fixture now publishes the PID atomically and waits for the observer to capture
+its identity before allowing early exit. Cleanup receipts, empty remaining-PID
+checks and the unrelated-process survival assertion are retained. Runtime code
+was not changed. That failed run and its cancelled macOS job do not count as passes.
+
+The current CI adds a fifth, blocking **publication-security** job: a
+checksum-pinned Gitleaks release scans full fetched history, merge-parent diffs
+and a tracked source export with redacted reports; the dependency gate retains
+raw findings and blocks new or expired risks. Follow the exact candidate's
+[canonical CI result](https://github.com/beipo-ai/NorthCUA/actions/workflows/ci.yml)
+for the hosted verdict. [Release preparation](releasing.md) defines the remaining
+publication steps and distinguishes source, model, website and PyPI publication.

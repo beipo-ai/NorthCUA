@@ -46,6 +46,8 @@ regression coverage. [Contributing](../CONTRIBUTING.md) describes the developmen
 what actually ran and the scope of independent reviewer signoffs.
 [Clean scope](clean-scope.md) explains removals, retained compatibility and open decisions.
 [Security](../SECURITY.md) describes operational boundaries and reporting.
+[Release preparation](releasing.md) covers candidate gates, source inspection
+and the separate publication steps.
 
 Use `northcua config schema --kind app` or `--kind batch` for complete generated
 JSON schemas and `--help` for optional CLI flags. Tutorials use supported public examples. Deterministic tests and research

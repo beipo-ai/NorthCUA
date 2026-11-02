@@ -57,7 +57,10 @@ for current app/batch fields. `config validate` does not call the model.
    installation without credentials; label it as such. Use the user's real
    model for their actual task. Do not substitute demo success for task success.
 2. Use uv 0.13.6+ for source or wheel installation; older uv releases can omit
-   Darwin PyObjC dependencies. Install from this repository's lock or matching release wheels. Activate the
+   Darwin PyObjC dependencies. First read the [known upstream dependency risk](../../docs/security/dependencies.md):
+   the retained NexAU constraint requires affected Transformers 4.x; do not load
+   untrusted tokenizer/model configuration or treat the policy exception as a fix.
+   Install from this repository's lock or matching release wheels. Activate the
    environment in every terminal. `uv run --no-sync` preserves installed extras.
    Create configuration in a new writable directory; preserve existing outputs.
 3. Run one bounded task first. Desktop GUI tools return screenshots directly;

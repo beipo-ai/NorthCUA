@@ -38,6 +38,15 @@ def _window(directory: Path):
     entry.focus_set()
 
     def ready():
+        if sys.platform == "darwin":
+            from AppKit import NSApplicationActivateIgnoringOtherApps, NSRunningApplication
+
+            # Tk focus alone does not activate a newly launched macOS process.
+            # Activate only this disposable fixture before publishing its target.
+            NSRunningApplication.currentApplication().activateWithOptions_(NSApplicationActivateIgnoringOtherApps)
+            window.lift()
+            entry.focus_force()
+            window.update_idletasks()
         (directory / "ready.json").write_text(
             json.dumps(
                 {

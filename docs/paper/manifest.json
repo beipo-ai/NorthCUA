@@ -12,7 +12,8 @@
     "full_pdf_sha256": "9d4e17708b48f6a8bf02e4c7d62b4aa4402f6df20e31c5b66e52527e743f2c64"
   },
   "links": {
-    "model": "https://huggingface.co/beipo-ai/NorthCUA-Pro",
+    "model": "https://huggingface.co/china-beipo/NorthCUA-Pro",
+    "model_reported": "https://huggingface.co/beipo-ai/NorthCUA-Pro",
     "harness": "https://github.com/beipo-ai/NorthCUA"
   },
   "compiled_at": "2026-10-31T01:49:33+08:00",

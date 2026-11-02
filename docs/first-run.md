@@ -8,6 +8,10 @@ remote filesystem is needed.
 
 ## 1. Install once
 
+Read the [retained upstream dependency risk](security/dependencies.md) before
+installation. Public NexAU currently requires an affected Transformers 4.x
+version; only trusted model/tokenizer configurations belong in this environment.
+
 Use Python **3.12** (the tested baseline), Git and [uv 0.13.6+](https://docs.astral.sh/uv/).
 Clone the public repository; skip the first two commands if you already have a
 checkout or an extracted source archive. These commands work in Bash and PowerShell:

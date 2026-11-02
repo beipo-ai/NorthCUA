@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- Move the canonical repository and all installation, citation and package links to `beipo-ai/NorthCUA`.
+- Make the English/Chinese README start with a complete no-key browser task; keep model setup explicit and provide a separate agent operator path.
+- Update NorthCUA-Pro availability, exact public revision, weight-license attribution and separate-serving guidance after the 3 November check.
+- Scan fetched Git history and tracked source exports in CI with a checksum-pinned Gitleaks release; add community conduct and GitHub Actions dependency-update configuration.
+- Synchronize the detached-descendant test fixture before early exit, eliminating a process-observation race while preserving cleanup and unrelated-process assertions.
+- Upgrade compatible affected dependencies, enforce the Pillow 13 minimum in source and device wheels, and isolate pre-commit from the runtime dependency graph.
+- Retain public NexAU by maintainer decision; disclose six known Transformers advisories under an exact-version/ID exception expiring 3 December, with raw PyPI/OSV findings retained and new risks blocked.
+
 ## 0.2.0 — source release, 2026-10-31
 
 - Publish the Desktop/Web NorthCUA Harness as a standalone source repository with a fresh Git history and Apache-2.0 licensing.

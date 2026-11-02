@@ -1,7 +1,10 @@
 # NorthCUA Harness verification
 
-The [0.2.0 release record](release-0.2.0.md) is the current source of execution
-results, distribution checks, independent reviewer signoffs and their limits.
+The [0.2.0 release record](release-0.2.0.md) records the original execution,
+distribution and independent review evidence, with a [3 November publication recheck](release-0.2.0.md#3-november-publication-recheck).
+The [canonical CI](https://github.com/beipo-ai/NorthCUA/actions/workflows/ci.yml)
+shows the status for each subsequent commit. Follow [release preparation](releasing.md)
+before publishing another candidate.
 
 ## Execution matrix
 

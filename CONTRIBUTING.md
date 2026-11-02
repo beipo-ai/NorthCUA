@@ -4,6 +4,7 @@ The current release provides the NorthCUA Harness. Contributions should make
 Desktop/Web tasks easier to run, inspect or reproduce. The
 [architecture](docs/architecture.md) explains ownership boundaries; the
 [clean scope](docs/clean-scope.md) describes what belongs in this release.
+Project discussions follow the [community conduct guidelines](CODE_OF_CONDUCT.md).
 
 ## Development setup
 
@@ -19,6 +20,9 @@ uv run --no-sync pyright --pythonpath .venv/bin/python
 
 [Testing](docs/testing.md) lists opt-in browser/native checks and wheel-only validation.
 The default suite does not call paid model endpoints or create cloud sandboxes.
+Run `uvx --from pre-commit==4.7.0 pre-commit run --all-files` for repository hooks.
+This tool runs separately from the project environment; see [release preparation](docs/releasing.md)
+for permanent Git-hook installation.
 
 ## Before a pull request
 

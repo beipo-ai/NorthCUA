@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "exceptions": [
+    {
+      "package": "transformers",
+      "version": "4.57.6",
+      "ids": [
+        "CVE-2025-14929", "PYSEC-2025-217",
+        "CVE-2026-1839", "GHSA-69w3-r845-3855", "PYSEC-2026-2288",
+        "CVE-2026-4372", "GHSA-29pf-2h5f-8g72", "PYSEC-2026-2289",
+        "CVE-2026-5241", "GHSA-fgcw-684q-jj6r", "PYSEC-2026-2290",
+        "CVE-2026-9856", "GHSA-xrqw-3rrv-vx5w", "PYSEC-2026-3929",
+        "CVE-2026-80047", "GHSA-x9r9-c232-4q39", "PYSEC-2026-4174"
+      ],
+      "owner": "NorthCUA maintainers",
+      "accepted_on": "2026-11-03",
+      "expires": "2026-12-03",
+      "reason": "Maintainer decision: retain pinned public NexAU, whose declared transformers<5 constraint prevents installing the fixed 5.x line; disclose the remaining risk without dependency overrides.",
+      "reference": "docs/security/dependencies.md"
+    }
+  ]
+}

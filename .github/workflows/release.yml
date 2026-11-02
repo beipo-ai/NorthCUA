@@ -30,7 +30,7 @@ jobs:
           if os.environ['REF_TYPE'] == 'tag' and os.environ['REF_NAME'] != 'v' + version:
               raise SystemExit('Release tag must match the package version')
           output = pathlib.Path('candidate')
-          for name in ('LICENSE', 'NOTICE', 'CITATION.cff', 'README.md', 'README.zh-CN.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'SECURITY.md', 'THIRD_PARTY_NOTICES.md', 'AGENTS.md', 'llms.txt', '.env.example'):
+          for name in ('LICENSE', 'NOTICE', 'CITATION.cff', 'README.md', 'README.zh-CN.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', 'SECURITY.md', 'THIRD_PARTY_NOTICES.md', 'AGENTS.md', 'llms.txt', '.env.example'):
               shutil.copy(name, output / name)
           shutil.copytree('docs', output / 'docs')
           shutil.copytree('examples', output / 'examples')

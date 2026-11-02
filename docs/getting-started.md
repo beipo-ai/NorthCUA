@@ -6,7 +6,10 @@ credential-free checks, start with [From zero to a verified task](first-run.md).
 Install the NorthCUA Harness provided by the NorthCUA project. Its packages and command
 remain named `northcua`; the project branding does not change installation or imports.
 
-Use Python 3.12+ and [uv 0.13.6+](https://docs.astral.sh/uv/). Start in the clean candidate checkout
+Before installation, read the [known NexAU/Transformers dependency risk](security/dependencies.md).
+The pinned upstream constraint is retained under an explicit, expiring policy.
+
+Use Python 3.12+ and [uv 0.13.6+](https://docs.astral.sh/uv/). Start in the repository checkout
 shown in the [README](../README.md#quick-start), or in an extracted source archive.
 
 ```sh
@@ -84,7 +87,7 @@ work outside the source tree.
 
 ## Install the four release wheels
 
-The candidate supports source and wheel installation; it does not assume that version
+The project supports source and wheel installation; it does not assume that version
 0.2.0 has already been published to PyPI. Build from the checkout:
 
 ```sh

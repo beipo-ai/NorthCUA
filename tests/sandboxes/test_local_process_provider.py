@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+from contextlib import suppress
 import json
 import os
 from pathlib import Path
@@ -180,7 +181,11 @@ def test_supervisor_reaps_detached_descendant(tmp_path, early_exit):
     code = """import os,subprocess,sys,time,pathlib
 time.sleep(0.25)
 p=subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(120)'], start_new_session=True)
-pathlib.Path('descendant.pid').write_text(str(p.pid))
+pid_file=pathlib.Path('descendant.pid')
+pid_file.with_suffix('.tmp').write_text(str(p.pid))
+pid_file.with_suffix('.tmp').replace(pid_file)
+while not pathlib.Path('descendant.observed').exists():
+    time.sleep(0.01)
 """
     code += "os._exit(0)" if early_exit else "time.sleep(120)"
     settings["argv"] = [sys.executable, "-c", code]
@@ -195,6 +200,8 @@ pathlib.Path('descendant.pid').write_text(str(p.pid))
         unrelated = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(120)"], start_new_session=True)
         wait_file(directory / "descendant.pid")
         child = psutil.Process(int((directory / "descendant.pid").read_text()))
+        # Establish the child's identity before an early worker exit can trigger cleanup.
+        (directory / "descendant.observed").touch()
         if not early_exit:
             time.sleep(0.2)
             (directory / "stop").touch()
@@ -202,14 +209,17 @@ pathlib.Path('descendant.pid').write_text(str(p.pid))
         receipt = json.loads((directory / "finished.json").read_text())
         assert receipt["cleanup_confirmed"] is (not early_exit), receipt
         assert receipt["remaining_pids"] == [], receipt
-        assert not child.is_running() or child.status() == psutil.STATUS_ZOMBIE
+        with suppress(psutil.NoSuchProcess):
+            assert not child.is_running() or child.status() == psutil.STATUS_ZOMBIE
         assert unrelated.poll() is None
     finally:
         if supervisor.poll() is None:
             supervisor.terminate()
             supervisor.wait(timeout=15)
-        if child is not None and child.is_running():
-            child.kill()
+        if child is not None:
+            with suppress(psutil.NoSuchProcess):
+                if child.is_running():
+                    child.kill()
         if unrelated is not None and unrelated.poll() is None:
             unrelated.terminate()
             unrelated.wait(timeout=5)
