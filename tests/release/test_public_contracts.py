@@ -46,7 +46,7 @@ def test_paper_snapshot_is_identified_and_unchanged():
     assert manifest["page_count"] == 123
     assert manifest["sha256"] == "bf2ce9e665cd7eb2212c0d5635d276aaba46232ad89f9f34f7ce6b2367244611"
     assert "runtime validation" in manifest["status"]
-    assert manifest["links"]["harness"] == "https://github.com/china-qijizhifeng/NorthCUA-Harness"
+    assert manifest["links"]["harness"] == "https://github.com/beipo-ai/NorthCUA"
 
 
 @pytest.mark.parametrize("directory,collection", [("brand", "assets"), ("demos", "files")])

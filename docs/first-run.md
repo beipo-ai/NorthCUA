@@ -13,8 +13,8 @@ Clone the public repository; skip the first two commands if you already have a
 checkout or an extracted source archive. These commands work in Bash and PowerShell:
 
 ```sh
-git clone --branch main https://github.com/china-qijizhifeng/NorthCUA-Harness.git
-cd NorthCUA-Harness
+git clone --branch main https://github.com/beipo-ai/NorthCUA.git
+cd NorthCUA
 uv sync --locked --python 3.12 --extra local --extra device
 uv run --no-sync playwright install chromium
 ```

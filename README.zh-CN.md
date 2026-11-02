@@ -50,8 +50,8 @@ Python 3.12+ · Apache-2.0 · 基于公开 [NexAU](https://github.com/hzhua/nexa
 需要 Git、[uv 0.13.6+](https://docs.astral.sh/uv/) 和 Python 3.12。以下命令可用于 Bash 和 PowerShell：
 
 ```sh
-git clone https://github.com/china-qijizhifeng/NorthCUA-Harness.git
-cd NorthCUA-Harness
+git clone https://github.com/beipo-ai/NorthCUA.git
+cd NorthCUA
 uv sync --locked --python 3.12 --extra local --extra device
 uv run --no-sync playwright install chromium
 uv run --no-sync northcua --help

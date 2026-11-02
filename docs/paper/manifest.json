@@ -13,7 +13,7 @@
   },
   "links": {
     "model": "https://huggingface.co/beipo-ai/NorthCUA-Pro",
-    "harness": "https://github.com/china-qijizhifeng/NorthCUA-Harness"
+    "harness": "https://github.com/beipo-ai/NorthCUA"
   },
   "compiled_at": "2026-10-31T01:49:33+08:00",
   "bytes": 45987583

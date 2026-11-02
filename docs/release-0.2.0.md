@@ -1,9 +1,9 @@
 # 0.2.0 release verification
 
 Verification date: **31 October 2026**. Python **3.12.13**, macOS arm64,
-uv **0.13.6**. This source publication starts a new Git history in
-[NorthCUA-Harness](https://github.com/china-qijizhifeng/NorthCUA-Harness).
-The previous repository remains intact. Earlier implementation audits are
+uv **0.13.6**. This source publication uses a clean Git history, now hosted in
+[beipo-ai/NorthCUA](https://github.com/beipo-ai/NorthCUA).
+The previous repositories remain intact. Earlier implementation audits are
 [archived separately](verification.md#historical-audits).
 
 ## Execution matrix
@@ -21,7 +21,7 @@ The previous repository remains intact. Earlier implementation audits are
 | Independent local batch tutorial | **3/3 succeeded, one attempt each** | Live evaluator receipts; resume did not replay actions/evaluation; all three worker cleanup receipts confirmed, no remaining owned processes. |
 | Installed distributions | **Four wheels built; base/local smoke and three `pip check` runs passed** | Completely fresh environment outside the checkout; exact package/license/resources/NexAU provenance. |
 | Installed-wheel Web/controller/batch | **7 passed**; 53.15s | Five Web entry points and both three-task local batch modes/resume, executed from site-packages. |
-| Remote CI | **All four hosted jobs passed** in the [runtime acceptance run](https://github.com/china-qijizhifeng/NorthCUA-Harness/actions/runs/41110377739) | Linux contracts, real browser/X11, Linux/macOS wheels and installed tasks. The final report-only identity update is checked separately below; [current main status](https://github.com/china-qijizhifeng/NorthCUA-Harness/actions/workflows/ci.yml) remains authoritative for later revisions. |
+| Remote CI | **All four hosted jobs passed** in the previous repository's [runtime acceptance run](https://github.com/china-qijizhifeng/NorthCUA-Harness/actions/runs/41110377739) | Linux contracts, real browser/X11, Linux/macOS wheels and installed tasks. The final report-only identity update is checked separately below; [current main status](https://github.com/beipo-ai/NorthCUA/actions/workflows/ci.yml) remains authoritative for later revisions. |
 
 Task checks above use **real browser/native tools and public NexAU with a
 scripted local model endpoint**. They establish executable integration and

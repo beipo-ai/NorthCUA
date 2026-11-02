@@ -11,7 +11,7 @@ The open-source Desktop and Web agent harness behind NorthCUA.
 
 [**Get started**](docs/first-run.md) · [**Watch the work**](#see-computer-use-in-action) · [**Technical Report**](docs/paper/main.pdf) · [**Models**](docs/models.md) · [**Documentation**](docs/README.md) · [**中文**](README.zh-CN.md)
 
-[![CI](https://github.com/china-qijizhifeng/NorthCUA-Harness/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/china-qijizhifeng/NorthCUA-Harness/actions/workflows/ci.yml)
+[![CI](https://github.com/beipo-ai/NorthCUA/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/beipo-ai/NorthCUA/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/Python-3.12%2B-3776AB.svg)](pyproject.toml)
 
@@ -70,8 +70,8 @@ Use **Python 3.12**, Git and [uv 0.13.6+](https://docs.astral.sh/uv/).
 The commands below work in Bash and PowerShell:
 
 ```sh
-git clone https://github.com/china-qijizhifeng/NorthCUA-Harness.git
-cd NorthCUA-Harness
+git clone https://github.com/beipo-ai/NorthCUA.git
+cd NorthCUA
 uv sync --locked --python 3.12 --extra local --extra device
 uv run --no-sync playwright install chromium
 uv run --no-sync northcua --help
@@ -154,7 +154,7 @@ task source, observation/action profile and evaluation protocol.
   title  = {NorthCUA Technical Report: Turbocharging Computer-Use Agents through Experience at Scale},
   author = {{NorthCUA Team}},
   year   = {2026},
-  url    = {https://github.com/china-qijizhifeng/NorthCUA-Harness/blob/main/docs/paper/main.pdf}
+  url    = {https://github.com/beipo-ai/NorthCUA/blob/main/docs/paper/main.pdf}
 }
 ```
 

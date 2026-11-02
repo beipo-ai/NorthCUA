@@ -134,7 +134,7 @@ typeCheckingMode = "basic"
 reportMissingTypeStubs = "none"
 
 [project.urls]
-Repository = "https://github.com/china-qijizhifeng/NorthCUA-Harness"
-Documentation = "https://github.com/china-qijizhifeng/NorthCUA-Harness/blob/main/docs/README.md"
-Issues = "https://github.com/china-qijizhifeng/NorthCUA-Harness/issues"
-Changelog = "https://github.com/china-qijizhifeng/NorthCUA-Harness/blob/main/CHANGELOG.md"
+Repository = "https://github.com/beipo-ai/NorthCUA"
+Documentation = "https://github.com/beipo-ai/NorthCUA/blob/main/docs/README.md"
+Issues = "https://github.com/beipo-ai/NorthCUA/issues"
+Changelog = "https://github.com/beipo-ai/NorthCUA/blob/main/CHANGELOG.md"

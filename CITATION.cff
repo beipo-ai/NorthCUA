@@ -6,8 +6,8 @@ version: 0.2.0
 date-released: 2026-10-31
 authors:
   - name: NorthCUA Team
-repository-code: https://github.com/china-qijizhifeng/NorthCUA-Harness
-url: https://github.com/china-qijizhifeng/NorthCUA-Harness
+repository-code: https://github.com/beipo-ai/NorthCUA
+url: https://github.com/beipo-ai/NorthCUA
 license: Apache-2.0
 preferred-citation:
   type: report
@@ -15,4 +15,4 @@ preferred-citation:
   authors:
     - name: NorthCUA Team
   year: 2026
-  url: https://github.com/china-qijizhifeng/NorthCUA-Harness/blob/main/docs/paper/main.pdf
+  url: https://github.com/beipo-ai/NorthCUA/blob/main/docs/paper/main.pdf

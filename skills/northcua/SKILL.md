@@ -13,9 +13,9 @@ and the corresponding version of these guides. Do not copy this file alone:
 its linked guides are part of the skill's operating contract.
 
 For a new installation, use the `main` branch of
-[NorthCUA-Harness](https://github.com/china-qijizhifeng/NorthCUA-Harness), following
+[NorthCUA](https://github.com/beipo-ai/NorthCUA), following
 the first-run guide's clone/install commands. Check [resource availability](../../docs/resources.md)
-for the current website, report and model links; do not assume a referenced model
+for the current report and model links; do not assume a referenced model
 checkpoint has been published or that this project is already available on PyPI.
 
 ## Choose the user's workflow

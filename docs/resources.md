@@ -6,7 +6,7 @@ from a publicly accessible resource.
 
 | Resource | Canonical address | Observed release status / usable fallback |
 |---|---|---|
-| Harness source | [NorthCUA-Harness](https://github.com/china-qijizhifeng/NorthCUA-Harness) | Fresh, self-contained source repository. Its visibility is controlled by the maintainer. |
+| Harness source | [NorthCUA](https://github.com/beipo-ai/NorthCUA) | Fresh, self-contained source repository. Its visibility is controlled by the maintainer. |
 | NorthCUA-Pro | [Hugging Face model page](https://huggingface.co/beipo-ai/NorthCUA-Pro) | Public page/API returned HTTP 401. Public downloads, checkpoint revision and weight license are not confirmed here; see [model setup](models.md). |
 | Technical Report | [123-page local PDF](paper/main.pdf) | Included in this repository; title, date and SHA-256 are recorded in the [paper manifest](paper/manifest.json). No account or external paper host is needed to read the local file. |
 | Operator skill | [NorthCUA skill](../skills/northcua/SKILL.md) | Bundled: from-zero install, configuration, local tasks, batches, results and recovery. |
