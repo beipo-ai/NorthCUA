@@ -18,24 +18,21 @@ jobs:
           name: wheelhouse-${{ github.sha }}
           path: candidate/wheelhouse
       - name: Record candidate version and checksums
+        shell: bash
         env:
           REVISION: ${{ github.sha }}
           REF_NAME: ${{ github.ref_name }}
           REF_TYPE: ${{ github.ref_type }}
         run: |
           git archive --format=tar.gz --output=candidate/northcua-source.tar.gz HEAD
+          # Keep the unpacked source complete too: docs link to scripts and policy files.
+          git archive HEAD | tar -x -C candidate
           python - <<'PY'
-          import hashlib, json, os, pathlib, shutil, tomllib
+          import hashlib, json, os, pathlib, tomllib
           version = tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version']
           if os.environ['REF_TYPE'] == 'tag' and os.environ['REF_NAME'] != 'v' + version:
               raise SystemExit('Release tag must match the package version')
           output = pathlib.Path('candidate')
-          for name in ('LICENSE', 'NOTICE', 'CITATION.cff', 'README.md', 'README.zh-CN.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', 'SECURITY.md', 'THIRD_PARTY_NOTICES.md', 'AGENTS.md', 'llms.txt', '.env.example'):
-              shutil.copy(name, output / name)
-          shutil.copytree('docs', output / 'docs')
-          shutil.copytree('examples', output / 'examples')
-          shutil.copytree('skills', output / 'skills')
-          shutil.copytree('config', output / 'config', ignore=shutil.ignore_patterns('*.local.*'))
           files = {str(p.relative_to(output)): hashlib.sha256(p.read_bytes()).hexdigest()
                    for p in output.rglob('*') if p.is_file()}
           (output / 'manifest.json').write_text(json.dumps({'version': version,
