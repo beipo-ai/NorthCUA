@@ -14,7 +14,9 @@
   "links": {
     "model": "https://huggingface.co/china-beipo/NorthCUA-Pro",
     "model_reported": "https://huggingface.co/beipo-ai/NorthCUA-Pro",
-    "harness": "https://github.com/beipo-ai/NorthCUA"
+    "harness": "https://github.com/beipo-ai/NorthCUA",
+    "arxiv": "https://arxiv.org/abs/2611.02102v1",
+    "arxiv_pdf": "https://arxiv.org/pdf/2611.02102v1"
   },
   "compiled_at": "2026-10-31T01:49:33+08:00",
   "bytes": 45987583

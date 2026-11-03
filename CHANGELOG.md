@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Link the public arXiv report (2611.02102v1), add an arXiv badge and matching full-author article citations in English/Chinese and GitHub citation metadata; retain the identified offline PDF snapshot.
+
 - Replace the repository showcases with the supplied 30-second Ruby Heart and Blender UFO edits; embed GitHub-native video players while retaining byte-identical offline MP4s and checksummed result frames.
 
 - Remove benchmark task/lifecycle adapters, external scoring callbacks, score aggregation and user-simulator bindings; retain core Desktop/Web Harness behavior and recommended Desktop settings.
