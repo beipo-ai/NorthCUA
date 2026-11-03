@@ -39,24 +39,37 @@ tutorial first. **Start on your machine. Scale to a batch. Keep the evidence.**
 
 <table>
 <tr>
-<td width="50%">
-<a href="docs/assets/demos/tidal-workflow.mp4"><img src="docs/assets/demos/tidal.webp" alt="TIDAL-01: an editable silver-and-glass craft created in Inkscape and Blender" width="460"></a>
-<br><strong>Sketch it. Model it. Make it move.</strong><br>
-Inkscape → Blender · an editable design and animation.<br>
-<a href="docs/assets/demos/tidal-workflow.mp4">▶ Watch the recorded workflow</a>
+<td width="50%" valign="top">
+
+### Ruby Heart · 30 seconds
+
+**An idea becomes an interactive 3D heart.**<br>
+GeoGebra · controls, construction, presentation and verification.
+
+https://github.com/user-attachments/assets/8afee957-87d7-43c9-8dff-21de7478dabf
+
+[Download MP4](https://github.com/beipo-ai/NorthCUA/raw/refs/heads/main/docs/assets/demos/ruby-heart-30s.mp4) · [Result frame](docs/assets/demos/ruby-heart.png)
+
 </td>
-<td width="50%">
-<a href="docs/assets/demos/wm33-smartest-workflow.mp4"><img src="docs/assets/demos/smartest.png" alt="Semiconductor engineering workflow: reading the task's noise and timing requirements" width="460"></a>
-<br><strong>Read the brief. Work through the details.</strong><br>
-Semiconductor engineering · documents, tools and checks.<br>
-<a href="docs/assets/demos/wm33-smartest-workflow.mp4">▶ Watch the recorded workflow</a>
+<td width="50%" valign="top">
+
+### Blender UFO · 30 seconds
+
+**Sketch it. Model it. Make it move.**<br>
+Inkscape → Blender · an editable craft and native animation.
+
+https://github.com/user-attachments/assets/b959f684-a23a-4052-bfcb-45d8c0c8c546
+
+[Download MP4](https://github.com/beipo-ai/NorthCUA/raw/refs/heads/main/docs/assets/demos/blender-ufo-30s.mp4) · [Result frame](docs/assets/demos/blender-ufo.png)
+
 </td>
 </tr>
 </table>
 
-Recordings from the broader NorthCUA project; these are research showcases,
-not reruns or checkpoint benchmarks of this release. Videos and posters are
-bundled here. [Showcase details and provenance](docs/showcase.md).
+Two **30-second accelerated edits** from the broader NorthCUA project. Playback
+duration is not task execution time. MP4s are bundled for offline viewing;
+GitHub's native players appear above. These are project showcases, not reruns
+or checkpoint benchmarks of this release. [Details and provenance](docs/showcase.md).
 
 ## A harness for the whole task
 

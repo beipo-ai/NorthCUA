@@ -1,41 +1,50 @@
-# Recorded workflows
+# Thirty-second project showcases
 
-These recordings show computer-use work from the broader NorthCUA project.
-They are bundled media, not executable tutorial fixtures. The code release has
-its own [reproducible first run](first-run.md), [local batch](local-batch.md) and
-[verification](release-0.2.0.md).
+Two short recordings turn an idea into a visible, editable result. These are
+**30-second accelerated edits** supplied by the maintainer. Playback duration
+is not task execution time or model inference speed. For a runnable task, use
+[first run](first-run.md) or [local batch](local-batch.md).
 
-## TIDAL-01 — Inkscape to Blender
+## Ruby Heart — interactive 3D geometry
 
-[![TIDAL-01 native design result](assets/demos/tidal.webp)](assets/demos/tidal-workflow.mp4)
+A GeoGebra workflow builds a ruby-red heart with controls for depth, pulse,
+color and slicing, then checks the saved interactive result.
 
-[Play the recorded workflow](assets/demos/tidal-workflow.mp4).
-A three-view sketch becomes an editable silver-and-glass craft, an opening iris
-and a camera animation. The film is an edited workflow presentation; its
-playback duration is not task execution time or model inference speed.
-The latest report includes TIDAL-01 in its showcase appendix.
+https://github.com/user-attachments/assets/8afee957-87d7-43c9-8dff-21de7478dabf
 
-## Semiconductor engineering — WM33 / SmarTest
+[Download the 30-second MP4](https://github.com/beipo-ai/NorthCUA/raw/refs/heads/main/docs/assets/demos/ruby-heart-30s.mp4) ·
+[View the result frame](assets/demos/ruby-heart.png).
 
-[![Reading noise and timing requirements](assets/demos/smartest.png)](assets/demos/wm33-smartest-workflow.mp4)
+## Blender UFO — sketch to native animation
 
-[Play the recorded workflow](assets/demos/wm33-smartest-workflow.mp4).
-The presentation follows a prepared engineering task through its source brief,
-application work and checks. Application names remain their owners' trademarks;
-engineering software, licenses, PDKs and the original environment are not bundled.
-The local Web tutorial is the supported credential-free way to exercise this repo.
+An Inkscape concept becomes a Blender craft: hull, animated iris, metal and
+glass materials, lighting and a native animation.
 
-## Attribution and evidence boundary
+https://github.com/user-attachments/assets/b959f684-a23a-4052-bfcb-45d8c0c8c546
 
-The maintainer supplied these previously prepared project recordings. They use
-an external controller/native CUA Driver workflow outside this clean Harness
-export. They are not NorthCUA checkpoint benchmark results and were not rerun
-with this release. No claim is made that the proprietary environments or editable
-source artifacts can be reconstructed from these MP4 files alone.
+[Download the 30-second MP4](https://github.com/beipo-ai/NorthCUA/raw/refs/heads/main/docs/assets/demos/blender-ufo-30s.mp4) ·
+[View the result frame](assets/demos/blender-ufo.png).
 
-Posters and videos retain their recorded/editorial content, including historical
-wordmark styling in video overlays. The current repository/documentation lockup
-is extracted from the latest report; see [brand assets](assets/brand/README.md).
-[Media checksums and provenance](assets/demos/manifest.json) identify the exact
-supplied recordings and the unaltered 12-second poster frame. Runtime tests do
-not use these videos as proof of task success.
+## Playback and offline copies
+
+On GitHub, the standalone attachment URLs above render as native video players.
+The same H.264/AAC MP4 bytes are also versioned in `docs/assets/demos/`, so a
+clone contains both recordings without a website checkout or external download.
+If a viewer does not render GitHub attachments, open the bundled MP4 directly.
+GitHub documents [native video attachments](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files).
+
+## Source and evidence
+
+Both videos are copied without re-encoding from the maintainer-supplied
+`NorthCUA-30s-Shorts-20261102.zip`. The
+[media manifest](assets/demos/manifest.json) records archive/video checksums,
+chapters and stable GitHub attachment URLs. Result images are extracted at
+27s for Ruby Heart and 23s for Blender UFO, proportionally resized to 1280 × 720.
+They add no overlays or retouching.
+
+These recordings come from the broader NorthCUA project. They were not rerun
+with this source release and do not establish checkpoint benchmark results.
+The bundled videos alone do not reproduce their original environment or
+editable source artifacts. Runtime acceptance is recorded separately in
+[verification](verification.md). The current logo follows the technical report;
+see [brand assets](assets/brand/README.md).

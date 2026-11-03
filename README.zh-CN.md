@@ -35,13 +35,38 @@
 
 ## 看看 Agent 能把工作推进到哪里
 
-| 草图到模型与动画 | 半导体工程工作流 |
-|---|---|
-| [![Inkscape 与 Blender 的 TIDAL-01 设计](docs/assets/demos/tidal.webp)](docs/assets/demos/tidal-workflow.mp4) | [![读取半导体任务的抗噪声与响应时间要求](docs/assets/demos/smartest.png)](docs/assets/demos/wm33-smartest-workflow.mp4) |
-| [播放完整工作流](docs/assets/demos/tidal-workflow.mp4) | [播放完整工作流](docs/assets/demos/wm33-smartest-workflow.mp4) |
+<table>
+<tr>
+<td width="50%" valign="top">
 
-演示来自更大的 NorthCUA 项目，视频和预览图均随仓库提供；不代表本次发布版本重新运行的任务或模型基准。
-[演示说明与来源](docs/showcase.md)。
+### Ruby Heart · 30 秒
+
+**让一个想法，成为可交互的三维心形。**<br>
+GeoGebra · 控件、构建、展示与保存检查。
+
+https://github.com/user-attachments/assets/8afee957-87d7-43c9-8dff-21de7478dabf
+
+[下载 MP4](https://github.com/beipo-ai/NorthCUA/raw/refs/heads/main/docs/assets/demos/ruby-heart-30s.mp4) · [结果画面](docs/assets/demos/ruby-heart.png)
+
+</td>
+<td width="50%" valign="top">
+
+### Blender UFO · 30 秒
+
+**从草图，到飞碟，再到原生动画。**<br>
+Inkscape → Blender · 船体、虹膜机构、金属与玻璃。
+
+https://github.com/user-attachments/assets/b959f684-a23a-4052-bfcb-45d8c0c8c546
+
+[下载 MP4](https://github.com/beipo-ai/NorthCUA/raw/refs/heads/main/docs/assets/demos/blender-ufo-30s.mp4) · [结果画面](docs/assets/demos/blender-ufo.png)
+
+</td>
+</tr>
+</table>
+
+两支均为 **30 秒加速剪辑**，播放时长不代表任务执行速度。上方使用 GitHub 原生播放器，
+MP4 也随仓库提供，克隆后可离线观看。演示来自更大的 NorthCUA 项目，
+不代表本次发布版本重新运行的任务或模型基准。[演示说明与来源](docs/showcase.md)。
 
 ## 不止于点击：覆盖整个任务生命周期
 
