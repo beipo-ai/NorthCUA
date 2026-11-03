@@ -54,7 +54,8 @@ def main():
             tools=[],
             tool_choice="auto",
         )
-        assert "normalized 0-1000" in envelope.system_prompt
+        assert "For 0-1000 coordinates" in envelope.system_prompt
+        assert "(1000, 1000)" in envelope.system_prompt
         assert "Open Calculator" in envelope.persistent_user_text
     with tempfile.TemporaryDirectory(prefix="northcua-wheel-smoke-") as temporary:
         root = Path(temporary)
