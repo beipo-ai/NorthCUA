@@ -1,7 +1,10 @@
 # Paper → implementation → evidence
 
 This repository releases the **NorthCUA Harness** described in §3 of the
-[NorthCUA Technical Report](paper/main.pdf), **31 October 2026, 123 pages**.
+[NorthCUA Technical Report](https://arxiv.org/pdf/2611.02102v1).
+The mechanism map and figures below use the bundled
+[31 October 2026, 123-page snapshot](paper/main.pdf). The public report is
+**arXiv:2611.02102**; [BibTeX](../CITATION.bib) lists its published authors.
 The broader research system also includes Experience Flywheel and Staged Learning.
 The report contains model results; the runtime tests here measure different
 contracts and do not reproduce those model experiments.

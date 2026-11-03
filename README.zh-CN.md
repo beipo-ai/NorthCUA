@@ -11,7 +11,7 @@
 
 开源计算机智能体 Harness：接入模型，运行任务，检查结果。
 
-[**从零开始**](docs/first-run.md) · [**观看演示**](README.md#see-computer-use-in-action) · [**技术报告**](docs/paper/main.pdf) · [**模型接入**](docs/models.md) · [**文档**](docs/README.md) · [**English**](README.md)
+[**从零开始**](docs/first-run.md) · [**观看演示**](README.md#see-computer-use-in-action) · [**技术报告**](https://arxiv.org/pdf/2611.02102v1) · [**模型接入**](docs/models.md) · [**文档**](docs/README.md) · [**English**](README.md)
 
 [![CI](https://github.com/beipo-ai/NorthCUA/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/beipo-ai/NorthCUA/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-0057B8?style=flat-square)](LICENSE)
@@ -19,7 +19,7 @@
 [![Built on NexAU](https://img.shields.io/badge/Built%20on-NexAU-0B8F87?style=flat-square)](https://github.com/hzhua/nexau/tree/28511d9f0362191a6c378fd441b2be55309a9e32)
 
 [![Hugging Face: NorthCUA-Pro](https://img.shields.io/badge/Hugging%20Face-NorthCUA--Pro-FFD21E?style=flat-square&logo=huggingface&logoColor=black)](https://huggingface.co/china-beipo/NorthCUA-Pro)
-[![Technical Report: 123 pages](https://img.shields.io/badge/Technical%20Report-123%20pages-0057B8?style=flat-square)](docs/paper/main.pdf)
+[![arXiv: 2611.02102](https://img.shields.io/badge/arXiv-2611.02102-b31b1b?style=flat-square)](https://arxiv.org/pdf/2611.02102v1)
 [![Agent Skill](https://img.shields.io/badge/Agent%20Skill-From%20zero%20to%20tasks-0B8F87?style=flat-square)](skills/northcua/SKILL.md)
 [![Contributions welcome](https://img.shields.io/badge/PRs-welcome-6554C0?style=flat-square)](CONTRIBUTING.md)
 
@@ -29,7 +29,7 @@
 **NorthCUA Harness** 把工具操作、视觉上下文、工作笔记、原环境评估和可恢复跑批连接起来，
 让你能追踪从第一张观察截图到最终产物的整个过程。
 
-本仓库提供最新 [NorthCUA Technical Report](docs/paper/main.pdf) 中的 Desktop/Web Harness，
+本仓库提供最新 [NorthCUA Technical Report](https://arxiv.org/pdf/2611.02102v1) 中的 Desktop/Web Harness，
 不绑定单个模型。接入支持图像和结构化工具调用的端点，或先用无密钥本地教程验证运行链路。
 **从一台电脑开始，扩展到批量任务，留下可检查的证据。**
 
@@ -181,7 +181,8 @@ uv run --no-sync northcua local desktop run --app-config logs/my-config/app.exam
 
 ## 研究与发布状态
 
-仓库附带 **2026-10-31、123 页的最新技术报告**。报告包含完整 NorthCUA 系统和模型结果；
+**[NorthCUA 技术报告已发布于 arXiv](https://arxiv.org/pdf/2611.02102v1)**，介绍完整 NorthCUA 系统和模型结果。
+仓库同时附带 [2026-10-31、123 页的报告快照](docs/paper/main.pdf)，便于离线阅读。
 本仓库发布 Desktop/Web Harness。Experience Flywheel、数据生成、分阶段训练与模型权重是独立研究组成，
 不是运行本仓库所需的隐藏依赖。
 
@@ -204,7 +205,22 @@ NorthCUA 模型系列在 Hugging Face 单独发布：
 脚本模型集成测试不等于真实模型能力或完整 OSWorld／云端基准验收。
 源代码安装不依赖已经存在的 PyPI 发行版。
 
-引用请使用 [CITATION.cff](CITATION.cff)，并记录代码/NexAU revision、模型设置、任务来源与评估协议。
+## 引用
+
+如本项目对你的研究有帮助，请引用技术报告，并记录代码/NexAU revision、模型设置、任务来源与评估协议。
+
+```bibtex
+@article{zhang2026northcua,
+  title={NorthCUA Technical Report: Turbocharging Computer-Use Agents through Experience at Scale},
+  author={Zhang, Chaoyun and Li, Bingxuan and Guo, Pinxue and Gao, Yangfan and Cai, Zikun and Xie, Tianci and Li, Hui and Huang, Yuqi and Cao, Yifei and Mao, Bo and Tang, Tian and Zheng, Qichang and Liu, Tongtong and Wang, Xiaoxing and Liu, Jinxiu and Lin, Lizhi and Shao, Zhou and Zhou, Maosen and Zheng, Miao and Zhang, Shuo and He, Yangji and Lei, Kepeng and Zhao, Ning and Shen, Wei and Jin, Zhenjiang and Zhang, Xinyue and Sun, Peng and Han, Zhenhua and Zheng, Rui and Yan, Hang},
+  journal={arXiv preprint arXiv:2611.02102},
+  year={2026},
+  url={https://arxiv.org/pdf/2611.02102v1}
+}
+```
+
+[BibTeX 文件](CITATION.bib) · [引用元数据](CITATION.cff)
+
 [Apache-2.0](LICENSE) · [第三方声明](THIRD_PARTY_NOTICES.md) · [安全](SECURITY.md) · [社区](CODE_OF_CONDUCT.md) · [更新](CHANGELOG.md)
 
 ## 联系我们

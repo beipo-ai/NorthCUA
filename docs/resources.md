@@ -8,7 +8,7 @@ from a publicly accessible resource.
 |---|---|---|
 | Harness source | [NorthCUA](https://github.com/beipo-ai/NorthCUA) | Fresh, self-contained source repository. Its visibility is controlled by the maintainer. |
 | NorthCUA-Pro | [Hugging Face model page](https://huggingface.co/china-beipo/NorthCUA-Pro) | Public, ungated checkpoint. Card/config/license and all 122 shard URLs checked without authentication; no weights downloaded or inference accepted. [Pinned revision and setup](models.md). |
-| Technical Report | [123-page local PDF](paper/main.pdf) | Included in this repository; title, date and SHA-256 are recorded in the [paper manifest](paper/manifest.json). No account or external paper host is needed to read the local file. |
+| Technical Report | [arXiv:2611.02102v1](https://arxiv.org/pdf/2611.02102v1) · [Abstract and metadata](https://arxiv.org/abs/2611.02102v1) | Public arXiv report. An unchanged [31 October, 123-page snapshot](paper/main.pdf) remains bundled for offline reading; its title, date and SHA-256 are recorded in the [paper manifest](paper/manifest.json). |
 | Operator skill | [NorthCUA skill](../skills/northcua/SKILL.md) | Bundled: from-zero install, configuration, local tasks, batches, results and recovery. |
 
 The report's original `beipo-ai/NorthCUA-Pro` address resolves to the model resource
@@ -16,7 +16,9 @@ above. Its published Apache-2.0 license was checked at revision
 `2f1f0cbf4ed3f1243c37838889c446f50bc3d32c`; the 31 October HTTP 401 observation
 is superseded. Model serving and experiment acceptance are separate checks.
 
-No arXiv/DOI identifier or PyPI publication is assumed. The model's license,
+The report is identified as **arXiv:2611.02102**; [BibTeX](../CITATION.bib) and
+[GitHub citation metadata](../CITATION.cff) use its published author list.
+PyPI publication is not assumed. The model's license,
 notices and hosting terms apply to its own distribution independently from
 the Harness's code license.
 

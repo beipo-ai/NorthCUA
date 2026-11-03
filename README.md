@@ -11,7 +11,7 @@
 
 An open-source computer-use harness. Bring your model. Run a task. Inspect the result.
 
-[**Get started**](docs/first-run.md) · [**Watch the work**](#see-computer-use-in-action) · [**Technical Report**](docs/paper/main.pdf) · [**Models**](docs/models.md) · [**Documentation**](docs/README.md) · [**中文**](README.zh-CN.md)
+[**Get started**](docs/first-run.md) · [**Watch the work**](#see-computer-use-in-action) · [**Technical Report**](https://arxiv.org/pdf/2611.02102v1) · [**Models**](docs/models.md) · [**Documentation**](docs/README.md) · [**中文**](README.zh-CN.md)
 
 [![CI](https://github.com/beipo-ai/NorthCUA/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/beipo-ai/NorthCUA/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-0057B8?style=flat-square)](LICENSE)
@@ -19,7 +19,7 @@ An open-source computer-use harness. Bring your model. Run a task. Inspect the r
 [![Built on NexAU](https://img.shields.io/badge/Built%20on-NexAU-0B8F87?style=flat-square)](https://github.com/hzhua/nexau/tree/28511d9f0362191a6c378fd441b2be55309a9e32)
 
 [![Hugging Face: NorthCUA-Pro](https://img.shields.io/badge/Hugging%20Face-NorthCUA--Pro-FFD21E?style=flat-square&logo=huggingface&logoColor=black)](https://huggingface.co/china-beipo/NorthCUA-Pro)
-[![Technical Report: 123 pages](https://img.shields.io/badge/Technical%20Report-123%20pages-0057B8?style=flat-square)](docs/paper/main.pdf)
+[![arXiv: 2611.02102](https://img.shields.io/badge/arXiv-2611.02102-b31b1b?style=flat-square)](https://arxiv.org/pdf/2611.02102v1)
 [![Agent Skill](https://img.shields.io/badge/Agent%20Skill-From%20zero%20to%20tasks-0B8F87?style=flat-square)](skills/northcua/SKILL.md)
 [![Contributions welcome](https://img.shields.io/badge/PRs-welcome-6554C0?style=flat-square)](CONTRIBUTING.md)
 
@@ -30,7 +30,7 @@ than the next click. **NorthCUA Harness** connects actions, visual context,
 working notes, live outcome checks and recoverable batches — so you can follow
 the whole task, from the first observation to the final artifact.
 
-This repository releases the Harness from the [NorthCUA Technical Report](docs/paper/main.pdf).
+This repository releases the Harness from the [NorthCUA Technical Report](https://arxiv.org/pdf/2611.02102v1).
 Built on public [NexAU](https://github.com/hzhua/nexau), it is model-agnostic:
 connect a vision model with structured tool calls, or try the no-key local
 tutorial first. **Start on your machine. Scale to a batch. Keep the evidence.**
@@ -192,10 +192,12 @@ batch execution and recovery. [From-zero guide](docs/first-run.md).
 
 ## Research, models and availability
 
-The bundled **123-page report, 31 October 2026**, describes the broader NorthCUA
-system and reports its model results. This repository publishes the **Desktop/Web
-Harness**. Experience Flywheel, data generation, staged training and model weights
-are separate research components, not hidden install requirements.
+The **[NorthCUA Technical Report on arXiv](https://arxiv.org/pdf/2611.02102v1)**
+describes the broader NorthCUA system and reports its model results. A
+[123-page snapshot dated 31 October 2026](docs/paper/main.pdf) is bundled for
+offline reading. This repository publishes the **Desktop/Web Harness**.
+Experience Flywheel, data generation, staged training and model weights are
+separate research components, not hidden install requirements.
 
 The NorthCUA model family is published separately on Hugging Face:
 
@@ -229,15 +231,16 @@ For reproducible research, record your code/NexAU revisions, model settings,
 task source, observation/action profile and evaluation protocol.
 
 ```bibtex
-@techreport{northcua2026,
-  title  = {NorthCUA Technical Report: Turbocharging Computer-Use Agents through Experience at Scale},
-  author = {{NorthCUA Team}},
-  year   = {2026},
-  url    = {https://github.com/beipo-ai/NorthCUA/blob/main/docs/paper/main.pdf}
+@article{zhang2026northcua,
+  title={NorthCUA Technical Report: Turbocharging Computer-Use Agents through Experience at Scale},
+  author={Zhang, Chaoyun and Li, Bingxuan and Guo, Pinxue and Gao, Yangfan and Cai, Zikun and Xie, Tianci and Li, Hui and Huang, Yuqi and Cao, Yifei and Mao, Bo and Tang, Tian and Zheng, Qichang and Liu, Tongtong and Wang, Xiaoxing and Liu, Jinxiu and Lin, Lizhi and Shao, Zhou and Zhou, Maosen and Zheng, Miao and Zhang, Shuo and He, Yangji and Lei, Kepeng and Zhao, Ning and Shen, Wei and Jin, Zhenjiang and Zhang, Xinyue and Sun, Peng and Han, Zhenhua and Zheng, Rui and Yan, Hang},
+  journal={arXiv preprint arXiv:2611.02102},
+  year={2026},
+  url={https://arxiv.org/pdf/2611.02102v1}
 }
 ```
 
-[Citation metadata](CITATION.cff) · [Apache-2.0](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md) · [Security](SECURITY.md) · [Community](CODE_OF_CONDUCT.md) · [Changelog](CHANGELOG.md)
+[BibTeX file](CITATION.bib) · [Citation metadata](CITATION.cff) · [Apache-2.0](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md) · [Security](SECURITY.md) · [Community](CODE_OF_CONDUCT.md) · [Changelog](CHANGELOG.md)
 
 ## Contact
 

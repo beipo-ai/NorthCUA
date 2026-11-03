@@ -22,7 +22,8 @@ The report's `beipo-ai` links currently resolve to the `china-beipo` resources.
 
 ## NorthCUA-Pro research model
 
-The [31 October 2026 Technical Report](paper/main.pdf) names
+The [NorthCUA Technical Report](https://arxiv.org/pdf/2611.02102v1), also
+available as a bundled [31 October snapshot](paper/main.pdf), names
 [beipo-ai/NorthCUA-Pro](https://huggingface.co/beipo-ai/NorthCUA-Pro). That address
 now resolves to the public [china-beipo/NorthCUA-Pro model resource](https://huggingface.co/china-beipo/NorthCUA-Pro).
 On **2026-11-03**, its card, configuration, index, license and all 122 weight-shard

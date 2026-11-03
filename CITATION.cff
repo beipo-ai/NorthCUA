@@ -1,18 +1,82 @@
 cff-version: 1.2.0
-message: "Please cite the NorthCUA Technical Report and record the Harness and NexAU revisions used."
-title: "NorthCUA Harness"
+message: Please cite the NorthCUA Technical Report and record the Harness and NexAU revisions used.
+title: NorthCUA Harness
 type: software
 version: 0.2.0
 date-released: 2026-10-31
 authors:
-  - name: NorthCUA Team
+- name: NorthCUA Team
 repository-code: https://github.com/beipo-ai/NorthCUA
 url: https://github.com/beipo-ai/NorthCUA
 license: Apache-2.0
 preferred-citation:
-  type: report
-  title: "NorthCUA Technical Report: Turbocharging Computer-Use Agents through Experience at Scale"
+  type: article
+  title: 'NorthCUA Technical Report: Turbocharging Computer-Use Agents through Experience at Scale'
   authors:
-    - name: NorthCUA Team
+  - family-names: Zhang
+    given-names: Chaoyun
+  - family-names: Li
+    given-names: Bingxuan
+  - family-names: Guo
+    given-names: Pinxue
+  - family-names: Gao
+    given-names: Yangfan
+  - family-names: Cai
+    given-names: Zikun
+  - family-names: Xie
+    given-names: Tianci
+  - family-names: Li
+    given-names: Hui
+  - family-names: Huang
+    given-names: Yuqi
+  - family-names: Cao
+    given-names: Yifei
+  - family-names: Mao
+    given-names: Bo
+  - family-names: Tang
+    given-names: Tian
+  - family-names: Zheng
+    given-names: Qichang
+  - family-names: Liu
+    given-names: Tongtong
+  - family-names: Wang
+    given-names: Xiaoxing
+  - family-names: Liu
+    given-names: Jinxiu
+  - family-names: Lin
+    given-names: Lizhi
+  - family-names: Shao
+    given-names: Zhou
+  - family-names: Zhou
+    given-names: Maosen
+  - family-names: Zheng
+    given-names: Miao
+  - family-names: Zhang
+    given-names: Shuo
+  - family-names: He
+    given-names: Yangji
+  - family-names: Lei
+    given-names: Kepeng
+  - family-names: Zhao
+    given-names: Ning
+  - family-names: Shen
+    given-names: Wei
+  - family-names: Jin
+    given-names: Zhenjiang
+  - family-names: Zhang
+    given-names: Xinyue
+  - family-names: Sun
+    given-names: Peng
+  - family-names: Han
+    given-names: Zhenhua
+  - family-names: Zheng
+    given-names: Rui
+  - family-names: Yan
+    given-names: Hang
+  journal: arXiv preprint arXiv:2611.02102
   year: 2026
-  url: https://github.com/beipo-ai/NorthCUA/blob/main/docs/paper/main.pdf
+  identifiers:
+  - type: other
+    description: arXiv
+    value: '2611.02102'
+  url: https://arxiv.org/pdf/2611.02102v1
