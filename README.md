@@ -25,7 +25,7 @@ An open-source computer-use harness. Bring your model. Run a task. Inspect the r
 
 </div>
 
-From an editable design to a checked engineering workflow, computer use is more
+From an interactive 3D heart to a native Blender animation, computer use is more
 than the next click. **NorthCUA Harness** connects actions, visual context,
 working notes, live outcome checks and recoverable batches — so you can follow
 the whole task, from the first observation to the final artifact.

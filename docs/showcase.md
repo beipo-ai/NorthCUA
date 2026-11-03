@@ -42,8 +42,10 @@ chapters and stable GitHub attachment URLs. Result images are extracted at
 27s for Ruby Heart and 23s for Blender UFO, proportionally resized to 1280 × 720.
 They add no overlays or retouching.
 
-These recordings come from the broader NorthCUA project. They were not rerun
-with this source release and do not establish checkpoint benchmark results.
+These recordings come from the broader NorthCUA project. The supplied footage
+labels its workflow as an external Codex-supervised controller using NorthCUA
+MCP and edited GUI evidence. It was not rerun with this clean Harness release
+and does not establish checkpoint benchmark results.
 The bundled videos alone do not reproduce their original environment or
 editable source artifacts. Runtime acceptance is recorded separately in
 [verification](verification.md). The current logo follows the technical report;
