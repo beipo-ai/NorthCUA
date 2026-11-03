@@ -1,11 +1,12 @@
 # Recommended Desktop settings
 
-These are optional prompt/model settings for the ordinary NorthCUA Desktop
-Harness. Copy a complete directory, set model environment variables, configure
-an available desktop endpoint and run it with `northcua local desktop run`.
+Optional model/history/context settings for the ordinary NorthCUA Desktop Harness.
+Copy a whole directory, set model environment variables and run
+`northcua local desktop run`; both examples use the native Desktop backend.
 
-- [OSWorld1-style settings](../../docs/desktop-settings-osworld1.md): screenshot history, coordinate text projection and bounded response recovery.
-- [OSWorld2-style settings](../../docs/desktop-settings-osworld2.md): context compaction and bounded text-only response retries.
+- `response-recovery/`: bounded response recovery, screenshot history and Chat reasoning replay.
+- `long-context/`: independent summary model, context compaction and bounded text-only retries.
 
-For ordinary local Desktop/Web tasks, start with [first run](../../docs/first-run.md).
-Step budgets and sampling values are adjustable; they are not benchmark protocols.
+Read [the settings guide](../../docs/desktop-settings.md). Step budgets and
+sampling values are adjustable. For a first Desktop/Web task, use
+[first run](../../docs/first-run.md).

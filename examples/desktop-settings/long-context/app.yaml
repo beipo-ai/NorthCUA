@@ -1,7 +1,7 @@
-# Recommended Desktop settings; configure an available desktop endpoint locally.
+# Recommended settings for the ordinary local Desktop Harness.
 agent_config_path: agent.yaml
 artifacts:
-  root_dir: logs/osworld2
+  root_dir: logs/long-context
 execution:
   max_agent_iterations_per_round: 500
   no_tool_call_attempts: 3
@@ -27,19 +27,11 @@ context_management:
     max_chunks: 4
     max_calls: 12
 desktop:
-  backend: osworld
+  backend: native
   coordinate_policy:
     input_space: normalized_1000
-    clamp_to_bounds: false
-  osworld:
-    vm_ip: 127.0.0.1  # replace locally with your already prepared endpoint
-    server_port: 5000
-    command_timeout_seconds: 120
-    screenshot_timeout_seconds: 30
-    retry_times: 3
-    retry_interval_seconds: 5
+    clamp_to_bounds: true
 prompt:
-  system_prompt_profile: osworld2
   history_window_rounds: 500
   screenshot_window_images: 3
   history_action_trace_enabled: true

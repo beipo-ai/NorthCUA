@@ -121,7 +121,7 @@ DOM/SoM refs remain identifiers. Read the [full coordinate contract](configurati
 
 Validate configuration, run one task with an explicit step budget, and inspect
 its actual outcome and artifacts. Then use [local batch](local-batch.md) or the
-[recommended Desktop settings](desktop-settings-osworld2.md). Their example sampling and
+[recommended Desktop settings](desktop-settings.md). Their example sampling and
 retry parameters are explicit experiment recipes, not universal model defaults.
 
 Without credentials, the [no-key tutorial](first-run.md#2b-verify-locally-without-a-model-key)

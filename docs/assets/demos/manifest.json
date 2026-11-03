@@ -1,32 +1,135 @@
 {
-  "snapshot_date": "2026-10-31",
-  "kind": "historical recorded agent demonstrations, not reruns or model benchmarks of this source release",
+  "snapshot_date": "2026-11-02",
+  "kind": "maintainer-supplied 30-second accelerated project recordings, not reruns or model benchmarks of this source release",
+  "source_archive": {
+    "file": "NorthCUA-30s-Shorts-20261102.zip",
+    "sha256": "e34f606d6900aaab660cd2fbd82b2a5044172b391e4f8408f290dd351580c6fc"
+  },
   "files": [
     {
-      "file": "tidal-workflow.mp4",
-      "source": "NorthCUA-site/public/media/tidal-workflow.mp4",
-      "bytes": 11019793,
-      "sha256": "124c984c124a0cb810bebf33eaace54848abc900c6ed7e64cf634fb00e5a30cb"
+      "file": "ruby-heart-30s.mp4",
+      "source": "NorthCUA-30s-Shorts-20261102.zip/NorthCUA-30s-Shorts-20261102/01-NorthCUA-Ruby-Heart-30s.mp4",
+      "bytes": 1998810,
+      "sha256": "7f0be0a7b5cb221dc0a91f0ddeaa1a2a012c9740766fa60e33bb07cc968038ac",
+      "duration_seconds": 30,
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "frames": 900,
+      "github_attachment_url": "https://github.com/user-attachments/assets/8afee957-87d7-43c9-8dff-21de7478dabf",
+      "method": "Maintainer-supplied accelerated edit, copied without re-encoding",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 1.2,
+          "title": "Opening"
+        },
+        {
+          "start": 1.2,
+          "end": 4.2,
+          "title": "01 / Set the controls"
+        },
+        {
+          "start": 4.2,
+          "end": 12.2,
+          "title": "02 / Build the heart"
+        },
+        {
+          "start": 12.2,
+          "end": 19.5,
+          "title": "03 / Refine the view"
+        },
+        {
+          "start": 19.5,
+          "end": 24.5,
+          "title": "04 / Save and verify"
+        },
+        {
+          "start": 24.5,
+          "end": 28.8,
+          "title": "Result / Interactive 3D heart"
+        },
+        {
+          "start": 28.8,
+          "end": 30,
+          "title": "Closing"
+        }
+      ]
     },
     {
-      "file": "wm33-smartest-workflow.mp4",
-      "source": "NorthCUA-site/public/media/wm33-smartest-workflow.mp4",
-      "bytes": 13000902,
-      "sha256": "4aa8f147513345833ec911efec300f7d613a2d029301ada05f9918540340a0a2"
+      "file": "blender-ufo-30s.mp4",
+      "source": "NorthCUA-30s-Shorts-20261102.zip/NorthCUA-30s-Shorts-20261102/03-NorthCUA-Blender-UFO-30s.mp4",
+      "bytes": 5358952,
+      "sha256": "a87db605b6876a08fb111dfc4e6bb30e0845e2a35c9ef7caa41aac6bb1715786",
+      "duration_seconds": 30,
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "frames": 900,
+      "github_attachment_url": "https://github.com/user-attachments/assets/b959f684-a23a-4052-bfcb-45d8c0c8c546",
+      "method": "Maintainer-supplied accelerated edit, copied without re-encoding",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 1.2,
+          "title": "Opening"
+        },
+        {
+          "start": 1.2,
+          "end": 6,
+          "title": "01 / Draw the concept"
+        },
+        {
+          "start": 6,
+          "end": 11.5,
+          "title": "02 / Shape the hull"
+        },
+        {
+          "start": 11.5,
+          "end": 15.5,
+          "title": "03 / Animate the iris"
+        },
+        {
+          "start": 15.5,
+          "end": 20,
+          "title": "04 / Add metal and glass"
+        },
+        {
+          "start": 20,
+          "end": 22.8,
+          "title": "05 / Light and save"
+        },
+        {
+          "start": 22.8,
+          "end": 28.8,
+          "title": "Result / Native Blender animation"
+        },
+        {
+          "start": 28.8,
+          "end": 30,
+          "title": "Closing"
+        }
+      ]
     },
     {
-      "file": "tidal.webp",
-      "source": "NorthCUA-site/public/images/tidal.webp",
-      "bytes": 16690,
-      "sha256": "21052e3d6ecb1f8f4f554f9dbb49a3367119dce51e6a23400a94e8ad1447a79a"
+      "file": "ruby-heart.png",
+      "source": "ruby-heart-30s.mp4",
+      "frame_seconds": 27,
+      "bytes": 158515,
+      "sha256": "a30a6c71d2a6508428d0c0d7f2d3a36e85dcfa3bf77b16471ecb7cd08641c635",
+      "method": "Frame extraction and proportional resize to 1280 x 720; no overlay or retouching"
     },
     {
-      "file": "smartest.png",
-      "source": "wm33-smartest-workflow.mp4",
-      "frame_seconds": 12,
-      "bytes": 309899,
-      "sha256": "780d0098fd35736dcbde80cf1ddf94d86c2680a6b161a18e4e50e6162cc7326a",
-      "method": "unaltered frame extraction"
+      "file": "blender-ufo.png",
+      "source": "blender-ufo-30s.mp4",
+      "frame_seconds": 23,
+      "bytes": 171743,
+      "sha256": "c7ec4bec286520399361f59951e1536a02117c103fbeb97d55df6deba23d0691",
+      "method": "Frame extraction and proportional resize to 1280 x 720; no overlay or retouching"
     }
   ]
 }

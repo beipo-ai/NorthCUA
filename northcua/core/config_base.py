@@ -23,7 +23,6 @@ class PromptPolicyConfig(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    system_prompt_profile: Literal["desktop", "osworld1", "osworld2"] = "desktop"
     history_window_rounds: int = 8
     # Total prompt image budget, including Web Set-of-Mark images.
     screenshot_window_images: int = 3

@@ -71,10 +71,10 @@ behavioral coverage of surviving paths.
 
 ## Desktop settings and response policies
 
-The optional [OSWorld1-style](desktop-settings-osworld1.md) and
-[OSWorld2-style](desktop-settings-osworld2.md) settings retain Desktop prompt,
-coordinate/history projection, context compaction and bounded response policies.
-These mechanisms belong to the core Harness and use its ordinary task entry points.
-Benchmark launchers, DesktopEnv lifecycle adapters, external score callbacks,
-score aggregation and user-simulator bindings are outside this release. The
-OSWorld HTTP screenshot/input backend remains available for a prepared desktop.
+[Recommended Desktop settings](desktop-settings.md) retain model parameters,
+screenshot history, context compaction and bounded response policies through the
+ordinary Desktop prompt and task entry points. Benchmark-specific prompts,
+profile selectors and coordinate-text rewriting are removed, alongside task
+launchers, DesktopEnv lifecycle adapters, external score callbacks/aggregation
+and user-simulator bindings. The general 0–1000 action-coordinate mapper and
+HTTP screenshot/input backend remain available.

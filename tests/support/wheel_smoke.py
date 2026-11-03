@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import importlib.metadata as metadata
 import importlib.util
 import json
@@ -34,12 +33,30 @@ def main():
         direct = json.loads(metadata.distribution("nexau").read_text("direct_url.json"))
         assert direct["url"] == "https://github.com/hzhua/nexau.git"
         assert direct["vcs_info"]["commit_id"] == "28511d9f0362191a6c378fd441b2be55309a9e32"
-        from northcua.agents.desktop.prompt.profiles.osworld1.prompt import PROMPT_SHA256, prompt_path
-        from northcua.agents.desktop.prompt.profiles.osworld2.prompt import SYSTEM_TEMPLATE_SHA256, system_template_path
+        from northcua.agents.desktop.prompt import PromptEnvelopeBuilder
+        from northcua.core.config import PromptPolicyConfig
+        from northcua.core.coordinates import CoordinatePolicy
+        from northcua.core.enums import CoordinateSpace
+        from northcua.core.models import WindowState
+        import northcua.agents.desktop.prompt as prompt_package
 
-        for path, expected in ((prompt_path(), PROMPT_SHA256), (system_template_path(), SYSTEM_TEMPLATE_SHA256)):
-            assert "site-packages" in str(path)
-            assert hashlib.sha256(path.read_bytes()).hexdigest() == expected
+        templates = Path(prompt_package.__file__).with_name("templates")
+        assert "site-packages" in str(templates)
+        envelope = PromptEnvelopeBuilder(
+            templates,
+            PromptPolicyConfig(),
+            coordinate_policy=CoordinatePolicy(CoordinateSpace.NORMALIZED_1000),
+        ).build(
+            task="Open Calculator",
+            platform_name="linux",
+            current_window=WindowState(),
+            history_turns=[],
+            tools=[],
+            tool_choice="auto",
+        )
+        assert "For 0-1000 coordinates" in envelope.system_prompt
+        assert "(1000, 1000)" in envelope.system_prompt
+        assert "Open Calculator" in envelope.persistent_user_text
     with tempfile.TemporaryDirectory(prefix="northcua-wheel-smoke-") as temporary:
         root = Path(temporary)
         env = dict(os.environ, NORTHCUA_MODEL="fixture-model", OPENAI_API_KEY="fixture-key")

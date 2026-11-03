@@ -78,7 +78,7 @@ async def test_real_provider_retries_same_request_without_polluting_history(tmp_
         http_client=httpx.AsyncClient(transport=httpx.MockTransport(handle)),
     )
     config = AgentConfig(
-        name="OSWorld1Fixture",
+        name="RecoveryFixture",
         tool_call_mode="structured",
         max_iterations=1,
         llm_config=LLMConfig(

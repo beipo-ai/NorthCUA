@@ -1,7 +1,7 @@
-# Recommended Desktop settings; configure an available desktop endpoint locally.
+# Recommended settings for the ordinary local Desktop Harness.
 agent_config_path: agent.yaml
 artifacts:
-  root_dir: logs/osworld1
+  root_dir: logs/response-recovery
 execution:
   max_agent_iterations_per_round: 100
   no_tool_call_attempts: 1
@@ -11,15 +11,11 @@ execution:
 evaluation:
   enabled: false
 desktop:
-  backend: osworld
-  osworld:
-    vm_ip: 127.0.0.1
-    server_port: 5000
+  backend: native
   coordinate_policy:
     input_space: normalized_1000
-    clamp_to_bounds: false
+    clamp_to_bounds: true
 prompt:
-  system_prompt_profile: osworld1
   history_window_rounds: 100
   screenshot_window_images: 3
   history_action_trace_enabled: true

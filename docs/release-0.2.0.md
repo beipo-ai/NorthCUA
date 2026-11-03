@@ -191,11 +191,11 @@ and user-simulator bindings. The Desktop HTTP screenshot/input backend, ordinary
 task entry points, generic local extension tools, built-in outcome evaluators and
 recoverable batches remain available.
 
-Optional prompt resources now live in the Desktop prompt package. Their selectors
-are `osworld1` and `osworld2`; copy the updated
-[recommended settings](../examples/desktop-settings/README.md) when migrating
-an earlier local configuration. Shared response recovery lives in the provider
-module. Independent summary-model paths resolve relative to the app YAML.
+This earlier verification preceded the subsequent removal of all benchmark-specific
+prompts and their selectors. Use the current
+[recommended settings](desktop-settings.md) and remove
+`prompt.system_prompt_profile` from an older local configuration. Shared response
+recovery lives in the provider module. Independent summary-model paths resolve relative to the app YAML.
 
 | Check | Observed result |
 |---|---|
@@ -220,3 +220,26 @@ research weights or benchmark acceptance. The retained NexAU version and
 [accepted upstream dependency risk](security/dependencies.md) are unchanged.
 The [canonical CI](https://github.com/beipo-ai/NorthCUA/actions/workflows/ci.yml)
 records hosted checks for each subsequent committed revision.
+
+
+## One Desktop prompt and short showcases
+
+The subsequent 3 November cleanup removes every OSWorld-specific prompt,
+the prompt-profile selector, benchmark-conditioned instructions in the ordinary
+Desktop template and legacy coordinate-text rewriting. The general 0–1000
+action mapper, response recovery and context compaction remain. Recommended
+recipes use the native Desktop backend and one ordinary prompt; older configs
+must remove `prompt.system_prompt_profile`.
+
+The bundled showcases are now the maintainer-supplied 30-second Ruby Heart and
+Blender UFO edits. Both READMEs use native GitHub video attachments while
+retaining byte-identical MP4s and checksummed result frames for offline viewing.
+The source/controller attribution and accelerated-edit boundaries are described
+in [showcases](showcase.md). The report, research figures and brand files are unchanged.
+
+The local focused prompt/configuration/retry/release checks passed **111 tests**.
+Each clip was independently confirmed to contain 900 frames at 30fps/1080p with
+H.264/AAC and to decode fully; independent frame re-extraction matched the
+result PNGs. Both native players were clicked and observed advancing on the
+actual GitHub branch README while signed out. The canonical CI remains the
+revision-specific record for full regression and installed-runtime gates.

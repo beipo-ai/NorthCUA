@@ -26,10 +26,9 @@ deployment. [Batch execution](batch.md) adds attempt isolation, preparation, per
 recovery and reporting. [Environments](environments.md) covers public E2B templates and
 an available Desktop HTTP backend.
 
-Optional [OSWorld1-style](desktop-settings-osworld1.md) and
-[OSWorld2-style](desktop-settings-osworld2.md) Desktop settings provide prompt,
-coordinate, history and response-policy recipes. They use the ordinary Desktop
-entry points; the first-run tutorials above remain the local starting point.
+[Recommended Desktop settings](desktop-settings.md) provide optional model,
+history, context and response-policy recipes using the ordinary Desktop prompt
+and task entry points. The first-run tutorials above remain the local starting point.
 
 ## Understand and extend
 

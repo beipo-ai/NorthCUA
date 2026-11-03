@@ -66,8 +66,6 @@ include = ["northcua", "northcua.*", "northcua_controller_plugins", "northcua_co
 where = ["."]
 
 [tool.setuptools.package-data]
-"northcua.agents.desktop.prompt.profiles.osworld2" = ["system.j2"]
-"northcua.agents.desktop.prompt.profiles.osworld1" = ["prompt.j2"]
 "northcua.resources.config" = ["*.yaml"]
 "northcua.agents.desktop.prompt" = ["templates/*.j2", "templates/*.yaml"]
 "northcua.agents.desktop.evaluation" = ["templates/*.j2"]

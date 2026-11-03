@@ -3,7 +3,9 @@
 The [0.2.0 release record](release-0.2.0.md) records the original execution,
 distribution and independent review evidence, with a [3 November publication recheck](release-0.2.0.md#3-november-publication-recheck).
 The [core Harness scope update](release-0.2.0.md#core-harness-scope-update)
-records the subsequent adapter removal, resource migration and fresh verification.
+records the adapter removal and resource migration. The subsequent
+[ordinary-prompt and short-showcase update](release-0.2.0.md#one-desktop-prompt-and-short-showcases)
+records the latest scope cleanup.
 The [canonical CI](https://github.com/beipo-ai/NorthCUA/actions/workflows/ci.yml)
 shows the status for each subsequent commit. Follow [release preparation](releasing.md)
 before publishing another candidate.
