@@ -35,8 +35,13 @@ and provenance. The original font has not been modified or renamed as a new font
 
 ## Usage
 
-READMEs select the light or dark lockup with a `picture` element. Preserve the
-mark's original blue and use the appropriate lettering for the background.
+GitHub READMEs select the light or dark lockup with GitHub's
+`#gh-light-mode-only` and `#gh-dark-mode-only` image/link fragments. These track
+the reader's GitHub theme, including when it differs from the operating system's
+appearance. Do not replace them with a `picture` element using
+`prefers-color-scheme`: that follows the system appearance instead of GitHub's
+selected theme. For other renderers, select the appropriate SVG explicitly.
+Preserve the mark's original blue and use the appropriate lettering for the background.
 Keep the full lockup proportional and leave clear space around it. Avoid adding
 another large project-name heading directly beneath it.
 
