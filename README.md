@@ -187,7 +187,7 @@ batch execution and recovery. [From-zero guide](docs/first-run.md).
 | Python, CLI, WebSocket or controller/device | [Execution modes](docs/running.md) |
 | Context, images, notes and compaction | [Context and memory](docs/context.md) |
 | Evaluation, artifacts and trace viewer | [Outcome evaluation](docs/evaluation.md) |
-| Recommended Desktop settings | [OSWorld1](docs/desktop-settings-osworld1.md) · [OSWorld2](docs/desktop-settings-osworld2.md) |
+| Recommended Desktop settings | [Model, context and retry recipes](docs/desktop-settings.md) |
 | Extend, test or contribute | [Architecture](docs/architecture.md) · [Testing](docs/testing.md) · [Contributing](CONTRIBUTING.md) |
 
 ## Research, models and availability

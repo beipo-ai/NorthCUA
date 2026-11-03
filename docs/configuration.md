@@ -93,13 +93,11 @@ put these fields in the app YAML, not in the model's agent YAML.
 CSS pixels. `desktop.coordinate_policy` does not normalize Web actions, and
 `web.coordinate_policy` is not a supported configuration field.
 
-## Optional Desktop actor profiles and response retries
+## Desktop response retries
 
-The default `prompt.system_prompt_profile: desktop` keeps the ordinary Desktop
-prompt. Optional `osworld1` and `osworld2` profiles are documented in
-the [OSWorld1-style](desktop-settings-osworld1.md) and [OSWorld2-style](desktop-settings-osworld2.md) recommended settings.
-They change Desktop prompt behavior only when explicitly selected. Run either
-recipe through the ordinary Desktop CLI or Python API.
+Desktop uses one ordinary prompt. Optional model/history/context recipes are
+listed in [recommended Desktop settings](desktop-settings.md). Remove
+`prompt.system_prompt_profile` from older configurations.
 
 | App YAML setting | Default | Optional behavior |
 |---|---|---|
@@ -109,8 +107,8 @@ recipe through the ordinary Desktop CLI or Python API.
 The two optional retry policies are mutually exclusive. SDK transport retries
 are separate and can add network requests; they do not reset task-step budgets.
 Neither policy repeats tool execution. Default Desktop/Web tutorials keep both
-policies off. OSWorld1's virtual canvas and regex text conversion are limited to
-its explicitly selected historical profile; they do not alter ordinary task text.
+policies off. The general action-coordinate mapper does not rewrite task or
+history text.
 
 ## Providers
 

@@ -189,3 +189,30 @@ mcp_servers:
     assert candidates[1].llm_config.extra_params["provider_profile"] == "claude-compatible-gateway"
     assert candidates[2].llm_config.base_url == "https://openai.example.invalid/v1"
     assert candidates[2].llm_config.api_type == "openai_responses"
+
+
+def test_portable_long_context_settings_resolve_summary_from_app_directory(monkeypatch, tmp_path):
+    import shutil
+    from northcua.core.config_loader import NorthCUAConfigLoader
+
+    root = Path(__file__).resolve().parents[2]
+    config_dir = tmp_path / "local-config"
+    shutil.copytree(root / "examples/desktop-settings/long-context", config_dir)
+    monkeypatch.chdir(tmp_path)
+    for name in ("NORTHCUA_MODEL", "OPENAI_API_KEY", "NORTHCUA_SUMMARY_MODEL", "NORTHCUA_SUMMARY_API_KEY"):
+        monkeypatch.setenv(name, "fixture")
+    for name in ("NORTHCUA_BASE_URL", "NORTHCUA_SUMMARY_BASE_URL"):
+        monkeypatch.setenv(name, "https://fixture.invalid/v1")
+    bootstrap = NorthCUAConfigLoader.from_app_config(config_dir / "app.yaml")
+    assert bootstrap.app.context_management.summary.model.agent_config_path == str(config_dir / "summary-agent.yaml")
+    assert bootstrap.agent.llm_config.get_param("extra_body") == {
+        "presence_penalty": 1.0,
+        "top_k": 20,
+        "min_p": 0,
+        "repetition_penalty": 1.0,
+    }
+    assert bootstrap.agent.llm_config.temperature == 0.8
+    assert bootstrap.agent.llm_config.timeout == 600
+    assert bootstrap.agent.llm_config.max_tokens == 65536
+    assert bootstrap.app.execution.no_tool_call_attempts == 3
+    assert bootstrap.app.desktop.backend == "native"

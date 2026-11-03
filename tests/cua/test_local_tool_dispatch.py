@@ -141,7 +141,7 @@ async def test_real_desktop_query_receives_callback_answer_in_next_model_request
         data = yaml.safe_load(config_path.read_text())
         data["evaluation"]["enabled"] = False
         data["observation"] = {"a11y": {"enabled": False}}
-        data["prompt"] = {"screenshot_window_images": 1, "system_prompt_profile": "desktop"}
+        data["prompt"] = {"screenshot_window_images": 1}
         data["execution"] = {"no_tool_call_attempts": 3}
         data["desktop"] = {"coordinate_policy": {"input_space": "normalized_1000"}}
         config_path.write_text(yaml.safe_dump(data))

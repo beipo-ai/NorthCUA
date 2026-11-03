@@ -59,7 +59,5 @@ northcua local desktop run --app-config logs/my-config/app.example.yaml \
 
 The backend provides screenshots, input and optional accessibility records.
 The environment owner prepares the desktop and manages its lifecycle. Task JSON,
-benchmark launchers and scorers are not part of this backend. Optional
-[OSWorld1-style](desktop-settings-osworld1.md) and
-[OSWorld2-style](desktop-settings-osworld2.md) settings provide prompt and model
-parameter recipes for the same Harness.
+benchmark launchers and scorers are not part of this backend. [Recommended Desktop settings](desktop-settings.md) provide model, history,
+context and response-policy recipes for the same ordinary Harness.

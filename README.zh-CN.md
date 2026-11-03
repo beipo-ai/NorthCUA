@@ -176,7 +176,7 @@ uv run --no-sync northcua local desktop run --app-config logs/my-config/app.exam
 | Python、CLI、WebSocket、Controller/device | [运行方式](docs/running.md) |
 | Context、图像窗口与工作记忆 | [上下文](docs/context.md) |
 | 输出检查、在线评估与轨迹查看器 | [评估](docs/evaluation.md) |
-| Desktop 推荐参数与 prompt | [OSWorld1](docs/desktop-settings-osworld1.md) · [OSWorld2](docs/desktop-settings-osworld2.md) |
+| Desktop 推荐参数与重试策略 | [模型、上下文与响应策略](docs/desktop-settings.md) |
 | 开发、测试与扩展 | [贡献](CONTRIBUTING.md) · [测试](docs/testing.md) |
 
 ## 研究与发布状态

@@ -506,7 +506,7 @@ def test_prompt_builder_marks_remote_home_directory_unavailable() -> None:
     )
 
 
-def test_prompt_builder_injects_osworld_guidance_only_for_osworld_observations() -> None:
+def test_prompt_builder_uses_backend_metadata_without_benchmark_assumptions() -> None:
     builder = PromptEnvelopeBuilder(
         template_root=Path("northcua/agents/desktop/prompt/templates"),
         policy=PromptPolicyConfig(screenshot_window_images=0),
@@ -533,10 +533,11 @@ def test_prompt_builder_injects_osworld_guidance_only_for_osworld_observations()
 
     assert "OSWorld benchmark environment:" not in generic.system_prompt
     assert "OSWorld benchmark environment:" not in generic.observation_user_text
-    assert "OSWorld benchmark environment:" in osworld.system_prompt
+    assert "OSWorld benchmark environment:" not in osworld.system_prompt
     assert "OSWorld benchmark environment:" not in osworld.observation_user_text
-    assert "Ubuntu 22.04" in osworld.system_prompt
-    assert "Home directory: /home/user" in osworld.system_prompt
+    assert "Ubuntu 22.04" not in osworld.system_prompt
+    assert "Home directory:" not in osworld.system_prompt
+    assert "Desktop environment: osworld" in osworld.system_prompt
     assert "Do not ask the user for clarification." in generic.system_prompt
     assert "Do not ask the user for clarification." in osworld.system_prompt
     assert "emit `[INFEASIBLE]` and stop" in osworld.system_prompt

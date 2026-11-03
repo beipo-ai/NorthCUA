@@ -54,7 +54,7 @@ class SystemPromptBuilder:
             screenshot_width: Current screenshot width when known.
             screenshot_height: Current screenshot height when known.
             desktop_environment: Runtime desktop environment label exposed to
-                the model, such as ``linux`` or ``osworld``.
+                the model, such as ``linux`` or ``remote``.
             home_directory: User home directory when known for the controlled
                 desktop environment.
             coordinate_policy: Active coordinate policy for desktop action
@@ -217,24 +217,6 @@ class PromptEnvelopeBuilder:
             template_root / "computer_using_agent_persistent_user.j2",
             template_root / "computer_using_agent_observation_user.j2",
         )
-        if policy.system_prompt_profile == "osworld1":
-            from northcua.agents.desktop.prompt.profiles.osworld1.prompt import (
-                ProfileObservationBuilder,
-                ProfileSystemBuilder,
-            )
-
-            self.system_builder = ProfileSystemBuilder()
-            self.observation_builder = ProfileObservationBuilder()
-        if policy.system_prompt_profile == "osworld2":
-            from northcua.agents.desktop.prompt.profiles.osworld2.prompt import (
-                ProfileObservationBuilder,
-                system_template_path,
-            )
-
-            self.system_builder = SystemPromptBuilder(system_template_path())
-            self.observation_builder = ProfileObservationBuilder(
-                self.observation_builder.persistent_template, self.observation_builder.observation_template
-            )
         self.image_window_allocator = PromptImageWindowAllocator(policy)
         self.tool_builder = ToolSpecBuilder()
 
@@ -321,16 +303,6 @@ class PromptEnvelopeBuilder:
         if observation_notes:
             observation_user_text = "\n\n".join([observation_user_text, *observation_notes])
         envelope_tools, envelope_choice = self.tool_builder.build(tools, tool_choice)
-        if (
-            self.policy.system_prompt_profile == "osworld1"
-            and self.coordinate_policy.input_space == CoordinateSpace.NORMALIZED_1000
-        ):
-            from northcua.agents.desktop.prompt.profiles.osworld1.coordinates import normalize_message, normalize_text
-
-            width, height = screenshot_resolution or (1920, 1080)
-            persistent_user_text = normalize_text(persistent_user_text, width, height)
-            observation_user_text = normalize_text(observation_user_text, width, height)
-            history_messages = [normalize_message(message, width, height) for message in history_messages]
         return PromptEnvelope(
             system_prompt=system_prompt,
             persistent_user_text=persistent_user_text,
@@ -402,8 +374,6 @@ class PromptEnvelopeBuilder:
         if isinstance(value, str) and value.strip():
             return value.strip()
         platform_name = str(observation_context.platform_name or "").lower()
-        if platform_name == "osworld":
-            return "/home/user"
         if platform_name.startswith("remote"):
             return "unavailable"
         return ""

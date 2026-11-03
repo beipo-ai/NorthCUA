@@ -12,12 +12,7 @@ Runtime context:
 {% if home_directory %}
 - Home directory: {{ home_directory }}
 {% endif %}
-{% set desktop_environment_key = (desktop_environment or "") | lower %}
-{% if desktop_environment_key == "osworld" %}
 
-OSWorld benchmark environment:
-- OS: Ubuntu 22.04 (x86_64). Browser is Chrome.
-{% endif %}
 
 Task completion contract:
 - At the start of the task, classify the user's request privately:

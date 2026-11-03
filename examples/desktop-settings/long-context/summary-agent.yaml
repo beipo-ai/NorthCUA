@@ -1,6 +1,6 @@
 # Configure an independent summary model for context compaction; it is separate
 # from the main actor and does not use the no-tool retry policy.
-name: OSWorld2Summary
+name: DesktopSummary
 llm_config:
   model: ${env.NORTHCUA_SUMMARY_MODEL}
   base_url: ${env.NORTHCUA_SUMMARY_BASE_URL}

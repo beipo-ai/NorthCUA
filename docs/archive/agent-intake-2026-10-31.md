@@ -17,11 +17,10 @@ history, cancellation/deadline propagation, safe artifact namespaces, explicit
 HTTP error classification and mutually exclusive retry policies. Local extension
 tool dispatch remains a generic Harness capability with test-only callback fixtures.
 
-Prompt resources now live under `northcua/agents/desktop/prompt/profiles/`;
-response recovery lives under `northcua/agentinfra/providers/response_recovery.py`.
-The current profile names are `osworld1` and `osworld2`. Earlier `_formal`
-configuration names are no longer accepted. The OSWorld2 prompt no longer refers
-to the removed user-simulator tool.
+Response recovery lives under `northcua/agentinfra/providers/response_recovery.py`.
+The subsequent scope cleanup removed all benchmark-specific prompts, their
+selectors and coordinate-text rewriting. Recommended settings now use the
+ordinary Desktop prompt; the general action-coordinate mapper is retained.
 
 Earlier acceptance runs in this audit predate the removal and do not certify the
 current source. Refer to the canonical CI and current verification record.

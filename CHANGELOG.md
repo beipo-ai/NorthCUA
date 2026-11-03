@@ -5,7 +5,7 @@
 - Replace the repository showcases with the supplied 30-second Ruby Heart and Blender UFO edits; embed GitHub-native video players while retaining byte-identical offline MP4s and checksummed result frames.
 
 - Remove benchmark task/lifecycle adapters, external scoring callbacks, score aggregation and user-simulator bindings; retain core Desktop/Web Harness behavior and recommended Desktop settings.
-- Move optional Desktop prompts into the core prompt package and response recovery into the shared provider module. Rename profile selectors from `osworld1_formal` / `osworld2_formal` to `osworld1` / `osworld2`; resolve dedicated summary-model paths relative to the app config.
+- Remove all OSWorld-specific prompts, prompt-profile selectors and coordinate-text rewriting. Retain one ordinary Desktop prompt, general action-coordinate mapping and response-policy recipes; resolve dedicated summary-model paths relative to the app config.
 
 - Move the canonical repository and all installation, citation and package links to `beipo-ai/NorthCUA`.
 - Make the English/Chinese README start with a complete no-key browser task; keep model setup explicit and provide a separate agent operator path.
