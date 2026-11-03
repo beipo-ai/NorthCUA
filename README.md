@@ -1,9 +1,11 @@
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/brand/northcua-logo-dark.svg">
-  <img src="docs/assets/brand/northcua-logo.svg" width="420" height="112" alt="NorthCUA">
-</picture>
+<a href="docs/assets/brand/northcua-logo.svg#gh-light-mode-only">
+  <img src="docs/assets/brand/northcua-logo.svg#gh-light-mode-only" width="420" height="112" alt="NorthCUA">
+</a>
+<a href="docs/assets/brand/northcua-logo-dark.svg#gh-dark-mode-only">
+  <img src="docs/assets/brand/northcua-logo-dark.svg#gh-dark-mode-only" width="420" height="112" alt="NorthCUA">
+</a>
 
 **Worlds in mind. Wonders at your fingertips.**
 
