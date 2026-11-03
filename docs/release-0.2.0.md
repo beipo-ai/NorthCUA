@@ -6,6 +6,9 @@ uv **0.13.6**. This source publication uses a clean Git history, now hosted in
 The previous repositories remain intact. Earlier implementation audits are
 [archived separately](verification.md#historical-audits).
 
+The current scope is recorded in the [core Harness update](#core-harness-scope-update).
+The original release matrix below is retained as historical evidence.
+
 ## Execution matrix
 
 | Gate | Observed result | Scope |
@@ -13,7 +16,7 @@ The previous repositories remain intact. Earlier implementation audits are
 | Default regression suite | **2,930 passed, 9 skipped**; 199.21s | Opt-in browser/native checks are separate below. Two expected fork-safety deprecation warnings. |
 | Static and repository checks | **Passed** | Ruff lint/format, configured scoped Pyright, lock check, actionlint, all pre-commit hooks and Git whitespace checks. |
 | Release/asset contracts after final packaging changes | **19 passed** | Four-package metadata, config mirrors, local document links, report/brand/figure/recording provenance. |
-| Formal actor dispatch/recovery guards | **17 passed** | Harness-local callback placement, tool contracts, bounded response policies, cancellation and retry baselines. |
+| Actor dispatch/recovery guards | **17 passed** | Harness-local callback placement, tool contracts, bounded response policies, cancellation and retry baselines. |
 | From-zero operator skill | Independent **PASS** | Fresh environment, CLI/config generation and validation, matching managed Chromium 145 / revision 1208. |
 | Source Web entry points and local batch | **7 passed**; 49.22s | Local application, CLI, WebSocket, both controller executors, real browser, live evaluation, both local batch modes and completed resume. |
 | Browser-tool regressions | **4/4 passed**, **3/3 live probes** | Local fixtures: refs/forms/tabs/screenshots and actionability. Redaction scan passed. |
@@ -177,3 +180,43 @@ raw findings and blocks new or expired risks. Follow the exact candidate's
 [canonical CI result](https://github.com/beipo-ai/NorthCUA/actions/workflows/ci.yml)
 for the hosted verdict. [Release preparation](releasing.md) defines the remaining
 publication steps and distinguishes source, model, website and PyPI publication.
+
+
+## Core Harness scope update
+
+**3 November 2026.** This update narrows the distribution to core Desktop/Web
+Harness behavior and optional recommended settings. It removes benchmark task
+runners, DesktopEnv lifecycle launchers, external scoring callbacks/aggregation
+and user-simulator bindings. The Desktop HTTP screenshot/input backend, ordinary
+task entry points, generic local extension tools, built-in outcome evaluators and
+recoverable batches remain available.
+
+Optional prompt resources now live in the Desktop prompt package. Their selectors
+are `osworld1` and `osworld2`; copy the updated
+[recommended settings](../examples/desktop-settings/README.md) when migrating
+an earlier local configuration. Shared response recovery lives in the provider
+module. Independent summary-model paths resolve relative to the app YAML.
+
+| Check | Observed result |
+|---|---|
+| Default regression | **2,906 passed, 9 skipped**; 188.66s; two existing fork-safety warnings |
+| Targeted core/profile/configuration checks | **71 passed**; 3.41s |
+| Source real-browser/controller/local batches and resume | **7 passed**; 44.04s |
+| Physical input and Desktop actor in the owned disposable window | **2 passed**; 8.33s |
+| Four newly built wheels | No removed integration modules; both relocated prompt resources and core recovery module present |
+| Fresh base/local wheel installation outside the checkout | Both config/worker/controller/bundle smoke checks and dependency compatibility check passed |
+| Installed-wheel real-browser/controller/local batches | **7 passed**; 43.26s; two marker-registration warnings in the copied test files |
+| Static, lock and documentation checks | Ruff lint/format, scoped Pyright, lock check, whitespace and skill validation passed; final release/onboarding checks **19 passed** |
+
+Independent code/distribution review passed **92 focused tests**, checked copied
+configs outside the checkout, inspected all four wheel archives and scanned the
+unpacked wheels for credentials with zero findings. Independent documentation
+review checked local links/anchors and ran four CLI configuration validations
+plus four core-loader/summary-model reads outside the checkout. Both gave scoped
+signoff for this removal and resource migration.
+
+These runs use scripted local model endpoints for tool integration, not hosted
+research weights or benchmark acceptance. The retained NexAU version and
+[accepted upstream dependency risk](security/dependencies.md) are unchanged.
+The [canonical CI](https://github.com/beipo-ai/NorthCUA/actions/workflows/ci.yml)
+records hosted checks for each subsequent committed revision.

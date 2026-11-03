@@ -24,12 +24,12 @@ workload needs. Commands, Python imports and package names use `northcua`.
 [Execution modes](running.md) covers Python, CLI, local WebSocket serving and controller/device
 deployment. [Batch execution](batch.md) adds attempt isolation, preparation, persistent
 recovery and reporting. [Environments](environments.md) covers public E2B templates and
-upstream OSWorld integration.
+an available Desktop HTTP backend.
 
-For an already prepared benchmark desktop, the optional [OSWorld1 actor profile](osworld1-harness.md)
-and [OSWorld2 actor profile](osworld2-harness.md) expose versioned prompts and bounded
-response policies. Their environment and evaluator backends remain caller-owned;
-the first-run tutorials above remain the local starting point.
+Optional [OSWorld1-style](desktop-settings-osworld1.md) and
+[OSWorld2-style](desktop-settings-osworld2.md) Desktop settings provide prompt,
+coordinate, history and response-policy recipes. They use the ordinary Desktop
+entry points; the first-run tutorials above remain the local starting point.
 
 ## Understand and extend
 

@@ -96,10 +96,10 @@ CSS pixels. `desktop.coordinate_policy` does not normalize Web actions, and
 ## Optional Desktop actor profiles and response retries
 
 The default `prompt.system_prompt_profile: desktop` keeps the ordinary Desktop
-prompt. Optional `osworld1_formal` and `osworld2_formal` profiles are documented in
-the [OSWorld1](osworld1-harness.md) and [OSWorld2](osworld2-harness.md) guides.
-They change Desktop actor behavior only when explicitly selected; they are not
-environment provisioning or benchmark launchers.
+prompt. Optional `osworld1` and `osworld2` profiles are documented in
+the [OSWorld1-style](desktop-settings-osworld1.md) and [OSWorld2-style](desktop-settings-osworld2.md) recommended settings.
+They change Desktop prompt behavior only when explicitly selected. Run either
+recipe through the ordinary Desktop CLI or Python API.
 
 | App YAML setting | Default | Optional behavior |
 |---|---|---|

@@ -23,7 +23,7 @@ class PromptPolicyConfig(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    system_prompt_profile: Literal["desktop", "osworld1_formal", "osworld2_formal"] = "desktop"
+    system_prompt_profile: Literal["desktop", "osworld1", "osworld2"] = "desktop"
     history_window_rounds: int = 8
     # Total prompt image budget, including Web Set-of-Mark images.
     screenshot_window_images: int = 3
@@ -95,7 +95,7 @@ class ExecutionConfig(BaseModel):
     experiment_tags: list[str] = Field(default_factory=list)
     max_agent_iterations_per_round: int = 8
     no_tool_call_attempts: Literal[1, 3] = 1
-    # OSWorld1's provider-response retries, not OSWorld2's text-only retry policy.
+    # Provider-response recovery is separate from the text-only retry policy.
     model_response_recovery: bool = False
 
     @model_validator(mode="after")

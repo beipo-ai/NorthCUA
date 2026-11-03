@@ -196,7 +196,7 @@ class SingleModelStepRunner:
         api_type = getattr(llm_config, "api_type", None)
         configured_timeout_seconds = getattr(llm_config, "timeout", None)
         configured_max_retries = getattr(llm_config, "max_retries", None)
-        response_recovery = bool(getattr(agent, "_osworld1_response_recovery", False))
+        response_recovery = bool(getattr(agent, "_northcua_response_recovery", False))
         response_retries = _non_negative_int(configured_max_retries) or 0
         if response_recovery:
             # Keep the historical per-attempt 3600s guard and allow backoff.
@@ -235,7 +235,7 @@ class SingleModelStepRunner:
                     )
 
                 if response_recovery:
-                    from northcua.integrations.osworld1.recovery import recover_response
+                    from northcua.agentinfra.providers.response_recovery import recover_response
 
                     pending_response = recover_response(
                         provider_call,

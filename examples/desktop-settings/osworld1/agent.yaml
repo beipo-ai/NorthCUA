@@ -1,0 +1,24 @@
+# Suggested model parameters; adapt them to your model endpoint.
+name: OSWorld1Settings
+llm_config:
+  model: ${env.NORTHCUA_MODEL}
+  base_url: ${env.NORTHCUA_BASE_URL}
+  api_key: ${env.OPENAI_API_KEY}
+  api_type: openai_chat_completion
+  max_tokens: 16000
+  temperature: 0.7
+  reasoning_effort: max
+  max_retries: 3
+  timeout: 120
+  stream: false
+  reasoning_replay_policy: chat_reasoning_content
+  extra_body:
+    separate_reasoning: false
+max_iterations: 1
+mcp_servers:
+- name: DesktopNativeDataExecutor
+  model_visible: false
+  type: in-memory
+- name: DesktopNativeActionExecutor
+  model_visible: true
+  type: in-memory

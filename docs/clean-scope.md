@@ -8,7 +8,7 @@ modified by the cleanup.
 |---|---|
 | Keep and validate | Desktop/Web agents, typed tools, observations, visual history, semantic compaction, ordinary skills, working memory, artifact/live evaluators, controller/device, generic external-task APIs, batch and artifact/reporting code |
 | Remove | Private driver/PiP and companion control UI; training/data conversion/generation pipelines; environment-builder actor; CUA-Gym/WebHarbor/NorthJetty workflows; reusable warm pools; dated experiment wrappers, inventory acceptance suites and private/public NexAU migration release administration |
-| Replace | Private model defaults → public env-based configs; dated template catalog → public Desktop/Web substrates; source-only install paths → packaged resources/wheelhouse; OSWorld hosted-dataset runner → local task JSON adapter; historical docs → user workflows and paper map |
+| Replace | Private model defaults → public env-based configs; dated template catalog → public Desktop/Web substrates; source-only install paths → packaged resources/wheelhouse; Benchmark adapters → ordinary Desktop entry points and recommended settings; historical docs → user workflows and paper map |
 | Test-only | Deterministic model/provider streams, fixture pages, fake provider/task scenarios and regression schemas; these are not live experiment claims |
 
 ## Decisions applied
@@ -69,15 +69,12 @@ is necessary or every environment has been exercised. The retained-uncertainty t
 remains deliberate. New deletion proposals should trace actual callers and preserve the
 behavioral coverage of surviving paths.
 
-## OSWorld1 harness extension
+## Desktop settings and response policies
 
-The [formal OSWorld1 actor contract](osworld1-harness.md) likewise keeps the
-single prompt, coordinate/history projection and response recovery in the
-harness. OSWorld1 environments, task-specific repairs/evaluators, task data and
-evaluation dispatch/stop workflows are explicitly outside this export.
-
-## OSWorld2 harness extension
-
-The [formal OSWorld2 adapter](osworld2-harness.md) adds a single frozen system
-prompt, actor request policy and local score accounting. Prepared task environments,
-original task/evaluator backends, VM lifecycle and dispatch remain external.
+The optional [OSWorld1-style](desktop-settings-osworld1.md) and
+[OSWorld2-style](desktop-settings-osworld2.md) settings retain Desktop prompt,
+coordinate/history projection, context compaction and bounded response policies.
+These mechanisms belong to the core Harness and use its ordinary task entry points.
+Benchmark launchers, DesktopEnv lifecycle adapters, external score callbacks,
+score aggregation and user-simulator bindings are outside this release. The
+OSWorld HTTP screenshot/input backend remains available for a prepared desktop.

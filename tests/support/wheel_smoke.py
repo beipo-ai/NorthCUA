@@ -34,8 +34,8 @@ def main():
         direct = json.loads(metadata.distribution("nexau").read_text("direct_url.json"))
         assert direct["url"] == "https://github.com/hzhua/nexau.git"
         assert direct["vcs_info"]["commit_id"] == "28511d9f0362191a6c378fd441b2be55309a9e32"
-        from northcua.integrations.osworld1.prompt import PROMPT_SHA256, prompt_path
-        from northcua.integrations.osworld2.prompt import SYSTEM_TEMPLATE_SHA256, system_template_path
+        from northcua.agents.desktop.prompt.profiles.osworld1.prompt import PROMPT_SHA256, prompt_path
+        from northcua.agents.desktop.prompt.profiles.osworld2.prompt import SYSTEM_TEMPLATE_SHA256, system_template_path
 
         for path, expected in ((prompt_path(), PROMPT_SHA256), (system_template_path(), SYSTEM_TEMPLATE_SHA256)):
             assert "site-packages" in str(path)

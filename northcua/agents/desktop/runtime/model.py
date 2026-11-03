@@ -515,7 +515,7 @@ class DesktopModelStepRunner:
         side_effect_fence: ContextSideEffectFence,
     ) -> None:
         from northcua.agentinfra.providers.no_tool_retry import scoped_no_tool_retry
-        from northcua.integrations.osworld1.recovery import response_recovery_scope
+        from northcua.agentinfra.providers.response_recovery import response_recovery_scope
 
         with (
             response_recovery_scope(

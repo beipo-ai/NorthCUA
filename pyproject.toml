@@ -66,8 +66,8 @@ include = ["northcua", "northcua.*", "northcua_controller_plugins", "northcua_co
 where = ["."]
 
 [tool.setuptools.package-data]
-"northcua.integrations.osworld2" = ["system.j2"]
-"northcua.integrations.osworld1" = ["prompt.j2"]
+"northcua.agents.desktop.prompt.profiles.osworld2" = ["system.j2"]
+"northcua.agents.desktop.prompt.profiles.osworld1" = ["prompt.j2"]
 "northcua.resources.config" = ["*.yaml"]
 "northcua.agents.desktop.prompt" = ["templates/*.j2", "templates/*.yaml"]
 "northcua.agents.desktop.evaluation" = ["templates/*.j2"]
@@ -115,7 +115,7 @@ ignore = []
 [tool.pyright]
 # CI checks the public wire contract and persistent-memory boundary.
 # Broader runtime scopes can be checked explicitly while their typing is tightened.
-include = ["northcua_protocol", "northcua/agentkernel/working_memory.py", "northcua/integrations/osworld"]
+include = ["northcua_protocol", "northcua/agentkernel/working_memory.py"]
 exclude = [
   ".git",
   ".mypy_cache",

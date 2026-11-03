@@ -77,8 +77,10 @@ for current app/batch fields. `config validate` does not call the model.
    user. The local provider shares the host OS and network; it is not a VM.
 
 The self-contained path needs no NorthJetty, cloud key, private dataset or
-historical deployment checkout. E2B/OSWorld are optional, separate deployments;
-do not provision them unless that is the requested workflow.
+historical deployment checkout. E2B deployments and prepared Desktop HTTP
+endpoints are optional environments managed separately. Use the
+[recommended Desktop settings](../../examples/desktop-settings/README.md) through
+the ordinary Desktop entry points when those model/prompt recipes are useful.
 
 Report the exact commands/mode, source revision, model type (scripted or real),
 actual outcomes, evidence paths, recovery/cleanup result and any remaining blocker.

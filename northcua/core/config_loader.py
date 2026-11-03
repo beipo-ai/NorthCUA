@@ -76,6 +76,12 @@ class NorthCUAConfigLoader:
 
         app_path = Path(app_config_path).resolve()
         app = NorthCUAAppConfig.from_yaml(app_path)
+        summary_model = app.context_management.summary.model
+        if summary_model.agent_config_path:
+            summary_path = Path(summary_model.agent_config_path).expanduser()
+            if not summary_path.is_absolute():
+                summary_path = app_path.parent / summary_path
+            summary_model.agent_config_path = str(summary_path.resolve())
         agent_kind_value = getattr(agent_kind, "value", str(agent_kind))
         if agent_config_path_override is not None:
             configured_agent_path = Path(agent_config_path_override)

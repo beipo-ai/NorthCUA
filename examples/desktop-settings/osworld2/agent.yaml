@@ -1,0 +1,27 @@
+name: OSWorld2Settings
+llm_config:
+  model: ${env.NORTHCUA_MODEL}
+  base_url: ${env.NORTHCUA_BASE_URL}
+  api_key: ${env.OPENAI_API_KEY}
+  api_type: openai_chat_completion
+  max_tokens: 65536
+  temperature: 0.8
+  top_p: 0.95
+  reasoning_effort: high
+  timeout: 600
+  max_retries: 0
+  stream: false
+  extra_body:
+    presence_penalty: 1.0
+    top_k: 20
+    min_p: 0
+    repetition_penalty: 1.0
+max_context_tokens: 262144
+max_iterations: 1
+mcp_servers:
+- name: DesktopNativeDataExecutor
+  model_visible: false
+  type: in-memory
+- name: DesktopNativeActionExecutor
+  model_visible: true
+  type: in-memory

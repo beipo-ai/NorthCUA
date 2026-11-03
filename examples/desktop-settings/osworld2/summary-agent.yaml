@@ -1,0 +1,12 @@
+# Configure an independent summary model for context compaction; it is separate
+# from the main actor and does not use the no-tool retry policy.
+name: OSWorld2Summary
+llm_config:
+  model: ${env.NORTHCUA_SUMMARY_MODEL}
+  base_url: ${env.NORTHCUA_SUMMARY_BASE_URL}
+  api_key: ${env.NORTHCUA_SUMMARY_API_KEY}
+  api_type: openai_chat_completion
+  max_tokens: 2048
+  timeout: 300
+max_context_tokens: 262144
+max_iterations: 1

@@ -217,16 +217,22 @@ class PromptEnvelopeBuilder:
             template_root / "computer_using_agent_persistent_user.j2",
             template_root / "computer_using_agent_observation_user.j2",
         )
-        if policy.system_prompt_profile == "osworld1_formal":
-            from northcua.integrations.osworld1.prompt import FormalObservationBuilder, FormalSystemBuilder
+        if policy.system_prompt_profile == "osworld1":
+            from northcua.agents.desktop.prompt.profiles.osworld1.prompt import (
+                ProfileObservationBuilder,
+                ProfileSystemBuilder,
+            )
 
-            self.system_builder = FormalSystemBuilder()
-            self.observation_builder = FormalObservationBuilder()
-        if policy.system_prompt_profile == "osworld2_formal":
-            from northcua.integrations.osworld2.prompt import FormalObservationBuilder, system_template_path
+            self.system_builder = ProfileSystemBuilder()
+            self.observation_builder = ProfileObservationBuilder()
+        if policy.system_prompt_profile == "osworld2":
+            from northcua.agents.desktop.prompt.profiles.osworld2.prompt import (
+                ProfileObservationBuilder,
+                system_template_path,
+            )
 
             self.system_builder = SystemPromptBuilder(system_template_path())
-            self.observation_builder = FormalObservationBuilder(
+            self.observation_builder = ProfileObservationBuilder(
                 self.observation_builder.persistent_template, self.observation_builder.observation_template
             )
         self.image_window_allocator = PromptImageWindowAllocator(policy)
@@ -316,10 +322,10 @@ class PromptEnvelopeBuilder:
             observation_user_text = "\n\n".join([observation_user_text, *observation_notes])
         envelope_tools, envelope_choice = self.tool_builder.build(tools, tool_choice)
         if (
-            self.policy.system_prompt_profile == "osworld1_formal"
+            self.policy.system_prompt_profile == "osworld1"
             and self.coordinate_policy.input_space == CoordinateSpace.NORMALIZED_1000
         ):
-            from northcua.integrations.osworld1.coordinates import normalize_message, normalize_text
+            from northcua.agents.desktop.prompt.profiles.osworld1.coordinates import normalize_message, normalize_text
 
             width, height = screenshot_resolution or (1920, 1080)
             persistent_user_text = normalize_text(persistent_user_text, width, height)
