@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import platform
+from collections.abc import Collection
 from pathlib import Path
 
 from nexau.archs.main_sub.config import AgentConfig
@@ -25,11 +26,43 @@ from northcua.runtime.mcp.accessibility_server import (
 from northcua.runtime.mcp.server_config import parse_mcp_server_config
 
 from .accessibility import AccessibilityObservationAugmentor
-from .adapters import ProbeAdapterRegistry
+from .adapters import BUILT_IN_PROBE_ADAPTER_NAMES, ProbeAdapterRegistry
 from .base import ProbeExecutor
 from .catalog import built_in_probe_chains, default_accessibility_probe_chain
 from .executors import LocalInternalProbeExecutor
 from .sources import ProbeChainStateSource, ToolResultStateSource
+
+
+def local_observation_probe_chains(app_config: NorthCUAAppConfig) -> dict[str, ProbeChainConfig]:
+    """Return the probe chains a local Desktop run executes for ``app_config``."""
+
+    probe_chains = built_in_probe_chains(app_config.desktop)
+    if app_config.observation.a11y.enabled:
+        probe_chains.setdefault(
+            "desktop_a11y_default",
+            default_accessibility_probe_chain(app_config.observation.a11y),
+        )
+    return probe_chains
+
+
+def validate_local_observation_config(app_config: NorthCUAAppConfig, agent_config: AgentConfig) -> None:
+    """Apply the local Desktop observation startup checks without creating artifacts.
+
+    ``northcua config validate`` uses this so a configuration that
+    ``ObservationCoordinator`` would reject is reported before a run starts.
+
+    Raises:
+        ConfigValidationError: If a probe chain references a missing,
+            model-visible or incompatible MCP server, or an unknown adapter.
+    """
+
+    _validate_observation_configuration(
+        observation_config=app_config.observation,
+        agent_config=agent_config,
+        agent_mcp_servers=list(getattr(app_config, "agent_mcp_servers", []) or []),
+        probe_chains=local_observation_probe_chains(app_config),
+        adapter_names=BUILT_IN_PROBE_ADAPTER_NAMES,
+    )
 
 
 class ObservationCoordinator:
@@ -58,13 +91,14 @@ class ObservationCoordinator:
             artifact_store,
             persist_a11y_raw_artifact=app_config.observation.a11y.persist_raw_artifact,
         )
-        self.probe_chains = built_in_probe_chains(app_config.desktop)
-        if app_config.observation.a11y.enabled:
-            self.probe_chains.setdefault(
-                "desktop_a11y_default",
-                default_accessibility_probe_chain(app_config.observation.a11y),
-            )
-        self._validate_configuration(app_config.observation, agent_config)
+        self.probe_chains = local_observation_probe_chains(app_config)
+        _validate_observation_configuration(
+            observation_config=app_config.observation,
+            agent_config=agent_config,
+            agent_mcp_servers=self.agent_mcp_servers,
+            probe_chains=self.probe_chains,
+            adapter_names=self.adapter_registry.names,
+        )
         self.tool_result_source = ToolResultStateSource()
         self.initial_screenshot_source = self._probe_source("desktop_snapshot_default")
         self.accessibility_augmentor = self._build_accessibility_augmentor(app_config.observation.a11y)
@@ -161,63 +195,69 @@ class ObservationCoordinator:
             cache_key=self.artifact_store.root.name,
         )
 
-    def _validate_configuration(self, observation_config: ObservationConfig, agent_config: AgentConfig) -> None:
-        server_configs: dict[str, JsonObject] = {}
-        for raw_server in self.agent_mcp_servers:
-            if not isinstance(raw_server, dict):
-                continue
-            parsed = parse_mcp_server_config(dict(raw_server))
-            server_configs[parsed.name] = {
-                **parsed.to_nexau_config(),
-                "name": parsed.name,
-                "model_visible": parsed.model_visible,
-            }
 
-        for server in list(agent_config.mcp_servers or []):
-            if isinstance(server, dict):
-                server_configs.setdefault(
-                    str(server.get("name") or ""),
-                    {**dict(server), "model_visible": True},
-                )
-        self._validate_accessibility_tool_names(observation_config.a11y)
-        for chain_name in self.probe_chains:
-            chain = self.probe_chains.get(chain_name)
-            if chain is None:
-                raise ConfigValidationError(f"Unknown observation probe chain: {chain_name}")
-            self._validate_chain(chain_name, chain, server_configs)
+def _validate_observation_configuration(
+    *,
+    observation_config: ObservationConfig,
+    agent_config: AgentConfig,
+    agent_mcp_servers: list[JsonObject],
+    probe_chains: dict[str, ProbeChainConfig],
+    adapter_names: Collection[str],
+) -> None:
+    server_configs: dict[str, JsonObject] = {}
+    for raw_server in agent_mcp_servers:
+        if not isinstance(raw_server, dict):
+            continue
+        parsed = parse_mcp_server_config(dict(raw_server))
+        server_configs[parsed.name] = {
+            **parsed.to_nexau_config(),
+            "name": parsed.name,
+            "model_visible": parsed.model_visible,
+        }
 
-    def _validate_chain(
-        self,
-        chain_name: str,
-        chain: ProbeChainConfig,
-        server_configs: dict[str, JsonObject],
-    ) -> None:
-        for step in chain.steps:
-            server_config = server_configs.get(step.server)
-            if server_config is None:
-                raise ConfigValidationError(
-                    f"Observation probe chain `{chain_name}` references unknown MCP server `{step.server}`."
-                )
-            if server_config is not None and bool(server_config.get("model_visible", True)):
-                raise ConfigValidationError(
-                    f"Observation probe chain `{chain_name}` must use internal-only MCP server `{step.server}`."
-                )
-            if step.adapter not in self.adapter_registry.names:
-                raise ConfigValidationError(
-                    f"Observation probe chain `{chain_name}` references unknown adapter `{step.adapter}`."
-                )
-
-    @staticmethod
-    def _validate_accessibility_tool_names(accessibility_config: AccessibilityObservationConfig) -> None:
-        if not accessibility_config.enabled:
-            return
-        if accessibility_config.server_name != "DesktopNativeA11yExecutor":
-            return
-        if accessibility_config.capture_tool_name != A11Y_CAPTURE_TOOL_NAME:
-            raise ConfigValidationError(
-                "Accessibility capture tool name does not match the built-in DesktopNativeA11yExecutor contract."
+    for server in list(agent_config.mcp_servers or []):
+        if isinstance(server, dict):
+            server_configs.setdefault(
+                str(server.get("name") or ""),
+                {**dict(server), "model_visible": True},
             )
-        if accessibility_config.capabilities_tool_name != A11Y_CAPABILITIES_TOOL_NAME:
+    _validate_accessibility_tool_names(observation_config.a11y)
+    for chain_name, chain in probe_chains.items():
+        _validate_chain(chain_name, chain, server_configs, adapter_names)
+
+
+def _validate_chain(
+    chain_name: str,
+    chain: ProbeChainConfig,
+    server_configs: dict[str, JsonObject],
+    adapter_names: Collection[str],
+) -> None:
+    for step in chain.steps:
+        server_config = server_configs.get(step.server)
+        if server_config is None:
             raise ConfigValidationError(
-                "Accessibility capabilities tool name does not match the built-in DesktopNativeA11yExecutor contract."
+                f"Observation probe chain `{chain_name}` references unknown MCP server `{step.server}`."
             )
+        if bool(server_config.get("model_visible", True)):
+            raise ConfigValidationError(
+                f"Observation probe chain `{chain_name}` must use internal-only MCP server `{step.server}`."
+            )
+        if step.adapter not in adapter_names:
+            raise ConfigValidationError(
+                f"Observation probe chain `{chain_name}` references unknown adapter `{step.adapter}`."
+            )
+
+
+def _validate_accessibility_tool_names(accessibility_config: AccessibilityObservationConfig) -> None:
+    if not accessibility_config.enabled:
+        return
+    if accessibility_config.server_name != "DesktopNativeA11yExecutor":
+        return
+    if accessibility_config.capture_tool_name != A11Y_CAPTURE_TOOL_NAME:
+        raise ConfigValidationError(
+            "Accessibility capture tool name does not match the built-in DesktopNativeA11yExecutor contract."
+        )
+    if accessibility_config.capabilities_tool_name != A11Y_CAPABILITIES_TOOL_NAME:
+        raise ConfigValidationError(
+            "Accessibility capabilities tool name does not match the built-in DesktopNativeA11yExecutor contract."
+        )

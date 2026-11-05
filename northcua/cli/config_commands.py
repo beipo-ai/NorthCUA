@@ -59,9 +59,14 @@ def run_config_command(args: argparse.Namespace) -> int:
             (target / item.name).write_text(content, encoding="utf-8")
         print(f"Configuration: {target / 'app.example.yaml'}")
         return 0
+    from northcua.agents.desktop.observation.coordinator import validate_local_observation_config
     from northcua.core.config_loader import NorthCUAConfigLoader
+    from northcua.core.enums import RuntimeMode
 
     for kind in ("desktop", "web"):
-        NorthCUAConfigLoader.from_app_config(args.app_config, agent_kind=kind)
+        bootstrap = NorthCUAConfigLoader.from_app_config(args.app_config, agent_kind=kind)
+        if kind == "desktop" and bootstrap.app.websocket.runtime_mode != RuntimeMode.REMOTE:
+            # Local Desktop runs build these observation probes at startup; fail here instead.
+            validate_local_observation_config(bootstrap.app, bootstrap.agent)
     print("Desktop and Web configuration valid.")
     return 0

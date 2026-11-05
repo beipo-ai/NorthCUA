@@ -34,6 +34,8 @@ does not overwrite existing files unless explicitly given `--force`.
 `northcua config init --directory my-config` writes portable examples.
 `northcua config validate --app-config my-config/app.example.yaml` loads both agent
 configurations without making a model call. Environment placeholders must be populated.
+For a local Desktop configuration it also checks the observation probes a run starts,
+so a probe that names an undeclared internal MCP server fails validation, not the run.
 
 | Layer | Responsibility |
 |---|---|
@@ -51,7 +53,8 @@ surface. Explicitly adding tools changes the task's execution contract.
 Desktop always uses screenshots returned by its GUI tools. Initial capture supplies
 state before a clean tool result exists; subsequent visual decisions use the returned
 state and the shared overlay/clean history window. There is no observation-mode selector.
-The `observation` section configures optional `a11y` recording only. See
+The `observation` section configures optional `a11y` recording only; enabling it
+requires an internal-only `DesktopNativeA11yExecutor` server in the agent YAML. See
 [context and images](context.md#images) for removed configuration fields.
 
 ## Desktop coordinates

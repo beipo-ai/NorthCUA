@@ -235,7 +235,7 @@ class AccessibilityObservationConfig(BaseModel):
         Defines accessibility tools, scope, diffing, capture limits, raw artifact persistence, timeout, and fail-open mode.
     """
 
-    enabled: bool = True
+    enabled: bool = False
     server_name: str = "DesktopNativeA11yExecutor"
     capture_tool_name: str = "capture_accessibility_tree"
     capabilities_tool_name: str = "get_accessibility_capabilities"
