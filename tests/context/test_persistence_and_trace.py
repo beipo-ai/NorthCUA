@@ -4,12 +4,19 @@ import asyncio
 import json
 import multiprocessing
 import stat
+import subprocess
+import sys
+import textwrap
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import pytest
 
 from northcua.agentinfra.context.observability import ArtifactContextTraceSink
+from northcua.agentinfra.context.observability import artifacts as observability_artifacts
+from northcua.agentinfra.context.observability.artifacts import ConcurrentJsonlWriter
 from northcua.agentinfra.context.persistence import ArtifactCheckpointRepository
+from northcua.agentinfra.context.persistence import artifact as persistence_artifact
 from northcua.agentkernel.context.domain.enums import (
     CompactionOutcome,
     CompactionTrigger,
@@ -196,3 +203,71 @@ def test_trace_sink_separates_files_and_redacts_sensitive_payloads(tmp_path: Pat
     assert "abc123" not in summary_payload["response"]["raw"]
     assert audit_payload["event_id"] == "event"
     assert not (tmp_path / "llm_trace.jsonl").exists()
+
+
+def test_context_artifact_modules_import_without_fcntl() -> None:
+    """Windows has no fcntl; the Desktop import chain must still load these modules."""
+
+    code = textwrap.dedent(
+        """
+        import sys
+
+        sys.modules["fcntl"] = None
+        import northcua.agentinfra.context.observability.artifacts as observability
+        import northcua.agentinfra.context.persistence.artifact as persistence
+
+        assert observability.fcntl is None
+        assert persistence.fcntl is None
+        """
+    )
+    completed = subprocess.run(
+        [sys.executable, "-c", code],
+        capture_output=True,
+        text=True,
+        timeout=120,
+        cwd=Path(__file__).resolve().parents[2],
+        check=False,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+
+
+def test_jsonl_writer_serializes_threads_without_fcntl(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(observability_artifacts, "fcntl", None)
+    path = tmp_path / "trace.jsonl"
+    filler = "x" * 65536
+
+    def append(index: int) -> None:
+        ConcurrentJsonlWriter(path).append({"index": index, "filler": filler})
+
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        list(pool.map(append, range(32)))
+
+    records = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+    assert sorted(record["index"] for record in records) == list(range(32))
+    assert all(record["filler"] == filler for record in records)
+
+
+@pytest.mark.asyncio
+async def test_checkpoint_lease_serializes_tasks_without_fcntl(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(persistence_artifact, "fcntl", None)
+    owner = _owner()
+    repository = ArtifactCheckpointRepository(tmp_path)
+    events: list[str] = []
+
+    async def hold(name: str) -> None:
+        async with repository.lease(owner, name):
+            events.append(f"{name}:enter")
+            await asyncio.sleep(0.05)
+            events.append(f"{name}:exit")
+
+    await asyncio.gather(hold("a"), hold("b"))
+
+    assert events in (
+        ["a:enter", "a:exit", "b:enter", "b:exit"],
+        ["b:enter", "b:exit", "a:enter", "a:exit"],
+    )
+    assert await repository.compare_and_swap(owner, expected_revision=0, checkpoint=_checkpoint(owner, 1))
+    loaded = await ArtifactCheckpointRepository(tmp_path).load(owner)
+    assert loaded is not None
+    assert loaded.revision == 1

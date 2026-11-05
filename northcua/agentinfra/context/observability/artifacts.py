@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
-import fcntl
+try:
+    import fcntl
+except ImportError:  # Windows local agents run in one process; batch workers require Linux.
+    fcntl = None
 import json
 import os
 import re
@@ -54,11 +57,15 @@ class ConcurrentJsonlWriter:
         with lock:
             fd = os.open(self.path, os.O_APPEND | os.O_CREAT | os.O_WRONLY, 0o600)
             try:
-                fcntl.flock(fd, fcntl.LOCK_EX)
+                # The per-path thread lock serializes writers in this process;
+                # flock extends that to other processes where it exists.
+                if fcntl is not None:
+                    fcntl.flock(fd, fcntl.LOCK_EX)
                 _write_all(fd, encoded)
                 os.fsync(fd)
             finally:
-                fcntl.flock(fd, fcntl.LOCK_UN)
+                if fcntl is not None:
+                    fcntl.flock(fd, fcntl.LOCK_UN)
                 os.close(fd)
 
     @classmethod
