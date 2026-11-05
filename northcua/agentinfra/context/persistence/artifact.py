@@ -3,7 +3,11 @@
 from __future__ import annotations
 
 import asyncio
-import fcntl
+
+try:
+    import fcntl
+except ImportError:  # Windows local agents run in one process; batch workers require Linux.
+    fcntl = None
 import hashlib
 import logging
 import os
@@ -103,7 +107,10 @@ class ArtifactCheckpointRepository:
             lock_path = self._owner_dir(owner) / "checkpoint.lock"
             lock_path.parent.mkdir(parents=True, exist_ok=True)
             file_handle = await asyncio.to_thread(lock_path.open, "a+b")
-            await asyncio.to_thread(fcntl.flock, file_handle.fileno(), fcntl.LOCK_EX)
+            # The per-owner asyncio lock serializes this process; flock extends
+            # the lease to other worker processes where it exists.
+            if fcntl is not None:
+                await asyncio.to_thread(fcntl.flock, file_handle.fileno(), fcntl.LOCK_EX)
             # Another process may have committed while this process waited.
             self._cache.pop(owner.storage_key(), None)
             token = self._held_owner_leases.set(self._held_owner_leases.get() | {owner_key})
@@ -113,7 +120,8 @@ class ArtifactCheckpointRepository:
                 self._held_owner_leases.reset(token)
         finally:
             if file_handle is not None:
-                await asyncio.to_thread(fcntl.flock, file_handle.fileno(), fcntl.LOCK_UN)
+                if fcntl is not None:
+                    await asyncio.to_thread(fcntl.flock, file_handle.fileno(), fcntl.LOCK_UN)
                 file_handle.close()
             lock.release()
 

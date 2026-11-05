@@ -16,6 +16,7 @@
 - Synchronize the detached-descendant test fixture before early exit, eliminating a process-observation race while preserving cleanup and unrelated-process assertions.
 - Upgrade compatible affected dependencies, enforce the Pillow 13 minimum in source and device wheels, and isolate pre-commit from the runtime dependency graph.
 - Retain public NexAU by maintainer decision; disclose six known Transformers advisories under an exact-version/ID exception expiring 3 December, with raw PyPI/OSV findings retained and new risks blocked.
+- Import POSIX-only `fcntl` conditionally in context trace and checkpoint persistence so Windows Desktop runs start; without `fcntl` these writers are serialized within the process, matching single-process local agents (#5).
 
 ## 0.2.0 — source release, 2026-10-31
 
