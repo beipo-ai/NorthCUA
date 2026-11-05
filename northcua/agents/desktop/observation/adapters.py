@@ -14,6 +14,8 @@ from northcua.runtime.mcp.desktop_native_server import save_data_url_to_path
 
 from .base import ProbeAdapterResult, ProbeExecutionRecord, ProbeResultAdapter
 
+BUILT_IN_PROBE_ADAPTER_NAMES = frozenset({"desktop_screenshot", "accessibility_tree"})
+
 
 class DesktopScreenshotProbeAdapter(ProbeResultAdapter):
     """Normalize a desktop screenshot probe result into a current-clean artifact.

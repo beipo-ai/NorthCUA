@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Default Desktop accessibility recording to off, as documented, so the recommended `examples/desktop-settings` recipes start without an accessibility server; `config validate` now runs the local Desktop observation-probe checks and reports an undeclared probe server before a run (#6).
+
 - Link the public arXiv report (2611.02102v1), add an arXiv badge and matching full-author article citations in English/Chinese and GitHub citation metadata; retain the identified offline PDF snapshot.
 
 - Replace the repository showcases with the supplied 30-second Ruby Heart and Blender UFO edits; embed GitHub-native video players while retaining byte-identical offline MP4s and checksummed result frames.
