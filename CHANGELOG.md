@@ -21,6 +21,7 @@
 - Upgrade compatible affected dependencies, enforce the Pillow 13 minimum in source and device wheels, and isolate pre-commit from the runtime dependency graph.
 - Retain public NexAU by maintainer decision; disclose six known Transformers advisories under an exact-version/ID exception expiring 3 December, with raw PyPI/OSV findings retained and new risks blocked.
 - Import POSIX-only `fcntl` conditionally in context trace and checkpoint persistence so Windows Desktop runs start; without `fcntl` these writers are serialized within the process, matching single-process local agents (#5).
+- Remove two CI flakes: the prepared-close test can no longer assign its slow-terminating sandbox to the task and deadlock the suite, and the writer-admission test asserts the scheduler's actual ordering bound; pytest now prints thread stacks for any test running over five minutes.
 
 ## 0.2.0 — source release, 2026-10-31
 

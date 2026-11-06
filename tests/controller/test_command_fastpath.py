@@ -621,7 +621,8 @@ def test_background_admission_bypasses_normal_waiters(tmp_path) -> None:
 
             def _blocker(_store) -> None:
                 started.set()
-                gate.wait(timeout=2)
+                # Safety bound only; the test releases the gate explicitly.
+                gate.wait(timeout=30)
                 execution_order.append("blocker")
 
             blocker = asyncio.create_task(
@@ -647,13 +648,22 @@ def test_background_admission_bypasses_normal_waiters(tmp_path) -> None:
                     priority=ControllerStorePriority.BACKGROUND,
                 )
             )
-            await asyncio.sleep(0)
+            # Background work is admitted and queued on the writer while the blocker
+            # still holds the only normal slot and all ten normal writes wait.
+            await _wait_for_writer_queue(executor, ControllerStorePriority.BACKGROUND)
+            with executor._condition:  # noqa: SLF001 - deterministic scheduler regression probe.
+                assert not executor._queues[ControllerStorePriority.NORMAL]  # noqa: SLF001
+            assert execution_order == []
+            assert not any(task.done() for task in normals)
             gate.set()
 
-            _value, metrics = await asyncio.wait_for(background, timeout=1)
+            _value, metrics = await asyncio.wait_for(background, timeout=10)
             await asyncio.gather(blocker, *normals)
-            assert execution_order.index("background") <= 3
-            assert execution_order.index("background") < execution_order.index("normal-2")
+            # Each released normal write races the writer thread for the next pick,
+            # so up to the three NORMAL slots left in the schedule after the blocker
+            # may run first; the queued background write must not wait any longer.
+            assert execution_order[0] == "blocker"
+            assert execution_order.index("background") < execution_order.index("normal-3")
             assert metrics.admission_ms >= 0
         finally:
             gate.set()

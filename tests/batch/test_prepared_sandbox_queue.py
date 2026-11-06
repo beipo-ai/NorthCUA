@@ -306,6 +306,27 @@ class PreparedSlowTerminateWaitsProvider(FakeSandboxProvider):
         await super().terminate(handle)
 
 
+class PreparedReadyAfterFallbackProvider(PreparedSlowTerminateWaitsProvider):
+    """Slow-terminate provider whose prepared sandbox exists only after the task fell back.
+
+    Holding the prepared create until the task's own create starts means the
+    prepared sandbox can never be assigned to the task. Its blocked terminate is
+    then reachable only through the bounded close cleanup, never through task
+    teardown, which would wait for ``release_termination`` and deadlock the run.
+    """
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.task_create_started = asyncio.Event()
+
+    async def create(self, spec: SandboxProviderSpec):
+        if spec.metadata.get("prepared_sandbox") == "true":
+            await self.task_create_started.wait()
+        else:
+            self.task_create_started.set()
+        return await super().create(spec)
+
+
 class PreparedBrokenPipeThenSucceedsProvider(FakeSandboxProvider):
     """Fake provider whose first prepared terminate raises BrokenPipeError."""
 
@@ -3633,7 +3654,7 @@ async def test_prepared_queued_futures_recheck_backpressure_after_slot_opens(tmp
 @pytest.mark.asyncio
 async def test_prepared_close_bounds_late_cleanup_wait(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(preparation_manager_module, "_CLOSE_CLEANUP_WAIT_SECONDS", 0.02)
-    provider = PreparedSlowTerminateWaitsProvider()
+    provider = PreparedReadyAfterFallbackProvider()
     RecordingSubmitter.provider = provider
     RecordingSubmitter.submit_times = []
     registry = SandboxProviderRegistry()
@@ -3645,30 +3666,39 @@ async def test_prepared_close_bounds_late_cleanup_wait(tmp_path: Path, monkeypat
     manifest.defaults.sandbox = manifest.defaults.sandbox.model_copy(update={"provider": "fake", "template": "desktop"})
 
     started = time.monotonic()
-    result = await BatchRunner(
-        provider_registry=registry,
-        submitter_factory=lambda url: RecordingSubmitter(url),
-    ).run(
-        BatchRunConfig(
-            manifest=manifest,
-            output_dir=tmp_path,
-            sandbox_create_concurrency=1,
-            prepared_sandbox_policy=PreparedSandboxPolicy(
-                enabled=True,
-                buffer=1,
-                prepare_concurrency=1,
-                initial_warmup_wait_seconds=0.01,
-                claim_wait_seconds=0.01,
-                claim_pending_wait_seconds=0.01,
+    try:
+        # An unbounded close never returns because termination is released only
+        # afterwards; fail instead of hanging the suite.
+        result = await asyncio.wait_for(
+            BatchRunner(
+                provider_registry=registry,
+                submitter_factory=lambda url: RecordingSubmitter(url),
+            ).run(
+                BatchRunConfig(
+                    manifest=manifest,
+                    output_dir=tmp_path,
+                    sandbox_create_concurrency=1,
+                    prepared_sandbox_policy=PreparedSandboxPolicy(
+                        enabled=True,
+                        buffer=1,
+                        prepare_concurrency=1,
+                        initial_warmup_wait_seconds=0.01,
+                        claim_wait_seconds=0.01,
+                        claim_pending_wait_seconds=0.01,
+                    ),
+                )
             ),
+            timeout=30,
         )
-    )
-    elapsed = time.monotonic() - started
-    provider.release_termination.set()
+        elapsed = time.monotonic() - started
+    finally:
+        provider.release_termination.set()
     await asyncio.sleep(0.05)
 
     assert result.succeeded == 1
-    assert elapsed < 0.25
+    assert provider.task_create_started.is_set()
+    # Far below the 5 s default close wait: the patched 0.02 s bound applied.
+    assert elapsed < 2.0
 
 
 @pytest.mark.asyncio

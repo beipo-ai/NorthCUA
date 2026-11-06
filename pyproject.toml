@@ -87,6 +87,9 @@ northcua-runtime-shared = { path = "packages/northcua-runtime-shared", editable 
 testpaths = ["tests"]
 pythonpath = ["."]
 markers = ["integration: real browser or process integration", "native: interactive native desktop smoke"]
+# Print every thread's stack if one test runs past 5 minutes, so a hung CI job
+# shows where it stopped instead of only hitting the job timeout.
+faulthandler_timeout = 300
 
 [tool.ruff]
 line-length = 120
