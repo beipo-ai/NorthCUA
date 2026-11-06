@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import time
 from collections.abc import Sequence
 from pathlib import Path
 
@@ -44,12 +45,40 @@ def rewrite_step_logs_preserving_existing(
                     payload = _merge_missing_heavy_payloads(existing_payload, payload)
                 json.dump(payload, output, ensure_ascii=False)
                 output.write("\n")
-        os.replace(tmp_path, step_log_path)
-    finally:
+        # Windows cannot replace a file that this process still holds open
+        # (Python's open() does not share delete access), so release the read
+        # handle before swapping the rewritten file into place.
         if existing_handle is not None:
+            existing_handle.close()
+        _replace_with_retry(tmp_path, step_log_path)
+    finally:
+        if existing_handle is not None and not existing_handle.closed:
             existing_handle.close()
         if tmp_path.exists():
             tmp_path.unlink()
+
+
+_REPLACE_ATTEMPTS = 5
+_REPLACE_BACKOFF_SECONDS = 0.1
+
+
+def _replace_with_retry(source: Path, destination: Path) -> None:
+    """Replace ``destination`` with ``source``, retrying brief Windows sharing locks.
+
+    On Windows ``os.replace`` raises ``PermissionError`` while another process
+    (reader, indexer, antivirus) holds the destination open without delete
+    sharing. Retry a bounded number of times there; POSIX replaces directly.
+    """
+
+    attempts = _REPLACE_ATTEMPTS if os.name == "nt" else 1
+    for attempt in range(1, attempts + 1):
+        try:
+            os.replace(source, destination)
+            return
+        except PermissionError:
+            if attempt == attempts:
+                raise
+            time.sleep(_REPLACE_BACKOFF_SECONDS * attempt)
 
 
 def _next_existing_payload(handle) -> tuple[str | None, dict[str, object] | None]:
