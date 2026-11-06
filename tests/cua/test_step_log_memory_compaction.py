@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 
+import pytest
+
 from northcua.agents.desktop.services.memory_compaction import (
     compact_replay_payloads_enabled,
     retained_step_payload_window,
@@ -303,3 +305,84 @@ def test_worker_replay_payload_compaction_requires_explicit_opt_in(monkeypatch) 
 
     monkeypatch.setenv("NORTHCUA_WORKER_COMPACT_REPLAY_PAYLOADS", "1")
     assert compact_replay_payloads_enabled() is True
+
+
+def _simple_record() -> StepLogRecord:
+    return StepLogRecord(
+        session_id="s",
+        session_step=0,
+        request="r",
+        status=TaskStatus.CONTINUE,
+        round_step=0,
+        round_num=0,
+    )
+
+
+def test_step_log_rewrite_succeeds_when_existing_file_present(tmp_path) -> None:
+    """The rewrite must release its own read handle before replacing (Windows)."""
+
+    step_log_path = tmp_path / "steps.jsonl"
+    step_log_path.write_text(json.dumps({"session_id": "s", "session_step": 0, "request": "r"}) + "\n")
+
+    rewrite_step_logs_preserving_existing([_simple_record()], step_log_path)
+
+    assert json.loads(step_log_path.read_text().splitlines()[0])["session_id"] == "s"
+    assert not (tmp_path / "steps.jsonl.rewrite.tmp").exists()
+
+
+def test_step_log_rewrite_retries_transient_permission_error(tmp_path, monkeypatch) -> None:
+    from northcua.agents.desktop.services import step_log_rewrite as module
+
+    real_replace = module.os.replace
+    calls = {"n": 0}
+
+    def flaky_replace(src, dst):
+        calls["n"] += 1
+        if calls["n"] < 3:
+            raise PermissionError(5, "Access is denied")
+        return real_replace(src, dst)
+
+    monkeypatch.setattr(module.os, "name", "nt")
+    monkeypatch.setattr(module.os, "replace", flaky_replace)
+    monkeypatch.setattr(module.time, "sleep", lambda _s: None)
+    step_log_path = tmp_path / "steps.jsonl"
+
+    rewrite_step_logs_preserving_existing([_simple_record()], step_log_path)
+
+    assert calls["n"] == 3
+    assert step_log_path.exists()
+
+
+def test_step_log_rewrite_raises_when_destination_stays_locked(tmp_path, monkeypatch) -> None:
+    from northcua.agents.desktop.services import step_log_rewrite as module
+
+    def locked_replace(src, dst):
+        raise PermissionError(5, "Access is denied")
+
+    monkeypatch.setattr(module.os, "name", "nt")
+    monkeypatch.setattr(module.os, "replace", locked_replace)
+    monkeypatch.setattr(module.time, "sleep", lambda _s: None)
+    step_log_path = tmp_path / "steps.jsonl"
+
+    with pytest.raises(PermissionError):
+        rewrite_step_logs_preserving_existing([_simple_record()], step_log_path)
+
+    assert not (tmp_path / "steps.jsonl.rewrite.tmp").exists()
+
+
+def test_step_log_rewrite_does_not_retry_on_posix(tmp_path, monkeypatch) -> None:
+    from northcua.agents.desktop.services import step_log_rewrite as module
+
+    calls = {"n": 0}
+
+    def locked_replace(src, dst):
+        calls["n"] += 1
+        raise PermissionError(13, "denied")
+
+    monkeypatch.setattr(module.os, "name", "posix")
+    monkeypatch.setattr(module.os, "replace", locked_replace)
+
+    with pytest.raises(PermissionError):
+        rewrite_step_logs_preserving_existing([_simple_record()], tmp_path / "steps.jsonl")
+
+    assert calls["n"] == 1

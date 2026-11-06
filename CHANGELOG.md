@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Release the step-log read handle before `os.replace` and retry brief `PermissionError`s on Windows, so Desktop runs that rewrite `steps.jsonl` (step-limit verification, terminal overrides) no longer fail with `[WinError 5] Access is denied`.
+
 - Default Desktop accessibility recording to off, as documented, so the recommended `examples/desktop-settings` recipes start without an accessibility server; `config validate` now runs the local Desktop observation-probe checks and reports an undeclared probe server before a run (#6).
 
 - Link the public arXiv report (2611.02102v1), add an arXiv badge and matching full-author article citations in English/Chinese and GitHub citation metadata; retain the identified offline PDF snapshot.
