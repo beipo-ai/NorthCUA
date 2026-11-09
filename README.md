@@ -25,6 +25,10 @@ An open-source computer-use harness. Bring your model. Run a task. Inspect the r
 [![Agent Skill](https://img.shields.io/badge/Agent%20Skill-From%20zero%20to%20tasks-0B8F87?style=flat-square)](skills/northcua/SKILL.md)
 [![Contributions welcome](https://img.shields.io/badge/PRs-welcome-6554C0?style=flat-square)](CONTRIBUTING.md)
 
+[![Papers with Code: SOTA on OSWorld-G Refined](https://paperswithcode.co/api/v1/papers/2611.02102/leaderboard-badge.svg?eval=46554&live=1)](https://paperswithcode.co/api/v1/papers/2611.02102/leaderboard-badge-link?eval=46554)
+[![Papers with Code: SOTA on ScreenSpot-Pro](https://paperswithcode.co/api/v1/papers/2611.02102/leaderboard-badge.svg?eval=46553&live=1)](https://paperswithcode.co/api/v1/papers/2611.02102/leaderboard-badge-link?eval=46553)
+[![Papers with Code: #2 on OSWorld-Verified (361 no-GDrive, 100 steps)](https://paperswithcode.co/api/v1/papers/2611.02102/leaderboard-badge.svg?eval=46555&live=1)](https://paperswithcode.co/api/v1/papers/2611.02102/leaderboard-badge-link?eval=46555)
+
 </div>
 
 From an interactive 3D heart to a native Blender animation, computer use is more
